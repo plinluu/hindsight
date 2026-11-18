@@ -40,6 +40,14 @@ Hindsight is a static, browser-only trade review. Import a broker export, pair e
 - **CSV export.** Download the analyzed trades, including the later price used for the selected horizon. Spreadsheet formula injection is neutralised.
 - **Optional live prices.** Fetch weekly closes directly from Alpha Vantage with your own free API key, cached for 12 hours. The UI shows progress, handles rate limits and bad symbols, and never puts the key in a URL, log, or page address.
 
+## Share card
+
+<p align="center">
+  <img src="assets/og-card.png" alt="Hindsight share card for a FLUX trade showing 4,862 dollars left on the table" width="85%">
+</p>
+
+Every review can become a 1200 × 630 PNG for sharing, with optional ticker and amount privacy toggles.
+
 ## Live demo
 
 The deployed site is at **<https://plinluu.github.io/hindsight/>**.
@@ -127,10 +135,13 @@ No test framework or npm package is required. Node 20 or newer is recommended.
 
 ## Deploy on GitHub Pages
 
-1. Review and merge `upgrade-v1` into `main`.
-2. In the repository, open **Settings → Pages**.
-3. Choose **Deploy from a branch**, then `main` and `/ (root)`. Save.
-4. The site appears at `https://<user>.github.io/hindsight/`.
+This repository currently deploys from the `upgrade-v1` branch:
+
+1. Open **Settings → Pages**.
+2. Choose **Deploy from a branch**, then `upgrade-v1` and `/ (root)`. Save.
+3. The site appears at `https://<user>.github.io/hindsight/`.
+
+If you later merge into `main`, switch the Pages branch to `main` in the same screen.
 
 If you fork the project or use a custom domain, update the canonical URL and the `og:url` / `og:image` / `twitter:image` values in `index.html`, plus the footer label on the generated share card in `app.js`.
 
