@@ -1,10 +1,33 @@
-# Hindsight
+<h1 align="center">Hindsight</h1>
 
-**See what your trading really cost you.**
+<p align="center"><strong>See what your trading really cost you.</strong><br>
+A private, browser-only review of every sale, every fee, and the habits behind your results.</p>
 
-![The Hindsight landing page and demo trade review](docs/screenshot.png)
+<p align="center">
+  <a href="https://plinluu.github.io/hindsight/"><strong>Live demo</strong></a>
+  &nbsp;·&nbsp;
+  <a href="#features">Features</a>
+  &nbsp;·&nbsp;
+  <a href="#privacy-and-security">Privacy</a>
+  &nbsp;·&nbsp;
+  <a href="#run-locally">Run locally</a>
+</p>
 
-Hindsight is a static, browser-only review of your trade history. Import a broker export, pair every sale with the shares you bought earlier, and see what happened after you sold — plus what fees and habits did to the result. There is no backend, no build step, no account, and no upload.
+<p align="center">
+  <img src="docs/screenshot.png" alt="Hindsight landing page with a colorful gradient headline, three steps, and a demo trade chart" width="100%">
+</p>
+
+Hindsight is a static, browser-only trade review. Import a broker export, pair every sale with the shares you bought earlier, and see what happened after you sold — plus what fees and habits did to the result. There is no backend, no build step, no account, and no upload.
+
+> **Not financial advice.** Hindsight is an educational review tool. It does not recommend buying or selling any security. Past results do not predict future returns.
+
+## At a glance
+
+| 🔒 Private by default | 📊 Built for review | 🪶 Lightweight |
+|:--|:--|:--|
+| Trades are parsed on your device and never uploaded or saved. No analytics, cookies, or third-party scripts. | FIFO matching, per-trade price charts, missed upside, fee totals, running results, and habit checks. | Plain HTML, CSS, and JavaScript. No framework, no package install, no build step. |
+
+**[Open the live demo →](https://plinluu.github.io/hindsight/)** · The demo works offline with simulated prices.
 
 ## Features
 
@@ -16,6 +39,12 @@ Hindsight is a static, browser-only review of your trade history. Import a broke
 - **Share card.** Download a 1200 × 630 PNG of your biggest regret, with options to hide the ticker and hide dollar amounts.
 - **CSV export.** Download the analyzed trades, including the later price used for the selected horizon. Spreadsheet formula injection is neutralised.
 - **Optional live prices.** Fetch weekly closes directly from Alpha Vantage with your own free API key, cached for 12 hours. The UI shows progress, handles rate limits and bad symbols, and never puts the key in a URL, log, or page address.
+
+## Live demo
+
+The deployed site is at **<https://plinluu.github.io/hindsight/>**.
+
+To run it yourself, see [Run locally](#run-locally). Demo mode, import, export, the share card, and the data controls all work without an API key. Live prices require your own free Alpha Vantage key.
 
 ## Privacy and security
 
@@ -84,6 +113,18 @@ The suite covers:
 
 No test framework or npm package is required. Node 20 or newer is recommended.
 
+## Repository layout
+
+| Path | Purpose |
+|---|---|
+| `index.html` | Page shell, content, metadata, and security policy |
+| `style.css` | Complete dark theme and responsive layout |
+| `core.js` | DOM-free parsing, matching, pricing, and CSV logic |
+| `app.js` | UI, demo data, live fetch, charts, sharing, and data controls |
+| `tests/core.test.js` | Node test suite for `core.js` |
+| `assets/og-card.png` | 1200 × 630 social preview card |
+| `docs/screenshot.png` | Screenshot used in this README |
+
 ## Deploy on GitHub Pages
 
 1. Review and merge `upgrade-v1` into `main`.
@@ -106,6 +147,17 @@ Current evergreen Chrome, Edge, Firefox, and Safari. Hindsight uses `fetch`, `ca
 - **A free Alpha Vantage key is rate-limited** (about 25 requests per day). Each uncached ticker costs one request and fetches are spaced 13 seconds apart. Use a free key only; never paste a paid, shared, or company key.
 - **Habits are descriptive.** A pattern flag means the numbers in your file fit the pattern, not that the pattern caused your result. Small samples are marked as hints, not proof.
 - **Not financial advice.** Hindsight is an educational review tool and does not recommend buying or selling any security.
+
+## Project status
+
+v1.0: redesigned dark theme with a colorful accent system, share card, CSV export, waitlist hook, data controls, and hardened import/security.
+
+- [x] CSV and pasted-table import with column matching
+- [x] FIFO matching, fee audit, and price charts
+- [x] Share card and CSV export
+- [x] Live prices with a visitor-owned free key
+- [ ] Verify against more real broker exports
+- [ ] Optional paid tier with a server-side data proxy
 
 ## License
 

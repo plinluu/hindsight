@@ -771,6 +771,17 @@
       height: Math.max(0, height - yFor(trade.sp))
     }));
     defs.appendChild(clipDown);
+    var lineGradient = svgEl("linearGradient", {
+      id: "hs-line-grad",
+      x1: "0%",
+      y1: "0%",
+      x2: "100%",
+      y2: "0%"
+    });
+    lineGradient.appendChild(svgEl("stop", { offset: "0%", "stop-color": "#7aa2ff" }));
+    lineGradient.appendChild(svgEl("stop", { offset: "52%", "stop-color": "#b18cff" }));
+    lineGradient.appendChild(svgEl("stop", { offset: "100%", "stop-color": "#3ee6a8" }));
+    defs.appendChild(lineGradient);
     svg.appendChild(defs);
 
     var gridCount = width < 480 ? 3 : 4;
@@ -825,7 +836,7 @@
     var path = "M" + points.map(pointPath).join("L");
     svg.appendChild(svgEl("path", {
       d: path,
-      class: "ln",
+      class: "ln gradient",
       pathLength: "1"
     }));
 
@@ -1050,6 +1061,24 @@
       role: "img",
       "aria-label": "Cumulative profit after fees: " + money(running)
     });
+    var defs = svgEl("defs");
+    var cumGradient = svgEl("linearGradient", {
+      id: "hs-cum-grad",
+      x1: "0%",
+      y1: "0%",
+      x2: "100%",
+      y2: "0%"
+    });
+    cumGradient.appendChild(svgEl("stop", {
+      offset: "0%",
+      "stop-color": running >= 0 ? "#66d9ff" : "#ffa45c"
+    }));
+    cumGradient.appendChild(svgEl("stop", {
+      offset: "100%",
+      "stop-color": running >= 0 ? "#3ee6a8" : "#ff6b70"
+    }));
+    defs.appendChild(cumGradient);
+    svg.appendChild(defs);
     svg.appendChild(svgEl("line", {
       x1: 14,
       x2: width - 14,
@@ -1059,7 +1088,7 @@
     }));
     svg.appendChild(svgEl("path", {
       d: path,
-      class: "ln " + (running >= 0 ? "good" : "bad"),
+      class: "ln cum-line " + (running >= 0 ? "good" : "bad"),
       pathLength: "1"
     }));
     svg.appendChild(svgEl("circle", {
@@ -1447,8 +1476,8 @@
       points = points.filter(function (point, index) { return index % step === 0 || index === points.length - 1; });
     }
 
-    var chartTop = 462;
-    var chartBottom = 552;
+    var chartTop = 444;
+    var chartBottom = 532;
     var chartLeft = 64;
     var chartRight = width - 64;
 
@@ -1474,7 +1503,11 @@
           ctx.lineTo(px, py);
         }
       });
-      ctx.strokeStyle = "#dfe6fb";
+      var lineGradient = ctx.createLinearGradient(chartLeft, 0, chartRight, 0);
+      lineGradient.addColorStop(0, "#7aa2ff");
+      lineGradient.addColorStop(0.52, "#b18cff");
+      lineGradient.addColorStop(1, "#3ee6a8");
+      ctx.strokeStyle = lineGradient;
       ctx.lineWidth = 3;
       ctx.lineJoin = "round";
       ctx.lineCap = "round";
@@ -1515,9 +1548,9 @@
         ctx.fillStyle = "#7582a3";
         ctx.font = "500 15px " + MONO;
         ctx.textAlign = "left";
-        ctx.fillText("Bought " + humanDate(trade.bd), chartLeft, chartBottom + 26);
+        ctx.fillText("Bought " + humanDate(trade.bd), chartLeft, chartBottom + 24);
         ctx.textAlign = "right";
-        ctx.fillText("Sold " + humanDate(trade.sd), chartRight, chartBottom + 26);
+        ctx.fillText("Sold " + humanDate(trade.sd), chartRight, chartBottom + 24);
       }
     } else {
       ctx.setLineDash([6, 8]);
@@ -1531,15 +1564,15 @@
       ctx.fillStyle = "#7582a3";
       ctx.font = "500 18px " + FONT;
       ctx.textAlign = "center";
-      ctx.fillText("No price history loaded", width / 2, chartBottom + 28);
+      ctx.fillText("No price history loaded", width / 2, chartBottom + 26);
     }
 
     ctx.textAlign = "left";
     ctx.fillStyle = "#7582a3";
     ctx.font = "500 17px " + FONT;
-    ctx.fillText(state.mode === "demo" ? "Demo data · simulated prices" : "Generated privately in your browser", 64, height - 42);
+    ctx.fillText(state.mode === "demo" ? "Demo data · simulated prices" : "Generated privately in your browser", 64, height - 28);
     ctx.textAlign = "right";
-    ctx.fillText("Not financial advice", width - 64, height - 42);
+    ctx.fillText("Not financial advice", width - 64, height - 28);
   }
 
   function renderShare() {
