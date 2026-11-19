@@ -19,7 +19,7 @@ A private, browser-only review of every sale, every fee, and the habits behind y
 
 Hindsight is a static, browser-only trade review. Import a broker export, pair every sale with the shares you bought earlier, and see what happened after you sold — plus what fees and habits did to the result. There is no backend, no build step, no account, and no upload.
 
-**v2.0 is the current recommended version.** It is what the live site serves, what the default branch holds, and what the latest release packages.
+**v2.0.1 is the current recommended version.** It is what the live site serves, what the default branch holds, and what the latest release packages.
 
 > **Not financial advice.** Hindsight is an educational review tool. It does not recommend buying or selling any security. Past results do not predict future returns.
 
@@ -179,7 +179,7 @@ Current evergreen Chrome, Edge, Firefox, and Safari. Hindsight uses `fetch`, `ca
 
 ## Project status
 
-v2.0 (recommended, branch `polish-v2`, default): monochrome black-and-white redesign with the price chart as the hero, a plain-language three-step explainer under it, an all-trades share card, a waitlist that says when it is not live yet, and legal sections with footer social links. This is the deployed, released version.
+v2.0.1 (recommended, branch `polish-v2`, default): monochrome black-and-white redesign with the price chart as the hero, a plain-language three-step explainer under it, an all-trades share card, a waitlist that says when it is not live yet, and legal sections with footer social links. Phones get larger tap targets and 16 px form fields, so iOS does not zoom on focus. This is the deployed, released version.
 
 - [x] CSV and pasted-table import with column matching
 - [x] FIFO matching, fee audit, and price charts
