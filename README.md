@@ -36,17 +36,17 @@ Hindsight is a static, browser-only trade review. Import a broker export, pair e
 - **FIFO trade matching.** Sales are matched against earlier purchases first in, first out. Partial lots, commissions, and unmatched sales are handled and reported.
 - **Price chart per trade.** See the buy, the sale, what the stock did next, and the area between the sale price and later prices. Toggle between today, 30 days after the sale, and 90 days after the sale.
 - **Report sections.** Result after fees, money left on the table, fees paid, profitable-trade share, average hold, a biggest-regret leaderboard, a cumulative result chart, a fee breakdown, and descriptive habit checks (chasing momentum, holding losers, trading after a loss).
-- **Share card.** Download a 1200 × 630 PNG of your biggest regret, with options to hide the ticker and hide dollar amounts.
+- **Share card.** Download one PNG listing every analyzed trade, biggest regret first, with totals and fees at the top. Up to 30 rows, then an "and N more" line. Hide tickers and hide dollar amounts (percentages stay) before sharing. The card footer reads "Educational tool. Not financial advice."
 - **CSV export.** Download the analyzed trades, including the later price used for the selected horizon. Spreadsheet formula injection is neutralised.
 - **Optional live prices.** Fetch weekly closes directly from Alpha Vantage with your own free API key, cached for 12 hours. The UI shows progress, handles rate limits and bad symbols, and never puts the key in a URL, log, or page address.
 
 ## Share card
 
 <p align="center">
-  <img src="assets/og-card.png" alt="Hindsight share card for a FLUX trade showing 4,862 dollars left on the table" width="85%">
+  <img src="assets/og-card.png" alt="Hindsight summary card listing eight demo trades with totals for result, money left on the table, and fees" width="85%">
 </p>
 
-Every review can become a 1200 × 630 PNG for sharing, with optional ticker and amount privacy toggles.
+Every review can become a PNG for sharing. The card lists each trade with its result and what the sale left behind, sorted by the biggest miss. Small reviews fit in 1200 × 630; longer ones grow up to 30 rows. Both privacy toggles apply to every row.
 
 ## Live demo
 
@@ -78,15 +78,31 @@ See [SECURITY.md](SECURITY.md) for the full security model and how to report a p
 
 ## Configure the waitlist link
 
-The waitlist opens an external hosted form in a new tab with `rel="noopener noreferrer"`. No form is embedded in the page.
+The waitlist is a single external link. No form is embedded and no email is collected by this site.
 
-1. Open `app.js` and replace the placeholder at the top:
+1. Open `app.js` and set the address at the top:
 
    ```js
-   var WAITLIST_URL = "https://example.com/hindsight-waitlist"; // TODO: replace with your hosted form
+   var WAITLIST_URL = "https://tally.so/r/your-form-id";
    ```
 
-2. Update the two fallback `href` values in `index.html` (`data-waitlist` links in the header and footer) so the no-JavaScript view points at the same form.
+2. Leave it empty and the button stays on the page and explains that the waitlist opens soon, instead of acting like a dead link.
+
+With a real address, the link gets `target="_blank"` and `rel="noopener noreferrer"`. The static `href="#waitlist"` fallback in `index.html` is only there for the no-JavaScript view.
+
+## Legal sections and placeholders
+
+The page ends with **Not financial advice and risk**, **Terms of use** and **Privacy** sections. The footer links to all three, and the short disclaimer appears under the hero results card and again in the footer on every view. The share card adds "Educational tool. Not financial advice." to its footer.
+
+Three values are placeholders and must be replaced before launch:
+
+| Placeholder | Where | What to put there |
+| --- | --- | --- |
+| `[GOVERNING LAW, e.g. Province/State and Country]` | `index.html`, Terms section | The law that governs your site |
+| `[YOUR EMAIL]` | `index.html`, Terms section | A contact address, plain text by default |
+| `X_URL` (empty string) | `app.js`, top of the script | Your X profile URL, e.g. `https://x.com/your-handle` |
+
+While `X_URL` is empty, the X icon stays hidden instead of rendering a dead link. The GitHub icon always points at <https://github.com/plinluu/hindsight>. Both icons are inline SVG, open in a new tab with `rel="noopener noreferrer"`, and use 44 px tap targets.
 
 ## Run locally
 
@@ -161,7 +177,7 @@ Current evergreen Chrome, Edge, Firefox, and Safari. Hindsight uses `fetch`, `ca
 
 ## Project status
 
-v1.0: redesigned dark theme with a colorful accent system, share card, CSV export, waitlist hook, data controls, and hardened import/security.
+v2.0 (branch `polish-v2`): warmer editorial theme, seven section anchors, a chart-first hero, an all-trades share card, a waitlist that says when it is not live yet, and legal sections with footer social links.
 
 - [x] CSV and pasted-table import with column matching
 - [x] FIFO matching, fee audit, and price charts

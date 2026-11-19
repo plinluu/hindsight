@@ -1,12 +1,15 @@
 /*
  * Hindsight app: UI, chart rendering, live prices, sharing, export.
  *
- * Replace WAITLIST_URL with your hosted form before deploying.
+ * The waitlist is one external link. Paste your hosted form address below and
+ * the button will open it in a new tab. Leave it empty and the page says the
+ * waitlist opens soon instead of offering a dead link.
  */
 (function () {
   "use strict";
 
-  var WAITLIST_URL = "https://example.com/hindsight-waitlist"; // TODO: replace with your hosted form
+  var WAITLIST_URL = ""; // e.g. "https://tally.so/r/your-form-id"
+  var X_URL = ""; // placeholder: e.g. "https://x.com/your-handle"
 
   var C = window.HindsightCore;
   if (!C) {
@@ -700,13 +703,13 @@
     var host = $("#chart");
     clear(host);
     if (!trade) {
-      chartEmpty(null, "No trades yet", "Import your broker activity to see a price chart for each completed trade.");
+      chartEmpty(null, "No trades yet", "Import a broker export to see a price chart for each completed trade. The demo above shows what that looks like.");
       return;
     }
 
     var series = state.series[trade.tk];
     if (!series || !series.length) {
-      chartEmpty(trade, trade.tk, "No price history is loaded for this ticker. Add a free Alpha Vantage key to fetch weekly prices.");
+      chartEmpty(trade, trade.tk, "No price history for this ticker yet. A free Alpha Vantage key fills in weekly closes.");
       return;
     }
 
@@ -714,13 +717,13 @@
       return point.d >= C.addDays(trade.bd, -56);
     });
     if (points.length < 4) {
-      chartEmpty(trade, trade.tk, "Not enough price history around this trade to draw a useful chart.");
+      chartEmpty(trade, trade.tk, "There is not enough price history around this trade to draw a useful chart.");
       return;
     }
 
     var width = Math.max(280, Math.round(host.clientWidth || 900));
-    var height = width < 520 ? 250 : 340;
-    var left = width < 480 ? 42 : 54;
+    var height = width < 520 ? 210 : width < 760 ? 260 : 288;
+    var left = width < 480 ? 40 : 52;
     var right = width < 480 ? 12 : 24;
     var top = 26;
     var bottom = 34;
@@ -771,17 +774,6 @@
       height: Math.max(0, height - yFor(trade.sp))
     }));
     defs.appendChild(clipDown);
-    var lineGradient = svgEl("linearGradient", {
-      id: "hs-line-grad",
-      x1: "0%",
-      y1: "0%",
-      x2: "100%",
-      y2: "0%"
-    });
-    lineGradient.appendChild(svgEl("stop", { offset: "0%", "stop-color": "#7aa2ff" }));
-    lineGradient.appendChild(svgEl("stop", { offset: "52%", "stop-color": "#b18cff" }));
-    lineGradient.appendChild(svgEl("stop", { offset: "100%", "stop-color": "#3ee6a8" }));
-    defs.appendChild(lineGradient);
     svg.appendChild(defs);
 
     var gridCount = width < 480 ? 3 : 4;
@@ -836,7 +828,7 @@
     var path = "M" + points.map(pointPath).join("L");
     svg.appendChild(svgEl("path", {
       d: path,
-      class: "ln gradient",
+      class: "ln",
       pathLength: "1"
     }));
 
@@ -1062,22 +1054,6 @@
       "aria-label": "Cumulative profit after fees: " + money(running)
     });
     var defs = svgEl("defs");
-    var cumGradient = svgEl("linearGradient", {
-      id: "hs-cum-grad",
-      x1: "0%",
-      y1: "0%",
-      x2: "100%",
-      y2: "0%"
-    });
-    cumGradient.appendChild(svgEl("stop", {
-      offset: "0%",
-      "stop-color": running >= 0 ? "#66d9ff" : "#ffa45c"
-    }));
-    cumGradient.appendChild(svgEl("stop", {
-      offset: "100%",
-      "stop-color": running >= 0 ? "#3ee6a8" : "#ff6b70"
-    }));
-    defs.appendChild(cumGradient);
     svg.appendChild(defs);
     svg.appendChild(svgEl("line", {
       x1: 14,
@@ -1088,7 +1064,7 @@
     }));
     svg.appendChild(svgEl("path", {
       d: path,
-      class: "ln cum-line " + (running >= 0 ? "good" : "bad"),
+      class: "ln " + (running >= 0 ? "good" : "bad"),
       pathLength: "1"
     }));
     svg.appendChild(svgEl("circle", {
@@ -1286,19 +1262,6 @@
 
   /* ---------- share card ---------- */
 
-  function closestPoint(points, date) {
-    var best = points[0];
-    var bestDistance = Infinity;
-    points.forEach(function (point) {
-      var distance = Math.abs(C.daysBetween(point.d, date));
-      if (distance < bestDistance) {
-        bestDistance = distance;
-        best = point;
-      }
-    });
-    return best;
-  }
-
   function roundedRect(ctx, x, y, width, height, radius) {
     var r = Math.min(radius, width / 2, height / 2);
     ctx.beginPath();
@@ -1314,19 +1277,49 @@
     ctx.closePath();
   }
 
-  function shareTrade() {
-    var rows = getRegretRows();
-    if (!rows.length) {
-      return currentTrade();
+  function fitText(ctx, text, maxWidth) {
+    if (ctx.measureText(text).width <= maxWidth) {
+      return text;
     }
-    var positive = rows.filter(function (row) { return row.c > 0; }).sort(function (a, b) { return b.c - a.c; });
-    if (positive.length) {
-      return positive[0].t;
+    var cut = String(text);
+    while (cut.length > 1 && ctx.measureText(cut + "…").width > maxWidth) {
+      cut = cut.slice(0, -1);
     }
-    return rows.sort(function (a, b) { return a.c - b.c; })[0].t;
+    return cut + "…";
   }
 
-  function drawShareCard(trade) {
+  function signedPct(value) {
+    if (value == null || !isFinite(value)) {
+      return "–";
+    }
+    var rounded = Math.abs(value) < 0.05 ? 0 : value;
+    return (rounded > 0 ? "+" : rounded < 0 ? "−" : "") + Math.abs(rounded).toFixed(1) + "%";
+  }
+
+  function shareEntries() {
+    var rows = state.trades.map(function (trade, index) {
+      var later = laterFor(trade);
+      var delta = later == null ? null : (later - trade.sp) * trade.q;
+      return { t: trade, d: delta, i: index };
+    });
+    return rows.sort(function (a, b) {
+      if (a.d == null && b.d == null) {
+        return a.t.sd < b.t.sd ? -1 : 1;
+      }
+      if (a.d == null) {
+        return 1;
+      }
+      if (b.d == null) {
+        return -1;
+      }
+      if (b.d !== a.d) {
+        return b.d - a.d;
+      }
+      return a.t.sd < b.t.sd ? -1 : 1;
+    });
+  }
+
+  function drawShareCard() {
     var canvas = $("#share-canvas");
     var ctx = canvas.getContext("2d");
     if (!ctx) {
@@ -1334,258 +1327,236 @@
     }
 
     var width = 1200;
-    var height = 630;
-    ctx.clearRect(0, 0, width, height);
+    var margin = 64;
+    var entries = shareEntries();
+    var shown = entries.slice(0, 30);
+    var extra = entries.length - shown.length;
+    var headerH = 240;
+    var extraH = extra > 0 ? 34 : 0;
+    var footerH = 76;
+    var spare = 630 - headerH - footerH;
+    var rowH = shown.length <= 12
+      ? Math.max(30, Math.min(46, Math.floor(spare / Math.max(shown.length, 1))))
+      : 27;
+    var tableH = Math.max(shown.length, 1) * rowH;
+    var height = Math.max(630, headerH + tableH + extraH + footerH);
+    var tableTop = headerH;
+    var spareAfter = height - headerH - footerH - 30;
+    if (extraH === 0 && tableH + 24 < spareAfter) {
+      tableTop = headerH + Math.floor((spareAfter - tableH) / 2);
+    }
 
-    var background = ctx.createLinearGradient(0, 0, width, height);
-    background.addColorStop(0, "#0c1326");
-    background.addColorStop(1, "#070a12");
-    ctx.fillStyle = background;
+    canvas.width = width;
+    canvas.height = height;
+    canvas.dataset.rows = String(shown.length);
+    canvas.dataset.total = String(entries.length);
+    canvas.dataset.hiddenRows = String(extra);
+
+    var bg = ctx.createLinearGradient(0, 0, width * 0.5, height);
+    bg.addColorStop(0, "#1a1511");
+    bg.addColorStop(1, "#100d0a");
+    ctx.fillStyle = bg;
     ctx.fillRect(0, 0, width, height);
 
-    var glow = ctx.createRadialGradient(170, -80, 30, 170, -80, 760);
-    glow.addColorStop(0, "rgba(122, 162, 255, 0.22)");
-    glow.addColorStop(1, "rgba(122, 162, 255, 0)");
+    var glow = ctx.createRadialGradient(width - 80, 20, 20, width - 80, 20, 640);
+    glow.addColorStop(0, "rgba(223, 160, 94, 0.13)");
+    glow.addColorStop(1, "rgba(223, 160, 94, 0)");
     ctx.fillStyle = glow;
     ctx.fillRect(0, 0, width, height);
 
-    ctx.strokeStyle = "rgba(255, 255, 255, 0.035)";
-    ctx.lineWidth = 1;
-    for (var x = 0; x < width; x += 48) {
-      ctx.beginPath();
-      ctx.moveTo(x, 0);
-      ctx.lineTo(x, height);
-      ctx.stroke();
-    }
-    for (var y = 0; y < height; y += 48) {
-      ctx.beginPath();
-      ctx.moveTo(0, y);
-      ctx.lineTo(width, y);
-      ctx.stroke();
-    }
-
-    roundedRect(ctx, 64, 52, 46, 46, 11);
-    ctx.fillStyle = "#141d33";
+    // Wordmark
+    roundedRect(ctx, margin, 44, 34, 34, 8);
+    ctx.fillStyle = "#251e17";
     ctx.fill();
-    ctx.strokeStyle = "rgba(255, 255, 255, 0.08)";
+    ctx.strokeStyle = "rgba(241, 232, 216, 0.12)";
+    ctx.lineWidth = 1;
     ctx.stroke();
-    ctx.fillStyle = "#ffc857";
-    ctx.font = "800 25px " + FONT;
     ctx.textAlign = "left";
-    ctx.fillText("H", 80, 85);
-
-    ctx.fillStyle = "#f3f6ff";
-    ctx.font = "750 25px " + FONT;
-    ctx.fillText("HINDSIGHT", 126, 84);
-    ctx.fillStyle = "#9aa6c4";
-    ctx.font = "500 17px " + FONT;
-    ctx.fillText("Private trade review", 126, 106);
+    ctx.fillStyle = "#f3ece0";
+    ctx.font = "700 17px " + MONO;
+    ctx.fillText("H", margin + 11, 67);
+    ctx.font = "700 16px " + FONT;
+    ctx.fillText("HINDSIGHT", margin + 46, 58);
+    ctx.fillStyle = "#9b9182";
+    ctx.font = "500 12px " + FONT;
+    ctx.fillText("PRIVATE TRADE REVIEW", margin + 46, 74);
 
     ctx.textAlign = "right";
-    ctx.fillStyle = "#7582a3";
-    ctx.font = "500 17px " + FONT;
-    ctx.fillText("hindsight", width - 64, 84);
+    ctx.fillStyle = "#9b9182";
+    ctx.font = "500 13px " + MONO;
+    ctx.fillText("plinluu.github.io/hindsight", width - margin, 66);
 
-    ctx.strokeStyle = "rgba(255, 200, 87, 0.35)";
+    // Totals band
+    var totalNet = sum(state.trades, "net");
+    var totalCost = sum(state.trades, "cost") || 1;
+    var soldValue = state.trades.reduce(function (total, trade) {
+      return total + trade.sp * trade.q;
+    }, 0) || 1;
+    var leftBehind = entries.reduce(function (total, entry) {
+      return entry.d != null && entry.d > 0 ? total + entry.d : total;
+    }, 0);
+    var fees = sum(state.trades, "fee") + sum(state.trades, "fx");
+
+    var stats = [
+      {
+        label: state.hideAmounts ? "RESULT, IN PERCENT" : "RESULT AFTER FEES",
+        value: state.hideAmounts ? signedPct((totalNet / totalCost) * 100) : money(totalNet),
+        color: totalNet > 0.5 ? "#93bfa0" : totalNet < -0.5 ? "#d97b62" : "#c0b6a6"
+      },
+      {
+        label: state.hideAmounts ? "LEFT BEHIND, IN PERCENT" : "LEFT ON THE TABLE",
+        value: state.hideAmounts ? signedPct((leftBehind / soldValue) * 100) : money(leftBehind),
+        color: "#d97b62"
+      },
+      {
+        label: state.hideAmounts ? "FEES, IN PERCENT" : "PAID IN FEES",
+        value: state.hideAmounts ? signedPct((fees / totalCost) * 100) : money(fees),
+        color: "#dfa05e"
+      }
+    ];
+
+    stats.forEach(function (stat, index) {
+      var x = margin + index * 360;
+      ctx.textAlign = "left";
+      ctx.fillStyle = "#9b9182";
+      ctx.font = "600 11px " + MONO;
+      ctx.fillText(stat.label, x, 126);
+      ctx.fillStyle = stat.color;
+      ctx.font = "600 42px " + MONO;
+      ctx.fillText(fitText(ctx, stat.value, 320), x, 176);
+    });
+
+    ctx.textAlign = "right";
+    ctx.fillStyle = "#c0b6a6";
+    ctx.font = "500 14px " + FONT;
+    ctx.fillText(entries.length + (entries.length === 1 ? " trade" : " trades") + " · " +
+      (state.horizon === 0 ? "prices today" : state.horizon + " days after each sale"), width - margin, 168);
+
+    ctx.strokeStyle = "rgba(241, 232, 216, 0.14)";
     ctx.lineWidth = 1;
     ctx.beginPath();
-    ctx.moveTo(64, 132);
-    ctx.lineTo(width - 64, 132);
+    ctx.moveTo(margin, 200);
+    ctx.lineTo(width - margin, 200);
     ctx.stroke();
 
-    if (!trade) {
-      ctx.textAlign = "left";
-      ctx.fillStyle = "#f3f6ff";
-      ctx.font = "750 62px " + FONT;
-      ctx.fillText("Import trades to create a card.", 64, 250, width - 128);
-      ctx.fillStyle = "#9aa6c4";
-      ctx.font = "500 27px " + FONT;
-      ctx.fillText("Your data never leaves this browser.", 64, 302, width - 128);
-      ctx.fillStyle = "#7582a3";
-      ctx.font = "500 17px " + FONT;
-      ctx.fillText("Not financial advice.", 64, height - 58);
-      return;
-    }
-
-    var later = laterFor(trade);
-    var delta = later == null ? null : (later - trade.sp) * trade.q;
-    var headline;
-    if (later == null) {
-      headline = "The review isn’t finished.";
-    } else if (delta > 0.005) {
-      headline = state.hideTicker ? "You sold too soon." : "You sold " + trade.tk + " too soon.";
-    } else if (delta < -0.005) {
-      headline = state.hideTicker ? "A good exit." : "A good exit on " + trade.tk + ".";
-    } else {
-      headline = state.hideTicker ? "Every sale has a second act." : "Every sale has a second act: " + trade.tk + ".";
-    }
-
+    // Table header
+    ctx.fillStyle = "#9b9182";
+    ctx.font = "600 11px " + MONO;
     ctx.textAlign = "left";
-    ctx.fillStyle = "#f3f6ff";
-    ctx.font = "750 58px " + FONT;
-    ctx.fillText(headline, 64, 222, width - 128);
-
-    var subline = [];
-    if (state.hideTicker) {
-      if (!state.hideAmounts) {
-        subline.push("Sold at " + money2(trade.sp));
-      }
-    } else {
-      subline.push(trade.tk);
-      if (!state.hideAmounts) {
-        subline.push("sold at " + money2(trade.sp));
-      }
-    }
-    subline.push(humanDate(trade.sd));
-    ctx.fillStyle = "#9aa6c4";
-    ctx.font = "500 26px " + FONT;
-    ctx.fillText(subline.join(" · "), 64, 272, width - 128);
-
-    var label;
-    var amount;
-    var amountColor;
-    if (later == null) {
-      label = "NEXT CHAPTER";
-      amount = "Add live prices";
-      amountColor = "#9aa6c4";
-    } else if (delta > 0.005) {
-      label = "LEFT ON THE TABLE";
-      amount = state.hideAmounts ? "Amount hidden" : money(delta);
-      amountColor = "#ff6b70";
-    } else if (delta < -0.005) {
-      label = "SAVED BY EXITING";
-      amount = state.hideAmounts ? "Amount hidden" : money(-delta);
-      amountColor = "#3ee6a8";
-    } else {
-      label = "FINISHED FLAT";
-      amount = state.hideAmounts ? "Amount hidden" : money(0);
-      amountColor = "#9aa6c4";
-    }
-
-    ctx.fillStyle = "#7582a3";
-    ctx.font = "700 17px " + FONT;
-    ctx.fillText(label, 64, 344);
-    ctx.fillStyle = amountColor;
-    ctx.font = state.hideAmounts ? "700 52px " + FONT : "750 78px " + FONT;
-    ctx.fillText(amount, 64, 424, width - 128);
-
-    var all = state.series[trade.tk] || [];
-    var points = all.filter(function (point) { return point.d >= C.addDays(trade.bd, -56); });
-    if (points.length > 120) {
-      var step = Math.ceil(points.length / 120);
-      points = points.filter(function (point, index) { return index % step === 0 || index === points.length - 1; });
-    }
-
-    var chartTop = 444;
-    var chartBottom = 532;
-    var chartLeft = 64;
-    var chartRight = width - 64;
-
-    if (points.length >= 4) {
-      var values = points.map(function (point) { return point.c; });
-      var low = Math.min.apply(null, values);
-      var high = Math.max.apply(null, values);
-      var span = (high - low) || 1;
-      var xFor = function (index) {
-        return chartLeft + (index / Math.max(points.length - 1, 1)) * (chartRight - chartLeft);
-      };
-      var yFor = function (value) {
-        return chartBottom - ((value - low) / span) * (chartBottom - chartTop);
-      };
-
-      ctx.beginPath();
-      points.forEach(function (point, index) {
-        var px = xFor(index);
-        var py = yFor(point.c);
-        if (index === 0) {
-          ctx.moveTo(px, py);
-        } else {
-          ctx.lineTo(px, py);
-        }
-      });
-      var lineGradient = ctx.createLinearGradient(chartLeft, 0, chartRight, 0);
-      lineGradient.addColorStop(0, "#7aa2ff");
-      lineGradient.addColorStop(0.52, "#b18cff");
-      lineGradient.addColorStop(1, "#3ee6a8");
-      ctx.strokeStyle = lineGradient;
-      ctx.lineWidth = 3;
-      ctx.lineJoin = "round";
-      ctx.lineCap = "round";
-      ctx.stroke();
-      ctx.setLineDash([]);
-
-      var buyPoint = closestPoint(points, trade.bd);
-      var sellPoint = closestPoint(points, trade.sd);
-      var buyIndex = points.indexOf(buyPoint);
-      var sellIndex = points.indexOf(sellPoint);
-      var sellX = xFor(sellIndex);
-
-      ctx.setLineDash([5, 6]);
-      ctx.strokeStyle = "rgba(255, 107, 112, 0.55)";
-      ctx.lineWidth = 2;
-      ctx.beginPath();
-      ctx.moveTo(sellX, chartTop - 6);
-      ctx.lineTo(sellX, chartBottom + 6);
-      ctx.stroke();
-      ctx.setLineDash([]);
-
-      ctx.beginPath();
-      ctx.arc(xFor(buyIndex), yFor(buyPoint.c), 6, 0, Math.PI * 2);
-      ctx.fillStyle = "#0b1120";
-      ctx.fill();
-      ctx.strokeStyle = "#3ee6a8";
-      ctx.lineWidth = 3;
-      ctx.stroke();
-
-      ctx.beginPath();
-      ctx.arc(sellX, yFor(sellPoint.c), 6, 0, Math.PI * 2);
-      ctx.fillStyle = "#0b1120";
-      ctx.fill();
-      ctx.strokeStyle = "#ff6b70";
-      ctx.stroke();
-
-      if (!state.hideAmounts) {
-        ctx.fillStyle = "#7582a3";
-        ctx.font = "500 15px " + MONO;
-        ctx.textAlign = "left";
-        ctx.fillText("Bought " + humanDate(trade.bd), chartLeft, chartBottom + 24);
-        ctx.textAlign = "right";
-        ctx.fillText("Sold " + humanDate(trade.sd), chartRight, chartBottom + 24);
-      }
-    } else {
-      ctx.setLineDash([6, 8]);
-      ctx.strokeStyle = "rgba(154, 166, 196, 0.35)";
-      ctx.lineWidth = 2;
-      ctx.beginPath();
-      ctx.moveTo(chartLeft, chartBottom);
-      ctx.lineTo(chartRight, chartBottom);
-      ctx.stroke();
-      ctx.setLineDash([]);
-      ctx.fillStyle = "#7582a3";
-      ctx.font = "500 18px " + FONT;
-      ctx.textAlign = "center";
-      ctx.fillText("No price history loaded", width / 2, chartBottom + 26);
-    }
-
-    ctx.textAlign = "left";
-    ctx.fillStyle = "#7582a3";
-    ctx.font = "500 17px " + FONT;
-    ctx.fillText(state.mode === "demo" ? "Demo data · simulated prices" : "Generated privately in your browser", 64, height - 28);
+    ctx.fillText("TRADE", margin, tableTop - 14);
+    ctx.fillText("SOLD", margin + 220, tableTop - 14);
     ctx.textAlign = "right";
-    ctx.fillText("Not financial advice", width - 64, height - 28);
+    ctx.fillText("RESULT", 780, tableTop - 14);
+    if (!state.hideAmounts) {
+      ctx.fillText("PERCENT", 910, tableTop - 14);
+    }
+    ctx.fillText("AFTER THE SALE", width - margin, tableTop - 14);
+
+    if (!shown.length) {
+      ctx.textAlign = "left";
+      ctx.fillStyle = "#f3ece0";
+      ctx.font = "600 30px " + FONT;
+      ctx.fillText("No trades to review yet.", margin, tableTop + 60);
+      ctx.fillStyle = "#9b9182";
+      ctx.font = "500 18px " + FONT;
+      ctx.fillText("Import a broker export to build this card.", margin, tableTop + 94);
+    }
+
+    // Rows
+    shown.forEach(function (entry, index) {
+      var top = tableTop + index * rowH;
+      var baseline = top + rowH / 2 + 5;
+      var trade = entry.t;
+
+      if (index % 2 === 1) {
+        ctx.fillStyle = "rgba(241, 232, 216, 0.028)";
+        ctx.fillRect(0, top, width, rowH);
+      }
+
+      ctx.textAlign = "left";
+      ctx.fillStyle = "#f3ece0";
+      ctx.font = "600 15px " + MONO;
+      var name = state.hideTicker ? "Trade " + (index + 1) : trade.tk;
+      ctx.fillText(fitText(ctx, name, 190), margin, baseline);
+
+      ctx.fillStyle = "#9b9182";
+      ctx.font = "500 12px " + MONO;
+      ctx.fillText(humanDate(trade.sd), margin + 220, baseline);
+
+      var pctOfSale = entry.d == null ? null : (entry.d / (trade.sp * trade.q)) * 100;
+
+      ctx.textAlign = "right";
+      ctx.fillStyle = trade.net >= 0 ? "#93bfa0" : "#d97b62";
+      ctx.font = "600 15px " + MONO;
+      if (state.hideAmounts) {
+        ctx.fillText(signedPct(trade.ret), 780, baseline);
+      } else {
+        ctx.fillText(money(trade.net), 780, baseline);
+        ctx.fillStyle = "#c0b6a6";
+        ctx.font = "500 14px " + MONO;
+        ctx.fillText(signedPct(trade.ret), 910, baseline);
+      }
+
+      if (entry.d == null) {
+        ctx.fillStyle = "#9b9182";
+        ctx.fillText("no price data", width - margin, baseline);
+      } else {
+        ctx.fillStyle = entry.d > 0 ? "#d97b62" : "#93bfa0";
+        var label = entry.d > 0 ? "Left " : "Saved ";
+        var amount = state.hideAmounts ? Math.abs(pctOfSale).toFixed(1) + "%" : money(Math.abs(entry.d));
+        if (Math.abs(entry.d) < 0.5) {
+          ctx.fillStyle = "#9b9182";
+          label = "Flat ";
+        }
+        ctx.fillText(label + amount, width - margin, baseline);
+      }
+    });
+
+    var noteY = tableTop + tableH + 26;
+    if (extra === 0 && noteY < height - footerH + 6) {
+      ctx.textAlign = "left";
+      ctx.fillStyle = "#7f7568";
+      ctx.font = "500 12px " + FONT;
+      ctx.fillText("Sorted by what each sale left behind. Prices are weekly closes.", margin, noteY);
+    }
+
+    // Overflow line
+    if (extra > 0) {
+      ctx.textAlign = "left";
+      ctx.fillStyle = "#9b9182";
+      ctx.font = "500 14px " + FONT;
+      ctx.fillText("and " + extra + " more " + (extra === 1 ? "trade" : "trades") + " not shown", margin, tableTop + tableH + 22);
+    }
+
+    // Footer
+    var footerY = height - 40;
+    ctx.strokeStyle = "rgba(241, 232, 216, 0.12)";
+    ctx.beginPath();
+    ctx.moveTo(margin, footerY - 24);
+    ctx.lineTo(width - margin, footerY - 24);
+    ctx.stroke();
+
+    ctx.textAlign = "left";
+    ctx.fillStyle = "#9b9182";
+    ctx.font = "500 13px " + MONO;
+    ctx.fillText("hindsight", margin, footerY);
+    ctx.fillStyle = "#7f7568";
+    ctx.fillText("· " + (state.mode === "demo" ? "demo data, simulated prices" : "made privately in your browser"), margin + 84, footerY);
+
+    ctx.textAlign = "right";
+    ctx.fillText("Educational tool. Not financial advice.", width - margin, footerY);
   }
 
   function renderShare() {
-    var trade = shareTrade() || currentTrade();
     var download = $("#share-download");
     var exportButton = $("#export");
     download.disabled = !state.trades.length;
     exportButton.disabled = !state.trades.length;
-    drawShareCard(trade);
-  }
-
-  function fileNameTicker(ticker) {
-    return String(ticker).toLowerCase().replace(/[^a-z0-9._-]+/g, "-").replace(/^-+|-+$/g, "") || "trade";
+    $("#share-canvas").setAttribute(
+      "aria-label",
+      "Preview of a card listing " + state.trades.length + " trades and what each sale left behind"
+    );
+    drawShareCard();
   }
 
   function downloadBlob(blob, filename) {
@@ -1602,18 +1573,17 @@
 
   function downloadShare() {
     if (!state.trades.length) {
+      setMsg($("#share-msg"), "Import some trades first, then the card can be built.", "bad");
       return;
     }
     var canvas = $("#share-canvas");
     canvas.toBlob(function (blob) {
       if (!blob) {
-        setMsg($("#share-msg"), "Couldn’t create the image in this browser. Try a different browser.", "bad");
+        setMsg($("#share-msg"), "This browser could not build the image. Try another one.", "bad");
         return;
       }
-      var trade = shareTrade() || currentTrade();
-      var name = state.hideTicker || !trade ? "hindsight-share-card.png" : "hindsight-" + fileNameTicker(trade.tk) + ".png";
-      downloadBlob(blob, name);
-      setMsg($("#share-msg"), "Share card downloaded as a PNG.", "good");
+      downloadBlob(blob, "hindsight-trades-" + new Date().toISOString().slice(0, 10) + ".png");
+      setMsg($("#share-msg"), "Card downloaded. It lists " + Math.min(state.trades.length, 30) + " trades.", "good");
     }, "image/png");
   }
 
@@ -1684,12 +1654,50 @@
 
   /* ---------- events ---------- */
 
+  function setupWaitlist() {
+    var links = $all("[data-waitlist]");
+    var url = String(WAITLIST_URL || "").trim();
+    var ready = /^https?:\/\//i.test(url);
+
+    links.forEach(function (link) {
+      if (ready) {
+        link.href = url;
+        link.target = "_blank";
+        link.rel = "noopener noreferrer";
+        return;
+      }
+      link.href = "#waitlist";
+      link.removeAttribute("target");
+      link.addEventListener("click", function (event) {
+        event.preventDefault();
+        var note = $("#waitlist-msg");
+        setMsg(note, "The waitlist opens soon. Nothing is collected on this page yet, and every feature here already works without it.", "good");
+        if (note && note.focus) {
+          note.setAttribute("tabindex", "-1");
+          note.focus();
+        }
+      });
+    });
+  }
+
+  function setupSocial() {
+    var link = $("#social-x");
+    if (!link) {
+      return;
+    }
+    var url = String(X_URL || "").trim();
+    if (!/^https?:\/\//i.test(url)) {
+      link.hidden = true;
+      return;
+    }
+    link.href = url;
+    link.hidden = false;
+  }
+
   function init() {
     state.key = storageGet(KEY_STORAGE) || "";
-
-    $all("[data-waitlist]").forEach(function (link) {
-      link.href = WAITLIST_URL;
-    });
+    setupWaitlist();
+    setupSocial();
 
     $("#open").addEventListener("click", openImport);
     $("#close").addEventListener("click", function () { $("#imp").hidden = true; });
@@ -1755,16 +1763,22 @@
 
     $("#hide-ticker").addEventListener("change", function (event) {
       state.hideTicker = event.target.checked;
-      drawShareCard(shareTrade() || currentTrade());
+      drawShareCard();
     });
     $("#hide-amount").addEventListener("change", function (event) {
       state.hideAmounts = event.target.checked;
-      drawShareCard(shareTrade() || currentTrade());
+      drawShareCard();
     });
     $("#share-download").addEventListener("click", downloadShare);
     $("#export").addEventListener("click", exportCsv);
 
     document.addEventListener("click", function (event) {
+      var opener = event.target.closest("[data-open-import]");
+      if (opener) {
+        event.preventDefault();
+        openImport();
+        return;
+      }
       var target = event.target.closest("[data-action]");
       if (!target) {
         return;
