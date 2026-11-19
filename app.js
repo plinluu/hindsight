@@ -722,8 +722,8 @@
     }
 
     var width = Math.max(280, Math.round(host.clientWidth || 900));
-    var height = width < 520 ? 210 : width < 760 ? 260 : 288;
-    var left = width < 480 ? 40 : 52;
+    var height = width < 520 ? 210 : width < 760 ? 240 : 260;
+    var left = width < 480 ? 40 : 56;
     var right = width < 480 ? 12 : 24;
     var top = 26;
     var bottom = 34;
@@ -1094,7 +1094,7 @@
   }
 
   function renderFees() {
-    var host = $("#fees");
+    var host = $("#fees-body");
     clear(host);
     if (!state.trades.length) {
       host.appendChild(el("p", "empty-note", "No fees to report yet."));
@@ -1353,36 +1353,37 @@
     canvas.dataset.hiddenRows = String(extra);
 
     var bg = ctx.createLinearGradient(0, 0, width * 0.5, height);
-    bg.addColorStop(0, "#1a1511");
-    bg.addColorStop(1, "#100d0a");
+    bg.addColorStop(0, "#0b0b0b");
+    bg.addColorStop(1, "#050505");
     ctx.fillStyle = bg;
     ctx.fillRect(0, 0, width, height);
 
     var glow = ctx.createRadialGradient(width - 80, 20, 20, width - 80, 20, 640);
-    glow.addColorStop(0, "rgba(223, 160, 94, 0.13)");
-    glow.addColorStop(1, "rgba(223, 160, 94, 0)");
+    glow.addColorStop(0, "rgba(255, 255, 255, 0.07)");
+    glow.addColorStop(1, "rgba(255, 255, 255, 0)");
     ctx.fillStyle = glow;
     ctx.fillRect(0, 0, width, height);
 
     // Wordmark
     roundedRect(ctx, margin, 44, 34, 34, 8);
-    ctx.fillStyle = "#251e17";
+    ctx.fillStyle = "#f5f5f5";
     ctx.fill();
-    ctx.strokeStyle = "rgba(241, 232, 216, 0.12)";
+    ctx.strokeStyle = "rgba(255, 255, 255, 0.18)";
     ctx.lineWidth = 1;
     ctx.stroke();
     ctx.textAlign = "left";
-    ctx.fillStyle = "#f3ece0";
+    ctx.fillStyle = "#050505";
     ctx.font = "700 17px " + MONO;
     ctx.fillText("H", margin + 11, 67);
+    ctx.fillStyle = "#f5f5f5";
     ctx.font = "700 16px " + FONT;
     ctx.fillText("HINDSIGHT", margin + 46, 58);
-    ctx.fillStyle = "#9b9182";
+    ctx.fillStyle = "#8a8a8a";
     ctx.font = "500 12px " + FONT;
     ctx.fillText("PRIVATE TRADE REVIEW", margin + 46, 74);
 
     ctx.textAlign = "right";
-    ctx.fillStyle = "#9b9182";
+    ctx.fillStyle = "#8a8a8a";
     ctx.font = "500 13px " + MONO;
     ctx.fillText("plinluu.github.io/hindsight", width - margin, 66);
 
@@ -1401,24 +1402,24 @@
       {
         label: state.hideAmounts ? "RESULT, IN PERCENT" : "RESULT AFTER FEES",
         value: state.hideAmounts ? signedPct((totalNet / totalCost) * 100) : money(totalNet),
-        color: totalNet > 0.5 ? "#93bfa0" : totalNet < -0.5 ? "#d97b62" : "#c0b6a6"
+        color: totalNet > 0.5 ? "#ffffff" : totalNet < -0.5 ? "#bdbdbd" : "#a8a8a8"
       },
       {
         label: state.hideAmounts ? "LEFT BEHIND, IN PERCENT" : "LEFT ON THE TABLE",
         value: state.hideAmounts ? signedPct((leftBehind / soldValue) * 100) : money(leftBehind),
-        color: "#d97b62"
+        color: "#d9d9d9"
       },
       {
         label: state.hideAmounts ? "FEES, IN PERCENT" : "PAID IN FEES",
         value: state.hideAmounts ? signedPct((fees / totalCost) * 100) : money(fees),
-        color: "#dfa05e"
+        color: "#a8a8a8"
       }
     ];
 
     stats.forEach(function (stat, index) {
       var x = margin + index * 360;
       ctx.textAlign = "left";
-      ctx.fillStyle = "#9b9182";
+      ctx.fillStyle = "#8a8a8a";
       ctx.font = "600 11px " + MONO;
       ctx.fillText(stat.label, x, 126);
       ctx.fillStyle = stat.color;
@@ -1427,12 +1428,12 @@
     });
 
     ctx.textAlign = "right";
-    ctx.fillStyle = "#c0b6a6";
+    ctx.fillStyle = "#b3b3b3";
     ctx.font = "500 14px " + FONT;
     ctx.fillText(entries.length + (entries.length === 1 ? " trade" : " trades") + " · " +
       (state.horizon === 0 ? "prices today" : state.horizon + " days after each sale"), width - margin, 168);
 
-    ctx.strokeStyle = "rgba(241, 232, 216, 0.14)";
+    ctx.strokeStyle = "rgba(255, 255, 255, 0.16)";
     ctx.lineWidth = 1;
     ctx.beginPath();
     ctx.moveTo(margin, 200);
@@ -1440,7 +1441,7 @@
     ctx.stroke();
 
     // Table header
-    ctx.fillStyle = "#9b9182";
+    ctx.fillStyle = "#8a8a8a";
     ctx.font = "600 11px " + MONO;
     ctx.textAlign = "left";
     ctx.fillText("TRADE", margin, tableTop - 14);
@@ -1454,10 +1455,10 @@
 
     if (!shown.length) {
       ctx.textAlign = "left";
-      ctx.fillStyle = "#f3ece0";
+      ctx.fillStyle = "#f5f5f5";
       ctx.font = "600 30px " + FONT;
       ctx.fillText("No trades to review yet.", margin, tableTop + 60);
-      ctx.fillStyle = "#9b9182";
+      ctx.fillStyle = "#8a8a8a";
       ctx.font = "500 18px " + FONT;
       ctx.fillText("Import a broker export to build this card.", margin, tableTop + 94);
     }
@@ -1469,43 +1470,43 @@
       var trade = entry.t;
 
       if (index % 2 === 1) {
-        ctx.fillStyle = "rgba(241, 232, 216, 0.028)";
+        ctx.fillStyle = "rgba(255, 255, 255, 0.03)";
         ctx.fillRect(0, top, width, rowH);
       }
 
       ctx.textAlign = "left";
-      ctx.fillStyle = "#f3ece0";
+      ctx.fillStyle = "#f5f5f5";
       ctx.font = "600 15px " + MONO;
       var name = state.hideTicker ? "Trade " + (index + 1) : trade.tk;
       ctx.fillText(fitText(ctx, name, 190), margin, baseline);
 
-      ctx.fillStyle = "#9b9182";
+      ctx.fillStyle = "#8a8a8a";
       ctx.font = "500 12px " + MONO;
       ctx.fillText(humanDate(trade.sd), margin + 220, baseline);
 
       var pctOfSale = entry.d == null ? null : (entry.d / (trade.sp * trade.q)) * 100;
 
       ctx.textAlign = "right";
-      ctx.fillStyle = trade.net >= 0 ? "#93bfa0" : "#d97b62";
+      ctx.fillStyle = trade.net >= 0 ? "#f5f5f5" : "#bdbdbd";
       ctx.font = "600 15px " + MONO;
       if (state.hideAmounts) {
         ctx.fillText(signedPct(trade.ret), 780, baseline);
       } else {
         ctx.fillText(money(trade.net), 780, baseline);
-        ctx.fillStyle = "#c0b6a6";
+        ctx.fillStyle = "#b3b3b3";
         ctx.font = "500 14px " + MONO;
         ctx.fillText(signedPct(trade.ret), 910, baseline);
       }
 
       if (entry.d == null) {
-        ctx.fillStyle = "#9b9182";
+        ctx.fillStyle = "#8a8a8a";
         ctx.fillText("no price data", width - margin, baseline);
       } else {
-        ctx.fillStyle = entry.d > 0 ? "#d97b62" : "#93bfa0";
+        ctx.fillStyle = entry.d > 0 ? "#f5f5f5" : "#b3b3b3";
         var label = entry.d > 0 ? "Left " : "Saved ";
         var amount = state.hideAmounts ? Math.abs(pctOfSale).toFixed(1) + "%" : money(Math.abs(entry.d));
         if (Math.abs(entry.d) < 0.5) {
-          ctx.fillStyle = "#9b9182";
+          ctx.fillStyle = "#8a8a8a";
           label = "Flat ";
         }
         ctx.fillText(label + amount, width - margin, baseline);
@@ -1515,7 +1516,7 @@
     var noteY = tableTop + tableH + 26;
     if (extra === 0 && noteY < height - footerH + 6) {
       ctx.textAlign = "left";
-      ctx.fillStyle = "#7f7568";
+      ctx.fillStyle = "#6f6f6f";
       ctx.font = "500 12px " + FONT;
       ctx.fillText("Sorted by what each sale left behind. Prices are weekly closes.", margin, noteY);
     }
@@ -1523,24 +1524,24 @@
     // Overflow line
     if (extra > 0) {
       ctx.textAlign = "left";
-      ctx.fillStyle = "#9b9182";
+      ctx.fillStyle = "#8a8a8a";
       ctx.font = "500 14px " + FONT;
       ctx.fillText("and " + extra + " more " + (extra === 1 ? "trade" : "trades") + " not shown", margin, tableTop + tableH + 22);
     }
 
     // Footer
     var footerY = height - 40;
-    ctx.strokeStyle = "rgba(241, 232, 216, 0.12)";
+    ctx.strokeStyle = "rgba(255, 255, 255, 0.14)";
     ctx.beginPath();
     ctx.moveTo(margin, footerY - 24);
     ctx.lineTo(width - margin, footerY - 24);
     ctx.stroke();
 
     ctx.textAlign = "left";
-    ctx.fillStyle = "#9b9182";
+    ctx.fillStyle = "#8a8a8a";
     ctx.font = "500 13px " + MONO;
     ctx.fillText("hindsight", margin, footerY);
-    ctx.fillStyle = "#7f7568";
+    ctx.fillStyle = "#6f6f6f";
     ctx.fillText("· " + (state.mode === "demo" ? "demo data, simulated prices" : "made privately in your browser"), margin + 84, footerY);
 
     ctx.textAlign = "right";

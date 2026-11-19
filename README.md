@@ -14,10 +14,12 @@ A private, browser-only review of every sale, every fee, and the habits behind y
 </p>
 
 <p align="center">
-  <img src="docs/screenshot.png" alt="Hindsight landing page with a colorful gradient headline, three steps, and a demo trade chart" width="100%">
+  <img src="docs/screenshot.png" alt="Hindsight landing page with a black-and-white headline, a full-width price chart, and a three-step explainer" width="100%">
 </p>
 
 Hindsight is a static, browser-only trade review. Import a broker export, pair every sale with the shares you bought earlier, and see what happened after you sold — plus what fees and habits did to the result. There is no backend, no build step, no account, and no upload.
+
+**v2.0 is the current recommended version.** It is what the live site serves, what the default branch holds, and what the latest release packages.
 
 > **Not financial advice.** Hindsight is an educational review tool. It does not recommend buying or selling any security. Past results do not predict future returns.
 
@@ -50,7 +52,7 @@ Every review can become a PNG for sharing. The card lists each trade with its re
 
 ## Live demo
 
-The deployed site is at **<https://plinluu.github.io/hindsight/>**.
+The deployed site is at **<https://plinluu.github.io/hindsight/>**. The current build is also packaged on the [releases page](https://github.com/plinluu/hindsight/releases/latest).
 
 To run it yourself, see [Run locally](#run-locally). Demo mode, import, export, the share card, and the data controls all work without an API key. Live prices require your own free Alpha Vantage key.
 
@@ -142,7 +144,7 @@ No test framework or npm package is required. Node 20 or newer is recommended.
 | Path | Purpose |
 |---|---|
 | `index.html` | Page shell, content, metadata, and security policy |
-| `style.css` | Complete dark theme and responsive layout |
+| `style.css` | Monochrome black-and-white theme and responsive layout |
 | `core.js` | DOM-free parsing, matching, pricing, and CSV logic |
 | `app.js` | UI, demo data, live fetch, charts, sharing, and data controls |
 | `tests/core.test.js` | Node test suite for `core.js` |
@@ -151,17 +153,17 @@ No test framework or npm package is required. Node 20 or newer is recommended.
 
 ## Deploy on GitHub Pages
 
-This repository currently deploys from the `upgrade-v1` branch:
+This repository deploys from the `polish-v2` branch, which is also the default branch:
 
 1. Open **Settings → Pages**.
-2. Choose **Deploy from a branch**, then `upgrade-v1` and `/ (root)`. Save.
+2. Choose **Deploy from a branch**, then `polish-v2` and `/ (root)`. Save.
 3. The site appears at `https://<user>.github.io/hindsight/`.
 
-If you later merge into `main`, switch the Pages branch to `main` in the same screen.
+To host your own copy, fork the repository, enable Pages on your default branch, and update the canonical, `og:url`, and share-card URLs described below.
 
 If you fork the project or use a custom domain, update the canonical URL and the `og:url` / `og:image` / `twitter:image` values in `index.html`, plus the footer label on the generated share card in `app.js`.
 
-The waitlist URL is the only feature that needs a value before launch. Demo mode and import/export work without any configuration.
+The waitlist URL and the three legal placeholders are the only values to set before launch. Demo mode and import/export work without any configuration.
 
 ## Browser support
 
@@ -177,7 +179,7 @@ Current evergreen Chrome, Edge, Firefox, and Safari. Hindsight uses `fetch`, `ca
 
 ## Project status
 
-v2.0 (branch `polish-v2`): warmer editorial theme, seven section anchors, a chart-first hero, an all-trades share card, a waitlist that says when it is not live yet, and legal sections with footer social links.
+v2.0 (recommended, branch `polish-v2`, default): monochrome black-and-white redesign with the price chart as the hero, a plain-language three-step explainer under it, an all-trades share card, a waitlist that says when it is not live yet, and legal sections with footer social links. This is the deployed, released version.
 
 - [x] CSV and pasted-table import with column matching
 - [x] FIFO matching, fee audit, and price charts

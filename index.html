@@ -6,13 +6,13 @@
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src https://www.alphavantage.co; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="no-referrer">
 <meta name="color-scheme" content="dark">
-<meta name="theme-color" content="#14110e">
+<meta name="theme-color" content="#050505">
 <title>Hindsight — what your trades did after you sold</title>
 <meta name="description" content="Paste a broker export and see what happened after each sale, what fees took, and which habits keep showing up. Everything runs in your browser. Nothing is uploaded.">
 <meta name="author" content="plinluu">
 <meta name="robots" content="index,follow">
 <link rel="canonical" href="https://plinluu.github.io/hindsight/">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2314110e'/%3E%3Cpath d='M15 44V20h6.5v9h9v-9H37v24h-6.5v-9.5h-9V44z' fill='%23f3ece0'/%3E%3Cpath d='M13 47L51 15' stroke='%23dfa05e' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23f5f5f5'/%3E%3Cpath d='M15 44V20h6.5v9h9v-9H37v24h-6.5v-9.5h-9V44z' fill='%23050505'/%3E%3Cpath d='M13 47L51 15' stroke='%23050505' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Hindsight">
 <meta property="og:title" content="Hindsight — what your trades did after you sold">
@@ -36,74 +36,96 @@
 <header class="topbar">
   <div class="topbar-inner">
     <a class="brand" href="#top" aria-label="Hindsight, back to top">
-      <svg class="brand-mark" width="26" height="26" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
-        <rect width="64" height="64" rx="14" fill="#211b16"></rect>
-        <path d="M15 44V20h6.5v9h9v-9H37v24h-6.5v-9.5h-9V44z" fill="#f3ece0"></path>
-        <path d="M13 47L51 15" stroke="#dfa05e" stroke-width="4" stroke-linecap="round"></path>
+      <svg class="brand-mark" width="28" height="28" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+        <rect width="64" height="64" rx="14" fill="#f5f5f5"></rect>
+        <path d="M15 44V20h6.5v9h9v-9H37v24h-6.5v-9.5h-9V44z" fill="#050505"></path>
+        <path d="M13 47L51 15" stroke="#050505" stroke-width="4" stroke-linecap="round"></path>
       </svg>
       <span>Hindsight</span>
     </a>
     <nav class="nav" id="nav" aria-label="Sections">
-      <a href="#left">Left behind</a>
+      <a href="#how">How it works</a>
+      <a href="#left">Results</a>
       <a href="#fees">Fees</a>
-      <a href="#habits">Habits</a>
-      <a href="#import">Import</a>
-      <a href="#share">Share</a>
       <a href="#privacy">Privacy</a>
-      <a href="#waitlist">Waitlist</a>
     </nav>
-    <a class="btn btn-small" href="#import" data-open-import>Import trades</a>
+    <a class="btn btn-primary btn-small" href="#import" data-open-import>Import trades</a>
   </div>
 </header>
 
 <main id="main">
 
   <section class="hero" aria-labelledby="hero-title">
-    <div class="hero-copy">
-      <p class="kicker"><span class="dot" aria-hidden="true"></span> A private review of your trades</p>
-      <h1 id="hero-title">Every sale has a <em>second act.</em></h1>
-      <p class="lede">Paste your broker export. Hindsight pairs each sale with the shares you bought earlier, then shows the price you walked away from, the fees you paid, and the habits that keep showing up.</p>
+    <p class="kicker">A private review of past trades</p>
+    <h1 id="hero-title">Every sale has a <em>second act.</em></h1>
+    <div class="hero-row">
+      <p class="lede">Paste a broker export and see what each sale did next: the price after, the fees, and the habits. All of it runs in this browser.</p>
       <div class="hero-actions">
         <button class="btn btn-primary btn-lg" id="open" type="button">Import my trades</button>
-        <a class="quiet-link" href="#how">or see how it works <span aria-hidden="true">↓</span></a>
+        <a class="quiet-link" href="#how">How it works <span aria-hidden="true">↓</span></a>
       </div>
-      <ul class="plain-list" aria-label="What this costs you">
-        <li>No account</li>
-        <li>No uploads</li>
-        <li>Demo runs offline</li>
-      </ul>
     </div>
+    <p class="hero-facts">No account <span aria-hidden="true">·</span> No uploads <span aria-hidden="true">·</span> Demo runs offline</p>
+  </section>
 
-    <section class="stage" id="stage" aria-labelledby="sent">
-      <div class="stage-top">
-        <span class="pill" id="pill">Demo · made-up trades, simulated prices</span>
-        <div class="stage-tools">
-          <button class="btn btn-quiet btn-small" id="back" type="button" hidden>Back to demo</button>
-          <button class="btn btn-quiet btn-small" id="live" type="button">Live prices</button>
-        </div>
+  <section class="stage" id="stage" aria-labelledby="sent">
+    <div class="stage-top">
+      <span class="pill" id="pill">Demo · made-up trades, simulated prices</span>
+      <div class="stage-tools">
+        <button class="btn btn-quiet btn-small" id="back" type="button" hidden>Back to demo</button>
+        <button class="btn btn-quiet btn-small" id="live" type="button">Live prices</button>
       </div>
-      <p class="lead" id="lead">Demo portfolio</p>
-      <h2 class="big" id="sent" aria-live="polite"></h2>
-      <div class="bar" id="hbar" role="group" aria-label="Compare with price">
-        <span class="bar-label">Price after the sale</span>
+    </div>
+    <p class="lead" id="lead">Demo portfolio</p>
+    <h2 class="big" id="sent" aria-live="polite"></h2>
+    <div class="bar" id="hbar" role="group" aria-label="Compare with price">
+      <span class="bar-label">Price after the sale</span>
+      <div class="segments">
         <button class="seg" data-h="0" type="button" aria-pressed="true">Today</button>
         <button class="seg" data-h="30" type="button" aria-pressed="false">30 days</button>
         <button class="seg" data-h="90" type="button" aria-pressed="false">90 days</button>
       </div>
-      <div class="chart-shell">
-        <div id="chart" class="chart"></div>
-        <div class="chart-legend">
-          <span><i class="legend-line" aria-hidden="true"></i>Price</span>
-          <span><i class="legend-miss" aria-hidden="true"></i>Left on the table</span>
-          <span><i class="legend-save" aria-hidden="true"></i>Saved by selling</span>
-        </div>
+    </div>
+    <div class="chart-shell">
+      <div id="chart" class="chart"></div>
+      <div class="chart-legend">
+        <span><i class="legend-line" aria-hidden="true"></i>Price</span>
+        <span><i class="legend-miss" aria-hidden="true"></i>Left on the table</span>
+        <span><i class="legend-save" aria-hidden="true"></i>Saved by selling</span>
       </div>
-      <div class="chips" id="chips" role="group" aria-label="Choose a trade"></div>
-      <p class="micro-legal">Hindsight is an educational tool that looks at past trades. It is not financial, investment, tax or legal advice, and it does not recommend buying or selling anything. Past results do not predict future results.</p>
-    </section>
+    </div>
+    <div class="chips" id="chips" role="group" aria-label="Choose a trade"></div>
   </section>
 
+  <p class="micro-legal">Hindsight is an educational tool that looks at past trades. It is not financial, investment, tax or legal advice, and it does not recommend buying or selling anything. Past results do not predict future results.</p>
+
   <p id="warn" class="msg warn" role="status"></p>
+
+  <section class="how" id="how" aria-labelledby="how-title">
+    <div class="section-head">
+      <p class="kicker">How it works</p>
+      <h2 id="how-title">Three steps. No setup.</h2>
+      <p class="d">The chart above is live. Click a ticker or change the window to see another trade. With your own file, it goes like this.</p>
+    </div>
+    <ol class="steps">
+      <li>
+        <span class="step-n" aria-hidden="true">01</span>
+        <h3>Export your trades</h3>
+        <p>Every broker has an export button on its activity page. A CSV, TSV, or a copied table all work.</p>
+      </li>
+      <li>
+        <span class="step-n" aria-hidden="true">02</span>
+        <h3>Paste it in</h3>
+        <p>The file is read in this tab and never uploaded. Hindsight pairs each sale with the shares you bought earlier, and you check the columns before anything is matched.</p>
+      </li>
+      <li>
+        <span class="step-n" aria-hidden="true">03</span>
+        <h3>Read the chart</h3>
+        <p>The white line is the price. The shaded block is what the shares were worth after you sold. Scroll on for fees, habits, and a card you can share.</p>
+      </li>
+    </ol>
+    <p class="how-note">No account, and no key needed for the demo. Live prices are optional and use your own free Alpha Vantage key.</p>
+  </section>
 
   <section class="block" id="left" aria-labelledby="left-title">
     <div class="section-head">
@@ -124,7 +146,7 @@
       <h2 id="fees-title">What the broker kept</h2>
       <p class="d">Commissions and currency conversion, added up across every completed trade. A file with no fee column shows zero here. You can point Hindsight at the right column during import.</p>
     </div>
-    <div id="fees"></div>
+    <div id="fees-body"></div>
   </section>
 
   <section class="block" id="habits" aria-labelledby="habits-title">
@@ -212,15 +234,21 @@
         <p class="cap">Preview. Nothing is posted anywhere.</p>
       </div>
       <div class="card share-controls">
-        <h3>Before you download</h3>
-        <p class="d">Tickers become "Trade 1", "Trade 2" and so on. Hiding amounts leaves percentages in place.</p>
-        <label class="check" for="hide-ticker"><input type="checkbox" id="hide-ticker"> Hide ticker names</label>
-        <label class="check" for="hide-amount"><input type="checkbox" id="hide-amount"> Hide dollar amounts</label>
-        <div class="row">
-          <button class="btn btn-primary" id="share-download" type="button">Download PNG</button>
-          <button class="btn" id="export" type="button">Export trades as CSV</button>
+        <div class="share-copy">
+          <h3>Before you download</h3>
+          <p class="d">Tickers become "Trade 1", "Trade 2" and so on. Hiding amounts leaves percentages in place.</p>
         </div>
-        <p class="msg" id="share-msg" role="status"></p>
+        <div class="share-options">
+          <label class="check" for="hide-ticker"><input type="checkbox" id="hide-ticker"> Hide ticker names</label>
+          <label class="check" for="hide-amount"><input type="checkbox" id="hide-amount"> Hide dollar amounts</label>
+        </div>
+        <div class="share-buttons">
+          <div class="row">
+            <button class="btn btn-primary" id="share-download" type="button">Download PNG</button>
+            <button class="btn" id="export" type="button">Export trades as CSV</button>
+          </div>
+          <p class="msg" id="share-msg" role="status"></p>
+        </div>
       </div>
     </div>
   </section>
@@ -233,11 +261,6 @@
     </div>
     <div class="about-grid">
       <div class="about-copy">
-        <ol class="how-list" id="how">
-          <li><b>Import.</b> The file is parsed in the browser. Sales are matched to earlier buys, oldest first.</li>
-          <li><b>Review.</b> Each trade gets a price chart, the money it left behind, and a fee total.</li>
-          <li><b>Share or export.</b> The card and the CSV are built on your device. Nothing is sent anywhere.</li>
-        </ol>
         <p>There is no backend and no account. Trades you import are processed in this tab, not uploaded to me, and not saved. A refresh brings the demo back.</p>
         <p>The only request the app can make goes to <b>https://www.alphavantage.co</b>, and only when you click Fetch prices. That request carries the ticker, the key you entered, and your IP address, the same as any direct request. A key you paste is saved in this browser as <code>hs_key</code>; weekly prices are cached as <code>hs_s_TICKER</code> for 12 hours so you do not spend a request twice.</p>
         <p>To remove them, use <b>Forget my key</b> or <b>Delete all my data</b> in the card beside this text, or clear site data for this page in your browser settings. No cookies, no analytics, no trackers and no third-party scripts. Nothing loads from another domain except the Alpha Vantage request you trigger.</p>
