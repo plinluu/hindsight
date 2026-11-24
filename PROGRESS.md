@@ -1,7 +1,9 @@
 # Current Hindsight brief
 Phase 0 complete
+Phase 1 complete
+Done — Sky loader, responsive navigation and sample journal screens. Production build passed.
 Done — Recorded desktop and mobile measurements, the available local artwork, and implementation dimensions in DESIGN_SPEC.md.
-Next — Phase 1 of the current brief covers the loader, shell, navigation and sample Today layout.
+Next — Phase 2 charts and Markets page.
 TODO — Replace sky.png with original artwork before public launch.
 
 ## Earlier project history (previous phase numbering)
