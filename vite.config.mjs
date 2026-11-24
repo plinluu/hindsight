@@ -1,0 +1,24 @@
+import history from './api/history.mjs'
+import { defineConfig, loadEnv } from 'vite'
+import market from './api/market.mjs'
+export default defineConfig(({ mode }) => {
+  const env = { ...process.env, ...loadEnv(mode, process.cwd(), '') }
+  const api = (s) => {
+    s.middlewares.use('/api/market', (req, res) => market(req, res, env))
+    s.middlewares.use('/api/history', (req, res) => history(req, res, env))
+  }
+  return {
+    base: './',
+    plugins: [
+      {
+        name: 'local-market-api',
+        configureServer(s) {
+          api(s)
+        },
+        configurePreviewServer(s) {
+          api(s)
+        },
+      },
+    ],
+  }
+})

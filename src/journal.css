@@ -1,0 +1,92 @@
+.journal-date {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+.journal-date span {
+  width: 32px;
+  height: 1px;
+  background: currentColor;
+}
+.brand svg {
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 4px;
+}
+.destination {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+.destination > svg {
+  width: 48px;
+  height: 48px;
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  flex-shrink: 0;
+}
+.destination p {
+  margin-bottom: 0;
+}
+.feature > h2 {
+  max-width: 23ch;
+  margin: 12px 0 20px;
+  font-size: clamp(1.6rem, 3.2vw, 2.8rem);
+}
+.feature > details {
+  max-width: 660px;
+}
+.feature > a {
+  display: inline-block;
+  background: var(--accent);
+  color: var(--paper);
+  padding: 12px 18px;
+  border-radius: 12px;
+  text-decoration: none;
+}
+.feature {
+  background: linear-gradient(110deg, var(--paper) 48%, color-mix(in srgb, var(--paper) 40%, transparent));
+  border-radius: 24px;
+}
+.panel {
+  background: color-mix(in srgb, var(--paper) 96%, transparent);
+}
+.panel:hover.destination {
+  border-color: var(--accent);
+}
+header > a:last-child {
+  padding: 10px;
+}
+.brand {
+  padding-left: 0;
+}
+h1,
+h2,
+h3 {
+  font-weight: 500;
+}
+nav {
+  gap: 6px;
+}
+@media (max-width: 700px) {
+  .feature {
+    margin-top: 16px;
+  }
+  .destination {
+    gap: 12px;
+  }
+  .journal-date {
+    font-size: 0.875rem;
+  }
+  nav {
+    gap: 0;
+  }
+}
+
+.feature > p[role=status] { min-height: 3.1em }
+[data-season=winter]{--chart-tint:#dce7e6}[data-season=spring]{--chart-tint:#dce8cb}[data-season=summer]{--chart-tint:#f1e6b9}[data-season=autumn]{--chart-tint:#e8d5ae}[data-sun=sunset]{--chart-tint:#dbae9a}[data-sun=night]{--chart-tint:#25384a}
