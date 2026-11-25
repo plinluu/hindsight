@@ -4,7 +4,7 @@ import type { Story } from '../feed'
 type Price = { symbol: string; change: number; time: number }
 type Snapshot<T> = { items: T[]; at: number }
 type Brief = { news?: Snapshot<Story>; quotes?: Snapshot<Price> }
-const storageKey = 'hindsight.briefing.v1'
+const storageKey = 'hindsight.briefing.v2'
 const ttl = 600000
 const funds: Record<string,string> = { SPY: 'S&P 500', QQQ: 'Nasdaq-100', DIA: 'Dow Jones' }
 const samples = [
@@ -57,8 +57,8 @@ function useBriefing() {
   }, [])
   return data
 }
-function label(part?: { at: number }) {
-  return part ? fresh(part) ? 'Finnhub' : 'Cached data' : 'Sample data'
+function label(part?: { at: number }, provider = 'Finnhub') {
+  return part ? fresh(part) ? provider : 'Cached data' : 'Sample data'
 }
 function timestamp(time: number) {
   const date = new Date(time * 1000)
@@ -71,7 +71,7 @@ export default function Briefing({ preview = false }: { preview?: boolean }) {
   const prices = quotes?.items ?? exampleQuotes
   const categories = ['All', ...new Set(stories.map(story => story.category))]
   const active = categories.includes(category) ? category : 'All'
-  const visible = preview ? stories.slice(0, 1) : stories.filter(story => active === 'All' || story.category === active)
+  const visible = preview ? stories.filter((story, index) => stories.findIndex(item => item.source === story.source) === index).slice(0, 3) : stories.filter(story => active === 'All' || story.category === active)
   const rising = prices.filter(price => price.change > 0).length
   const falling = prices.filter(price => price.change < 0).length
   const summary = rising === 3 ? 'All three index funds rose' : falling === 3 ? 'All three index funds fell'
@@ -83,7 +83,7 @@ export default function Briefing({ preview = false }: { preview?: boolean }) {
       <ul className="fund-moves">{prices.map(p => <li key={p.symbol}><b>{p.symbol}</b> · {funds[p.symbol]} tracker <strong>{p.change > 0 ? '+' : ''}{p.change.toFixed(2)}%</strong>{!preview && <div>{timestamp(p.time)}</div>}</li>)}</ul>
     </section>
     <section className="glass">
-      <div className="row"><h2>{preview ? 'Top story' : 'Headlines'}</h2><small>{label(news)}</small></div>
+      <div className="row"><h2>{preview ? 'Market headlines' : 'Across the news'}</h2><small>{label(news, new Set(stories.map(item => item.source)).size + ' publishers')}</small></div>
       {!preview && <div className="news-filters" role="group" aria-label="Filter headlines by category">{categories.map(c => <button type="button" key={c} aria-pressed={active === c} onClick={() => select(c)}>{c}</button>)}</div>}
       {visible.map(story => <article className="news-story" key={story.headline}>
         <div>{story.category} · {story.source} · {timestamp(story.time)}</div>

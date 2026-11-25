@@ -1,4 +1,5 @@
-import { fromFinnhub, normalizeStories } from '../../server/feed.mjs'
+import { marketNews } from '../../server/market-news.mjs'
+import { fromFinnhub } from '../../server/feed.mjs'
 
 const symbols = ['SPY', 'QQQ', 'DIA']
 export default async function briefing(req, res, env = process.env) {
@@ -9,13 +10,9 @@ export default async function briefing(req, res, env = process.env) {
     return res.end('{}')
   }
   const key = env.FINNHUB_KEY
-  if (!key) {
-    res.statusCode = 503
-    return res.end('{}')
-  }
   const [news, ...quotes] = await Promise.allSettled([
-    fromFinnhub('news?category=general', key).then(normalizeStories),
-    ...symbols.map(symbol => fromFinnhub('quote?symbol=' + symbol, key)),
+    marketNews(),
+    ...(key ? symbols.map(symbol => fromFinnhub('quote?symbol=' + symbol, key)) : []),
   ])
   const stories = news.status === 'fulfilled' ? news.value : []
   const prices = quotes.flatMap((result, index) => {
