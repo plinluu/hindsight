@@ -17,7 +17,7 @@ function App(){
  const [url,setUrl]=useState(location.pathname),[menu,setMenu]=useState(''),[loader,setLoader]=useState(read('motion')==='reduce'||matchMedia('(prefers-reduced-motion: reduce)').matches?'gone':'visible')
  const seen=useValue('location-seen'), motion=useValue('motion'), light=useValue('daylight')
  useEffect(()=>{document.documentElement.dataset.motion=motion||'system';document.documentElement.dataset.daylight=light||'auto';if(motion==='reduce')setLoader('gone')},[motion,light])
- const page=names.find(n=>path(n)===url)||'Page not found'
+ const page=[...names,'About','Declined'].find(n=>path(n)===url)||'Page not found'
  useEffect(()=>{
   const navigate=()=>{setUrl(location.pathname);setMenu('');window.scrollTo(0,0)}
   const click=(e:MouseEvent)=>{const a=(e.target as Element).closest('a');if(!a||a.origin!==location.origin||e.button||e.ctrlKey||e.metaKey||e.shiftKey||e.altKey)return;e.preventDefault();history.pushState(null,'',a.href);navigate()}
@@ -30,6 +30,6 @@ function App(){
  useEffect(()=>{if(loader!=='fade')return;const end=setTimeout(()=>setLoader('gone'),600);return ()=>clearTimeout(end)},[loader])
  const link=(n:string)=><a key={n} aria-current={page===n?'page':undefined} href={path(n)}>{n}</a>
  const toggle=(n:string)=><button aria-expanded={menu===n} onClick={()=>setMenu(menu===n?'':n)}>{n} ⌄</button>
- return <><WeatherSync/><Scene/><header><nav className="desktop">{names.slice(0,6).map(link)}{toggle('Tools')}{menu==='Tools'&&<aside>{['Tools','Review','Learn'].map(link)}</aside>}</nav></header><nav className="mobile">{names.slice(0,4).map(link)}{toggle('More')}{menu==='More'&&<aside>{names.slice(4).map(link)}</aside>}</nav><main>{page==='Today'?<Today/>:<Suspense fallback={<p>Loading…</p>}><Detail page={page}/></Suspense>}{!seen&&page!=='Settings'&&<Location/>}</main>{loader!=='gone'&&<div className={'loader '+loader} role="status" aria-label="Loading Hindsight"/>}</>
+ return <><WeatherSync/><Scene/><header><nav className="desktop">{names.slice(0,6).map(link)}{toggle('Tools')}{menu==='Tools'&&<aside>{['Review','Learn','Markets','News','About'].map(link)}</aside>}</nav></header><nav className="mobile">{names.slice(0,4).map(link)}{toggle('More')}{menu==='More'&&<aside>{names.slice(4).map(link)}</aside>}</nav><main>{page==='Today'?<Today/>:<Suspense fallback={<p>Loading…</p>}><Detail page={page}/></Suspense>}{!seen&&page!=='Settings'&&<Location/>}</main>{loader!=='gone'&&<div className={'loader '+loader} role="status" aria-label="Loading Hindsight"/>}</>
 }
 createRoot(document.getElementById('root')!).render(<App/>)

@@ -28,7 +28,13 @@ Revision — Autumn uses the spring branch composition with copper, gold and rus
 Revision — Automatic uses winter scenery for reported snow, snowfall within the previous 24 hours, or current temperatures at or below freezing. Settings explains the weather trigger.
 Revision — All journal routes share the Today wallpaper and one persistent seasonal scene, so branches and particle animations carry through navigation.
 Revision — Summer has sunlit leafy branches and winter has snow-capped evergreen boughs in the upper corners across all routes.
-Next — Phase 6 products.
+Phase 6 complete
+- Trade review — Review accepts local broker activity, matches FIFO lots, compares historical prices and exports CSV or PNG.
+- Why prices move — Learn provides seven selectable lessons with simulated price charts.
+- Markets — Symbol lookup and charts are available from Markets and Tools.
+- Market briefing — Headlines and the daily recap are available from News and Tools.
+The legacy project is named hindsight (lowercase). About contains the methodology, privacy details and local data controls.
+Next — Phase 7 polish.
 TODO — Replace sky.png with original artwork before public launch.
 
 ## Earlier project history (previous phase numbering)

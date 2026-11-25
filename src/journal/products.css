@@ -1,0 +1,19 @@
+.journal-product { max-width: 800px; margin: 0 auto; }
+.journal-product > h1 { text-align: center; padding: 40px 0 24px; }
+.journal-product .panel, .journal-product > details {
+  background: var(--glass); border: var(--rim); box-shadow: var(--shadow);
+  backdrop-filter: blur(24px); border-radius: 28px; padding: clamp(18px, 4vw, 32px); margin-bottom: 20px;
+}
+.journal-product p { line-height: 1.6; margin: 12px 0; }
+.journal-product label { display: grid; gap: 6px; margin: 14px 0; }
+.journal-product select, .journal-product textarea, .journal-product input[type=file] {
+  box-sizing: border-box; width: 100%; min-width: 0; color-scheme: dark; color: inherit; font: inherit;
+  background: #252332; border: 1px solid #ffffff45; border-radius: 12px; padding: 10px;
+}
+.journal-product textarea { resize: vertical; }
+.journal-product .row { display: flex; justify-content: flex-start; flex-wrap: wrap; align-items: center; gap: 12px; margin: 14px 0; }
+.journal-product .grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(210px,100%),1fr)); gap: 0 16px; }
+.journal-product button { background: #d9cfdf; color: #24212c; padding: 8px 18px; }
+.journal-product button:disabled { opacity: .5; cursor: default; }
+.journal-product summary { cursor: pointer; padding: 8px 0; }
+.journal-product svg { display: block; color: #bfd5fb; margin: 18px 0; }

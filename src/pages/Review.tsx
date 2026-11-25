@@ -12,7 +12,7 @@ const brokers = [
   'webull.com',
   'etrade.com',
 ]
-export default function Review() {
+export default function Review({aboutHref = '#/About', declineHref = '#/Declined'}: {aboutHref?: string; declineHref?: string}) {
   const terms = useValue('terms'),
     [raw, set] = useState(''),
     [parsed, parse] = useState<ReturnType<typeof table>>(),
@@ -47,10 +47,10 @@ export default function Review() {
             Hindsight uses historical prices to illustrate past decisions. Results are estimates for learning.
             You choose whether to request price history for a symbol.
           </p>
-          <a href="#/About">Read terms and privacy</a>
+          <a href={aboutHref}>Read terms and privacy</a>
           <div className="row">
             <button onClick={() => save('terms', 'v1')}>Accept and continue</button>
-            <a href="#/Declined">Decline</a>
+            <a href={declineHref}>Decline</a>
           </div>
         </section>
       ) : (
