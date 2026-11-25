@@ -2,6 +2,7 @@
 Phase 0 complete
 Phase 1 complete
 Phase 2 complete
+Revision — Restored the official TradingView ticker tape with an opaque dark theme on Today and Markets.
 Revision — Dark signed index tape and selected-stock profiles with TradingView valuation, financial and IPO details.
 Revision — Replaced the ticker tape embed, removed sample switches and the watchlist, and added inline company-name search using the SEC listings directory.
 Done — Connected Today and Markets to TradingView with symbol search, local watchlist and sample views. Production build passed.
