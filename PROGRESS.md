@@ -23,6 +23,7 @@ Done — Connected location onboarding, hourly weather, local sun times and Sett
 Phase 5 complete
 Revision — Restored the original Today sky wallpaper. Winter brings snowfall, spring brings petals, summer brings floating golden motes and autumn brings tumbling leaves. Local sun times, weather tints and saved overrides still apply.
 Revision — Mixed two branched crystal shapes into the winter snowfall and framed the spring sky with flowering Japanese cherry branches and drifting petals.
+Revision — Automatic shows the detected season in Settings and uses the weather location’s hemisphere and local date on Today. Without a location it shows the original sky.
 Next — Phase 6 products.
 TODO — Replace sky.png with original artwork before public launch.
 

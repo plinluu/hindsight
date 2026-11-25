@@ -3,6 +3,11 @@ export function season(month, latitude) {
     (Math.floor(((month + 1) % 12) / 3) + (latitude < 0 ? 2 : 0)) % 4
   ]
 }
+export function localSeason(now, latitude, timeZone) {
+  if (!Number.isFinite(latitude) || Math.abs(latitude) > 90) return null
+  const month = new Intl.DateTimeFormat('en', { month: 'numeric', timeZone }).format(now)
+  return season(Number(month) - 1, latitude)
+}
 export function sunState(now, rise, set) {
   if (!Number.isFinite(rise) || !Number.isFinite(set) || !Number.isFinite(now) || set <= rise) return undefined
   if (now < rise || now >= set) return 'night'

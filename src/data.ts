@@ -4,7 +4,7 @@ export { read, save }
 export function useValue(k: string) {
   return useSyncExternalStore(listen, () => read(k))
 }
-export type Place = { latitude: number; longitude: number; name: string }
+export type Place = { latitude: number; longitude: number; timezone?: string; name: string }
 export function setPlace(p: Place) {
   save('place', JSON.stringify(p))
 }
@@ -26,6 +26,6 @@ export async function locate() {
   } catch {
     const ip = await json('https://ipapi.co/json/')
     if (ip.error || !Number.isFinite(ip.latitude) || !Number.isFinite(ip.longitude)) throw Error('Choose your city below.')
-    setPlace({ latitude: ip.latitude, longitude: ip.longitude, name: ip.city })
+    setPlace({ latitude: ip.latitude, longitude: ip.longitude, timezone: ip.timezone, name: ip.city })
   }
 }

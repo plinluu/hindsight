@@ -1,5 +1,6 @@
 import {useState} from 'react'
 import {save, useValue} from '../data'
+import {useLocalScene} from '../useLocalScene'
 import Location from '../Location'
 
 
@@ -8,6 +9,7 @@ export default function Settings() {
   const motion = useValue('motion') || 'system'
   const daylight = useValue('daylight') || 'auto'
   const season = useValue('season') || 'auto'
+  const {detectedSeason, locationName} = useLocalScene()
   const stored = useValue('watchlist')
   const symbols: string[] = stored ? JSON.parse(stored) : []
   const [query, setQuery] = useState('')
@@ -28,7 +30,11 @@ export default function Settings() {
       <label>Season <select value={season} onChange={event=>save('season',event.target.value)}>
         {['auto','spring','summer','autumn','winter'].map(value=><option key={value} value={value}>{value==='auto'?'Automatic':value[0].toUpperCase()+value.slice(1)}</option>)}
       </select></label>
-      <p>Automatic follows the season at your location. Use Light above to choose day, sunset or night.</p>
+      <p>{season === 'auto'
+        ? detectedSeason
+          ? `Automatic · ${detectedSeason} at ${locationName === 'Current location' ? 'your current location' : locationName}.`
+          : 'Choose a weather location below to match your background to its season.'
+        : 'Choose Automatic to follow your weather location again.'}</p>
     </section>
     <Location/>
     <section className="glass pref-form"><h2>Watchlist</h2>
