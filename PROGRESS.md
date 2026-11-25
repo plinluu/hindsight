@@ -8,7 +8,9 @@ Revision — Replaced the ticker tape embed, removed sample switches and the wat
 Done — Connected Today and Markets to TradingView with symbol search, local watchlist and sample views. Production build passed.
 Done — Sky loader, responsive navigation and sample journal screens. Production build passed.
 Done — Recorded desktop and mobile measurements, the available local artwork, and implementation dimensions in DESIGN_SPEC.md.
-Next — Phase 3 news and market recap.
+Phase 3 complete
+Done — Connected Today and News to Finnhub headlines and ETF recaps with cached and sample fallbacks. Production build passed.
+Next — Phase 4 location, weather and settings.
 TODO — Replace sky.png with original artwork before public launch.
 
 ## Earlier project history (previous phase numbering)

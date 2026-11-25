@@ -102,3 +102,14 @@ nav [aria-current] {
 .tape-host iframe {display:block;color-scheme:dark}
 .tape-sample {position:absolute;inset:0;display:flex;align-items:center;gap:7px;padding:0 14px;background:#131722;font-size:12px}
 .tape-sample span {color:#b9bfcc}
+
+.news-brief { display: grid; gap: 16px; min-width: 0; }
+.news-brief .glass { min-width: 0; }
+.news-filters { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0; }
+.news-filters button { border: 1px solid #ffffff44; border-radius: 999px; padding: 8px 16px; color: inherit; background: #171d30; cursor: pointer; }
+.news-filters button[aria-pressed="true"] { color: #101626; background: #aacaff; }
+.news-story + .news-story { border-top: 1px solid #ffffff22; margin-top: 16px; padding-top: 16px; }
+.news-story > div, .fund-moves time { font-size: .8rem; color: #c9c6c2; }
+.news-story h3 { overflow-wrap: anywhere; }
+.fund-moves { list-style: none; padding: 0; margin: 16px 0 0; }
+.fund-moves li { padding: 4px 0; font-variant-numeric: tabular-nums; }
