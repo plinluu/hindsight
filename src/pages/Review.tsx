@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
 import { table, match, example, type Fields } from '../trades'
-import SaleChart from '../SaleChart'
 import Results from '../ReviewResults'
 import { useValue, save } from '../data'
 const brokers = [
@@ -13,15 +12,19 @@ const brokers = [
   'webull.com',
   'etrade.com',
 ]
+let tabReport:ReturnType<typeof match> | undefined
 export default function Review({aboutHref = '#/About', declineHref = '#/Declined'}: {aboutHref?: string; declineHref?: string}) {
   const terms = useValue('terms'),
     [raw, set] = useState(''),
     [parsed, parse] = useState<ReturnType<typeof table>>(),
-    [report, show] = useState<ReturnType<typeof match>>(),
+    [report, show] = useState(tabReport),
     [note, msg] = useState('')
+  const [importing, setImporting] = useState(false)
   const heading = useRef<HTMLHeadingElement>(null)
   useEffect(() => {
-    if (report) {
+    tabReport=report
+    if (report?.sales.length) {
+      setImporting(false)
       heading.current?.focus({preventScroll:true})
       heading.current?.scrollIntoView({block:'center'})
     }
@@ -32,23 +35,29 @@ export default function Review({aboutHref = '#/About', declineHref = '#/Declined
     show(undefined)
     msg('')
   }
-  function inspect(text: string, sample = false) {
+  function inspect(text: string) {
     try {
       const t = table(text)
       parse(t)
-      msg('')
-      show(sample ? match(t.rows, t.mapping) : undefined)
+      msg(t.rows.length+' activity rows found. Check the column matches below.')
     } catch (e) {
       msg((e as Error).message)
     }
   }
+  async function readFile(file?:File) {
+    if(!file)return
+    if(file.size>2097152){msg('Choose a file under 2 MB.');return}
+    if(!/\.(csv|tsv|txt)$/i.test(file.name) && !/^text\//.test(file.type)){msg('Choose a plain text broker export.');return}
+    try{const text=await file.text();reset(text);inspect(text)}catch{msg('File could not be read.')}
+  }
   return (
     <>
       <h1 ref={heading} tabIndex={-1}>Trade review</h1>
-      {report?.sales.length ? <Results sales={report.sales}/> : <SaleChart demo/>}
+      <div className="review-actions"><button aria-expanded={importing} onClick={()=>setImporting(!importing)}>{importing?'Close import':'Import my trades'}</button>
+        {!!report?.sales.length && <button onClick={()=>{reset('');setImporting(false)}}>Back to demo</button>}</div>
       {report && <p role="status">{report.sales.length} matched lots · {report.skipped} skipped rows · {report.unmatched} unmatched shares sold</p>}
       {report && !report.sales.length && <p>Include the purchases that came before your sales in the export.</p>}
-      {terms !== 'v1' ? (
+      {importing && (terms !== 'v1' ? (
         <section className="panel">
           <h2>Before reviewing trades</h2>
           <p>
@@ -80,27 +89,9 @@ export default function Review({aboutHref = '#/About', declineHref = '#/Declined
                 ))}
               </div>
             </details>
-            <label>
-              CSV, TSV or text file
-              <input
-                type="file"
-                accept=".csv,.tsv,.txt"
-                onChange={async (e) => {
-                  const f = e.target.files?.[0]
-                  if (!f) return
-                  if (f.size > 2097152) {
-                    msg('Choose a file under 2 MB.')
-                    return
-                  }
-                  try {
-                    const t = await f.text()
-                    reset(t)
-                    inspect(t)
-                  } catch {
-                    msg('File could not be read.')
-                  }
-                }}
-              />
+            <label className="review-drop" onDragOver={e=>e.preventDefault()} onDrop={e=>{e.preventDefault();void readFile(e.dataTransfer.files[0])}}>
+              Choose or drop a CSV, TSV or text file
+              <input type="file" accept=".csv,.tsv,.txt" onChange={e=>void readFile(e.target.files?.[0])}/>
             </label>
             <label>
               Paste trade activity
@@ -113,7 +104,7 @@ export default function Review({aboutHref = '#/About', declineHref = '#/Declined
               <button
                 onClick={() => {
                   reset(example)
-                  inspect(example, true)
+                  inspect(example)
                 }}
               >
                 Try a sample import
@@ -126,8 +117,8 @@ export default function Review({aboutHref = '#/About', declineHref = '#/Declined
               <div className="grid2">
                 {(Object.keys(parsed.mapping) as (keyof Fields)[]).map((k) => (
                   <label key={k}>
-                    {k}
-                    {k === 'fee' ? ' (optional)' : ''}
+                    {{fee:'Commission',fx:'Currency conversion',side:'Buy or sell',price:'Price per share',quantity:'Shares',symbol:'Ticker',date:'Trade date'}[k]}
+                    {k === 'fee' || k === 'fx' ? ' (optional)' : ''}
                     <select
                       value={parsed.mapping[k]}
                       onChange={(e) => {
@@ -162,7 +153,8 @@ export default function Review({aboutHref = '#/About', declineHref = '#/Declined
           <p role="status">{note}</p>
 
         </>
-      )}
+      ))}
+      <Results key={report?.sales.length ? 'imported' : 'demo'} sales={report?.sales.length ? report.sales : undefined}/>
     </>
   )
 }

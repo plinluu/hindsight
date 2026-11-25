@@ -1,11 +1,13 @@
 import Papa from 'papaparse'
+import {isoDate, num} from './review/calculations'
 const defs = {
   date: /date/i,
   symbol: /symbol|ticker|instrument|security/i,
   side: /action|side|type|activity/i,
   quantity: /quantity|qty|shares|units/i,
   price: /price/i,
-  fee: /fee|commission/i,
+  fee: /^(?!.*(?:fx|conversion|exchange)).*(?:fee|commission)/i,
+  fx: /currency conversion|conversion fee|fx fee|exchange fee/i,
 }
 export type Fields = Record<keyof typeof defs, number>
 export type Sale = {
@@ -15,6 +17,7 @@ export type Sale = {
   quantity: number
   entry: number
   exit: number
+  fx: number
   fees: number
   net: number
   days: number
@@ -40,28 +43,28 @@ export function table(text: string) {
   return { headers, rows, mapping }
 }
 function numeric(s: string) {
-  if (!s?.trim()) return NaN
-  return Number(s.replace(/[$,\s]/g, '').replace(/^\((.*)\)$/, '-$1'))
+  return num(s)
 }
 export function match(rows: string[][], map: Fields) {
   const used = Object.values(map).filter((i) => i >= 0)
-  if (new Set(used).size !== used.length || Object.entries(map).some(([k, i]) => k !== 'fee' && i < 0))
+  if (new Set(used).size !== used.length || Object.entries(map).some(([k, i]) => k !== 'fee' && k !== 'fx' && i < 0))
     throw Error('Choose a distinct column for each required field.')
   let skipped = 0,
     unmatched = 0
   const events = rows
     .flatMap((r) => {
-      const date = new Date(r[map.date]),
+      const date = isoDate(r[map.date]),
         symbol = r[map.symbol]?.trim().toUpperCase(),
         side = r[map.side]?.trim().toLowerCase(),
         qty = Math.abs(numeric(r[map.quantity])),
-        price = numeric(r[map.price]),
+        price = Math.abs(numeric(r[map.price])),
+        fx = r[map.fx]?.trim() ? Math.abs(numeric(r[map.fx])) : 0,
         fee = r[map.fee]?.trim() ? Math.abs(numeric(r[map.fee])) : 0
       if (
-        !Number.isFinite(+date) ||
+        !date ||
         !symbol ||
-        !['buy', 'bought', 'b', 'sell', 'sold', 's'].includes(side) ||
-        !Number.isFinite(qty + price + fee) ||
+        !/buy|bought|purchase|reinvest|sell|sold|dispose|redemption|^[bs]$/.test(side) ||
+        !Number.isFinite(qty + price + fee + fx) ||
         qty <= 0 ||
         price <= 0
       ) {
@@ -70,16 +73,16 @@ export function match(rows: string[][], map: Fields) {
       }
       return [
         {
-          date: date.toISOString().slice(0, 10),
+          date: date,
           symbol,
-          buy: ['buy', 'bought', 'b'].includes(side),
+          buy: /buy|bought|purchase|reinvest|^b$/.test(side),
           qty,
           price,
-          fee: fee / qty,
+          fee: fee / qty, fx: fx / qty,
         },
       ]
     })
-    .sort((a, b) => a.date.localeCompare(b.date))
+    .sort((a, b) => a.date.localeCompare(b.date) || Number(b.buy)-Number(a.buy))
   const lots = new Map<string, typeof events>(),
     sales: Sale[] = []
   for (const e of events) {
@@ -93,7 +96,8 @@ export function match(rows: string[][], map: Fields) {
     while (rest > 1e-9 && queue.length) {
       const lot = queue[0],
         quantity = Math.min(rest, lot.qty),
-        fees = quantity * (lot.fee + e.fee)
+        fx = quantity * (lot.fx + e.fx),
+        fees = quantity * (lot.fee + e.fee) + fx
       sales.push({
         symbol: e.symbol,
         buy: lot.date,
@@ -101,7 +105,7 @@ export function match(rows: string[][], map: Fields) {
         quantity,
         entry: lot.price,
         exit: e.price,
-        fees,
+        fees, fx,
         net: quantity * (e.price - lot.price) - fees,
         days: (Date.parse(e.date) - Date.parse(lot.date)) / 86400000,
       })

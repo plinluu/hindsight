@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Line } from '../ReviewResults'
+import { Line } from './LearnLine'
 const lessons = [
   [
     'Earnings',
