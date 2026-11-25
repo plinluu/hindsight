@@ -65,3 +65,14 @@ nav [aria-current] {
 @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))) {
   .glass,.ticker,.desktop,.mobile,aside {background:rgba(28,24,40,.88)}
 }
+
+.market-widget {min-width:0;max-width:100%;overflow:hidden;border-radius:24px}
+.market-controls form {margin:16px 0}
+.market-controls label {display:block;margin-bottom:6px}
+.market-controls form>div,.watchlist {display:flex;gap:8px;flex-wrap:wrap}
+.market-controls input {min-width:0;max-width:100%;flex:1;padding:10px 16px;border:1px solid #ffffff48;border-radius:999px;color:inherit;background:#191925;font:inherit}
+.market-controls button,.sample-switch {border:1px solid #ffffff38;border-radius:999px;padding:8px 14px;color:inherit;background:#373245;cursor:pointer}
+.market-controls form button,.watchlist button[aria-pressed=true] {background:#a7bff2;color:#151a29}
+.market-controls .row {flex-wrap:wrap;gap:8px}
+.sample-switch {font-size:12px;margin:6px 0}
+.watchlist {margin-top:12px}
