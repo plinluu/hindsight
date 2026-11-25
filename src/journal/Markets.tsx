@@ -1,6 +1,7 @@
 import {useState, type FormEvent} from 'react'
 import companies from './companies.json'
-import {Chart, Overview} from './Today'
+import {SecurityProfile, Overview} from './SecurityData'
+import {Chart} from './Today'
 import {MarketWidget} from './MarketWidget'
 
 const initial = ['S&P 500 ETF', 'AMEX:SPY']
@@ -46,7 +47,6 @@ export default function Markets() {
   return <>
     <div className="hero"><h1>Markets</h1><p>Find a company and explore its price over time.</p></div>
     <section className="glass market-controls">
-      <h2>{name}</h2>
       <form onSubmit={open}><label htmlFor="symbol">Find a company or ticker</label>
         <div><input id="symbol" autoComplete="off" role="combobox" aria-autocomplete="list" aria-controls="company-results"
           aria-expanded={visible} aria-activedescendant={visible && active >= 0 ? 'company-'+active : undefined}
@@ -60,7 +60,7 @@ export default function Markets() {
               expand(true)
               highlight(e.key === 'ArrowDown' ? (active+1)%results.length : (active <= 0 ? results.length-1 : active-1))
             }
-          }}/><button>Open chart</button></div>
+          }}/><button>View stock</button></div>
         <ul id="company-results" role="listbox" aria-label="Matching companies" hidden={!visible}>
           {results.map((row,i) => <li key={row[1]+i} id={'company-'+i} role="option" aria-selected={active===i}
             onMouseDown={e => e.preventDefault()} onClick={() => choose(row)}>{row[0]} <span>{row[1]}</span></li>)}
@@ -68,7 +68,8 @@ export default function Markets() {
         {expanded && query.trim() && !results.length && <p role="status">No matching companies. You can also enter a ticker.</p>}
       </form>
       {error && <p role="alert">{error}</p>}
-      <MarketWidget kind="advanced-chart" symbol={symbol}><Chart/></MarketWidget>
+      <SecurityProfile key={symbol} symbol={symbol} name={name}/>
+      <MarketWidget kind="advanced-chart" symbol={symbol}>{symbol === 'AMEX:SPY' ? <Chart/> : <p>Loading the price chart for {name}…</p>}</MarketWidget>
     </section>
     <Overview/>
   </>
