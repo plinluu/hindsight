@@ -198,7 +198,15 @@ nav a[href="/markets"]:not([aria-current]) { color: var(--mint); }
 nav a[href="/news"]:not([aria-current]), nav a[href="/learn"]:not([aria-current]) { color: var(--orchid); }
 nav a[href="/review"]:not([aria-current]) { color: #ffc7bc; }
 
-body:has(.opening)::before { background-image: url('/home-sky.png'); }
+body:has(.opening)::before { display: none; }
+.scene, .scene > * { position: fixed; inset: 0; pointer-events: none; background-position: center; background-size: cover; }
+.scene { z-index: -1; isolation: isolate; background-color: #23303b; }
+.scene::before { content: ''; position: absolute; inset: -20px; z-index: -1; background: linear-gradient(165deg, #273744, #675850 50%, #23302e 70%); filter: blur(16px); }
+.scene[style*="url"]::before { display: none; }
+.scene > div { animation: seasonal-reveal 700ms ease-out both; }
+.scene::after { content: ''; position: absolute; inset: 0; background: linear-gradient(#10142166, #10142199); }
+@keyframes seasonal-reveal { from { opacity: 0; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .scene > div { animation: none; } }
 .loader::before {
   content: '';
   position: absolute;

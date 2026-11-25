@@ -19,3 +19,5 @@ for (const [now, want] of [
 ])
   assert.equal(sunState(now, 1000, 10000), want)
 assert.equal(sunState(0, NaN, NaN), undefined)
+assert.equal(sunState(500, 1000, 900), undefined)
+assert.equal(sunState(9999, 1000, 10000), 'sunset')

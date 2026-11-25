@@ -20,7 +20,9 @@ Revision — News aggregates business and world reporting from direct publisher 
 Done — Connected Today and News to Finnhub headlines and ETF recaps with cached and sample fallbacks. Production build passed.
 Phase 4 complete
 Done — Connected location onboarding, hourly weather, local sun times and Settings to the current journal.
-Next — Phase 5 seasonal backgrounds.
+Phase 5 complete
+Done — Today uses the 12 seasonal WebP placeholders, local sun times, weather tints and saved scene overrides. Artwork prompts are in docs/IMAGE_PROMPTS.md.
+Next — Phase 6 products.
 TODO — Replace sky.png with original artwork before public launch.
 
 ## Earlier project history (previous phase numbering)

@@ -1,3 +1,4 @@
+import Scene from '../Scene'
 import Weather from '../Weather'
 import Briefing from './Briefing'
 import {MarketWidget} from './MarketWidget'
@@ -9,6 +10,7 @@ export default function Today() {
   const now = new Date()
   const greeting = now.getHours() < 12 ? 'Good morning' : now.getHours() < 18 ? 'Good afternoon' : 'Good evening'
   return <>
+    <Scene/>
     <div className="opening">
       <div className="greeting-glass">
         <time>{now.toLocaleDateString('en-US', {weekday:'long', month:'long', day:'numeric'})}</time>

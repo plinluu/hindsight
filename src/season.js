@@ -4,7 +4,7 @@ export function season(month, latitude) {
   ]
 }
 export function sunState(now, rise, set) {
-  if (!Number.isFinite(rise) || !Number.isFinite(set)) return undefined
+  if (!Number.isFinite(rise) || !Number.isFinite(set) || !Number.isFinite(now) || set <= rise) return undefined
   if (now < rise || now >= set) return 'night'
   return now >= Math.max(rise, set - 3600) ? 'sunset' : 'day'
 }
