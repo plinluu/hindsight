@@ -4,7 +4,18 @@ const fields = [
   'number_of_employees','volume','price_52_week_low','price_52_week_high','ipo_offer_date','ipo_offer_price_usd',
   'exchange','type','update_mode','total_shares_outstanding'
 ]
-const indices = ['SP:SPX','NASDAQ:IXIC','TVC:DJI']
+const indices = ['^GSPC','^IXIC','^DJI']
+async function indexQuote(symbol) {
+  const url='https://query1.finance.yahoo.com/v8/finance/chart/'+encodeURIComponent(symbol)+'?range=1d&interval=1d'
+  const response=await fetch(url,{headers:{'User-Agent':'Mozilla/5.0'},signal:AbortSignal.timeout(9000)})
+  if (!response.ok) throw Error('Index quote unavailable')
+  const {meta}= (await response.json()).chart.result[0]
+  const close=meta.regularMarketPrice
+  if (!Number.isFinite(close)) throw Error('No index price')
+  const previous=meta.previousClose ?? meta.chartPreviousClose
+  const change=meta.regularMarketChangePercent ?? (previous>0 ? (close/previous-1)*100 : null)
+  return {symbol,close,change}
+}
 const cache = new Map()
 async function lookup(symbol, selectedFields) {
   const url = new URL('https://scanner.tradingview.com/symbol')
@@ -28,7 +39,7 @@ export default async function security(req,res) {
     let entry=cache.get(key)
     if (!entry || Date.now()-entry.at>60000) {
       const data = key==='indices'
-        ? await Promise.all(indices.map(s=>lookup(s,['close','change','update_mode'])))
+        ? await Promise.all(indices.map(indexQuote))
         : await lookup(key,fields)
       entry={at:Date.now(),data}
       if(cache.size>=300) cache.delete(cache.keys().next().value)

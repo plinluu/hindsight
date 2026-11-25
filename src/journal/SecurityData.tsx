@@ -47,7 +47,7 @@ export function Overview() {
     <b>{benchmarks[i]}</b><span>{number(q.close)}</span><Change n={q.change}/>
   </div>)
   return <section className="index-tape" aria-label="Market overview">
-    <div className="index-caption">Market overview <span>{result?.data?'TradingView · quotes may be delayed':'Sample data'}</span></div>
+    <div className="index-caption">Market overview <span>{result?.data?'Yahoo Finance · quotes may be delayed':'Sample data'}</span></div>
     <div className="index-window"><div className="index-track"><div>{cells}</div><div aria-hidden="true">{cells}</div></div></div>
   </section>
 }
