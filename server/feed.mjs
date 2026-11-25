@@ -7,7 +7,7 @@ const baskets = [
   ['XLE', 'Energy', 'Sector'],
   ...['AAPL', 'MSFT', 'NVDA', 'AMZN', 'GOOGL'].map((s) => [s, s, 'Stock']),
 ]
-async function fromFinnhub(path, key) {
+export async function fromFinnhub(path, key) {
   const r = await fetch('https://finnhub.io/api/v1/' + path, {
     headers: { 'X-Finnhub-Token': key },
     signal: AbortSignal.timeout(9000),
@@ -29,18 +29,9 @@ const explain = {
   merger: 'A deal can change how investors value both companies.',
   general: 'This report gives context for the market moves in your recap.',
 }
-export async function feed(env) {
-  if (!env.FINNHUB_API_KEY) throw Error('Market feed needs a server key.')
-  const iso = (date) => date.toISOString().slice(0, 10)
-  const calendarPath =
-    'calendar/earnings?from=' + iso(new Date()) + '&to=' + iso(new Date(Date.now() + 7 * 86400000))
-  const [calendar, news, ...quotes] = await Promise.allSettled([
-    fromFinnhub(calendarPath, env.FINNHUB_API_KEY),
-    fromFinnhub('news?category=general', env.FINNHUB_API_KEY),
-    ...baskets.map(([s]) => fromFinnhub('quote?symbol=' + s, env.FINNHUB_API_KEY)),
-  ])
+export function normalizeStories(items) {
   const seen = new Set()
-  const stories = (news.status === 'fulfilled' && Array.isArray(news.value) ? news.value : [])
+  return (Array.isArray(items) ? items : [])
     .filter((n) => {
       const url = cleanUrl(n.url),
         id = n.headline?.trim().toLowerCase()
@@ -49,6 +40,7 @@ export async function feed(env) {
       seen.add(url)
       return true
     })
+    .sort((a,b) => b.datetime - a.datetime)
     .slice(0, 60)
     .map((n) => {
       const h = n.headline.toLowerCase(),
@@ -62,7 +54,7 @@ export async function feed(env) {
       return {
         headline: n.headline,
         url: cleanUrl(n.url),
-        source: n.source,
+        source: n.source || 'Finnhub',
         time: n.datetime,
         category,
         tone: /\b(slumps?|falls?|drops?|losses)\b/.test(h)
@@ -80,6 +72,18 @@ export async function feed(env) {
                 : (explain[n.category] ?? explain.general),
       }
     })
+}
+export async function feed(env) {
+  if (!env.FINNHUB_API_KEY) throw Error('Market feed needs a server key.')
+  const iso = (date) => date.toISOString().slice(0, 10)
+  const calendarPath =
+    'calendar/earnings?from=' + iso(new Date()) + '&to=' + iso(new Date(Date.now() + 7 * 86400000))
+  const [calendar, news, ...quotes] = await Promise.allSettled([
+    fromFinnhub(calendarPath, env.FINNHUB_API_KEY),
+    fromFinnhub('news?category=general', env.FINNHUB_API_KEY),
+    ...baskets.map(([s]) => fromFinnhub('quote?symbol=' + s, env.FINNHUB_API_KEY)),
+  ])
+  const stories = normalizeStories(news.status === 'fulfilled' ? news.value : [])
   const prices = quotes.flatMap((r, i) =>
     r.status === 'fulfilled' && r.value.c > 0 && Number.isFinite(r.value.dp) && r.value.t
       ? [
