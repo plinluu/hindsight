@@ -1,3 +1,4 @@
+import Weather from '../Weather'
 import Briefing from './Briefing'
 import {MarketWidget} from './MarketWidget'
 import type {ReactNode} from 'react'
@@ -13,13 +14,13 @@ export default function Today() {
         <time>{now.toLocaleDateString('en-US', {weekday:'long', month:'long', day:'numeric'})}</time>
         <h1>{greeting}.</h1>
         <p>Your market journal for the day.</p>
-        <div className="conditions"><span aria-hidden="true">☼</span> Toronto · 18°C <i/> Sunset 7:42 PM <small>Sample data</small></div>
+        <Weather compact/>
       </div>
     </div>
     <div className="section-line"><h2>Market session</h2><a href="/markets">Explore markets ↗</a></div>
     <MarketWidget kind="advanced-chart" symbol="AMEX:SPY"><Chart/></MarketWidget>
     <div className="section-line"><h2>Daily briefing</h2><a href="/news">Read the recap ↗</a></div>
-    <div className="briefing"><Briefing preview/><Panel title="Local outlook"><h3>18° · Partly cloudy</h3><p>Toronto · Feels like 17°C</p><p>Sunset at 7:42 PM</p></Panel></div>
+    <div className="briefing"><Briefing preview/><Weather/></div>
     <Products/>
   </>
 }

@@ -8,22 +8,21 @@ export default function Location() {
     [status, msg] = useState(''),
     [busy, setBusy] = useState(false)
   return (
-    <section className="panel stack">
+    <section className="glass location-form" id="location-settings" tabIndex={-1}>
       <h2>Local weather and scenery</h2>
       {place && <p>Selected location · {JSON.parse(place).name}</p>}
       <p>
-        We use your location to match the background to your local weather and season. Hindsight saves your
-        choice on this device. Open-Meteo receives your coordinates. If the browser can’t locate you, an IP
+        We use your location to match your local weather, sun times and season. Nothing is stored on a server. Open-Meteo receives your coordinates. If the browser can’t locate you, an IP
         lookup estimates your city.
       </p>
       <div className="row">
         <button
           disabled={busy}
           onClick={async () => {
-            save('location-seen', 'yes')
             setBusy(true)
             try {
               await locate()
+              save('location-seen', 'yes')
               msg('Location updated.')
             } catch {
               msg('Automatic location unavailable. Search for your city.')

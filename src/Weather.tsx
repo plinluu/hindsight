@@ -69,7 +69,7 @@ export function WeatherSync() {
   }, [place])
   return null
 }
-export default function Weather() {
+export default function Weather({compact = false}: {compact?: boolean}) {
   const place = useValue('place'),
     stored = useValue('weather'),
     error = useValue('weather-error'),
@@ -89,15 +89,20 @@ export default function Weather() {
       minute: '2-digit',
     })
   const minutes = d ? Math.ceil((d.daily.sunset[0] * 1000 - now) / 60000) : 0
+  const sample = !d || !!error
+  const label = sample ? 'Toronto' : JSON.parse(place!).name
+  const degrees = temp(sample ? 18 : d.current.temperature_2m)
+  const sunset = sample ? '7:42 PM' : time(d.daily.sunset[0])
+  if (compact) return <div className="conditions"><span aria-hidden="true">☼</span> {label} · {degrees} <i/> Sunset {sunset} {sample && <small>Sample data</small>}</div>
   return (
-    <section className="panel">
+    <section className="glass forecast">
       <div className="row">
         <h2>Local weather</h2>
         <button aria-label="Switch temperature units" onClick={() => save('unit', unit === 'C' ? 'F' : 'C')}>
           °{unit}
         </button>
       </div>
-      {d && entry ? (
+      {!sample && d && entry ? (
         <>
           <p>
             {JSON.parse(place!).name} · {temp(d.current.temperature_2m)} · {condition(d.current.weather_code)}
@@ -126,10 +131,14 @@ export default function Weather() {
           </small>
         </>
       ) : (
-        <p>
-          {place ? 'Waiting for the forecast.' : 'Choose a location to see your forecast.'}{' '}
-          <a href="#/Settings">Location settings</a>
-        </p>
+        <>
+          <small>Sample data</small>
+          <h3>{degrees} · Partly cloudy</h3>
+          <p>Toronto · Feels like {temp(17)}</p>
+          <p>Sunrise 6:34 AM · Sunset 7:42 PM (Toronto time)</p>
+          <details><summary>Hourly forecast</summary>{[18,17,16].map((c,i)=><p key={c}>{4+i}:00 PM · {temp(c)} · Partly cloudy</p>)}</details>
+          <a href="/settings">Location settings</a>
+        </>
       )}
       {place && error && <p role="status">{error} Retrying automatically.</p>}
     </section>

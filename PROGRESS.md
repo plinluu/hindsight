@@ -18,7 +18,9 @@ Revision — Applied shared liquid-glass surfaces to navigation, cards, search, 
 Revision — Removed the market overview ticker site-wide and centered the Today greeting in a clear glass panel.
 Revision — News aggregates business and world reporting from direct publisher feeds and multi-outlet search. Live check returned 60 stories across 19 source labels without a Finnhub key. Production build passed.
 Done — Connected Today and News to Finnhub headlines and ETF recaps with cached and sample fallbacks. Production build passed.
-Next — Phase 4 location, weather and settings.
+Phase 4 complete
+Done — Connected location onboarding, hourly weather, local sun times and Settings to the current journal.
+Next — Phase 5 seasonal backgrounds.
 TODO — Replace sky.png with original artwork before public launch.
 
 ## Earlier project history (previous phase numbering)

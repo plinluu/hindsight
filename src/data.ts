@@ -24,8 +24,8 @@ export async function locate() {
       name: 'Current location',
     })
   } catch {
-    const ip = await json('https://ipwho.is/')
-    if (!ip.success || !Number.isFinite(ip.latitude)) throw Error('Choose your city below.')
+    const ip = await json('https://ipapi.co/json/')
+    if (ip.error || !Number.isFinite(ip.latitude) || !Number.isFinite(ip.longitude)) throw Error('Choose your city below.')
     setPlace({ latitude: ip.latitude, longitude: ip.longitude, name: ip.city })
   }
 }
