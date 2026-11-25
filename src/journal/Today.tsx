@@ -1,5 +1,4 @@
 import Briefing from './Briefing'
-import {Overview} from './SecurityData'
 import {MarketWidget} from './MarketWidget'
 import type {ReactNode} from 'react'
 export function Panel({title,children}:{title:string,children:ReactNode}){return <section className="glass"><div className="row"><h2>{title}</h2><small>Sample data</small></div>{children}</section>}
@@ -10,13 +9,12 @@ export default function Today() {
   const greeting = now.getHours() < 12 ? 'Good morning' : now.getHours() < 18 ? 'Good afternoon' : 'Good evening'
   return <>
     <div className="opening">
-      <div>
+      <div className="greeting-glass">
         <time>{now.toLocaleDateString('en-US', {weekday:'long', month:'long', day:'numeric'})}</time>
         <h1>{greeting}.</h1>
         <p>Your market journal for the day.</p>
         <div className="conditions"><span aria-hidden="true">☼</span> Toronto · 18°C <i/> Sunset 7:42 PM <small>Sample data</small></div>
       </div>
-      <Overview/>
     </div>
     <div className="section-line"><h2>Market session</h2><a href="/markets">Explore markets ↗</a></div>
     <MarketWidget kind="advanced-chart" symbol="AMEX:SPY"><Chart/></MarketWidget>

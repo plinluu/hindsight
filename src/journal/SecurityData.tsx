@@ -1,4 +1,4 @@
-import {useEffect, useRef, useState} from 'react'
+import {useEffect, useState} from 'react'
 
 type Quote = {symbol:string;close:number;change:number|null}
 type Profile = Quote & {
@@ -35,43 +35,6 @@ function number(n:number|undefined|null, currency?:string, compact=false) {
 function Change({n}:{n:number|null}) {
   if (n==null) return <span>—</span>
   return <span className={n>0?'market-gain':n<0?'market-loss':''}>{n>0?'+':''}{n.toFixed(2)}%</span>
-}
-const tapeSymbols = [
-  {proName:'FOREXCOM:SPXUSD',title:'US 500'},
-  {proName:'FOREXCOM:NSXUSD',title:'US Tech 100'},
-  {proName:'FOREXCOM:DJI',title:'Dow 30'}
-]
-export function Overview() {
-  const host = useRef<HTMLDivElement>(null)
-  const [loaded,setLoaded] = useState(false)
-  useEffect(() => {
-    const root = host.current!
-    const holder = document.createElement('div')
-    holder.className = 'tradingview-widget-container'
-    const target = document.createElement('div')
-    target.className = 'tradingview-widget-container__widget'
-    const script = document.createElement('script')
-    script.async = true
-    script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js'
-    script.textContent = JSON.stringify({symbols:tapeSymbols,colorTheme:'dark',isTransparent:false,
-      displayMode:'regular',showSymbolLogo:true,locale:'en',isPaused:matchMedia('(prefers-reduced-motion: reduce)').matches})
-    const onLoad = (event:Event) => {if (event.target instanceof HTMLIFrameElement) setLoaded(true)}
-    holder.addEventListener('load',onLoad,true)
-    const observer = new IntersectionObserver(entries => {
-      if (!entries.some(entry => entry.isIntersecting)) return
-      observer.disconnect()
-      root.append(holder)
-      holder.append(target,script)
-    })
-    observer.observe(root)
-    return () => {observer.disconnect();holder.removeEventListener('load',onLoad,true);holder.remove()}
-  },[])
-  return <section className="index-tape" aria-label="Market overview">
-    <div className="index-caption">Market overview <a href="https://www.tradingview.com/markets/" target="_blank" rel="noreferrer">TradingView ↗</a></div>
-    <div className="tape-slot"><div ref={host} className="tape-host"/>
-      {!loaded && <div className="tape-sample"><span>Sample data</span> US 500 <b className="market-gain">+0.82%</b> · Dow 30 <b className="market-loss">−0.24%</b></div>}
-    </div>
-  </section>
 }
 export function SecurityProfile({symbol,name}:{symbol:string;name:string}) {
   const result = useSource<Profile>(symbol)

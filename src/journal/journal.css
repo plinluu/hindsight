@@ -11,7 +11,7 @@ body {
     linear-gradient(180deg,#29222e,#211c26 300px,#111016 575px,#101015);
 }
 .loader:before {background: url('/journal-sky.png') center/cover}
-.opening {display:grid;grid-template-columns:minmax(0,1fr) 380px;align-items:center;gap:40px;padding:96px 0 76px}
+.opening {display:grid;justify-items:center;padding:clamp(32px,6vw,80px) 0}
 .opening time,.ticker-heading,.axis {font-size:12px;color:#c2b6c3}
 .opening time {display:block;margin-bottom:12px}
 .opening h1 {letter-spacing:-.035em}
@@ -31,7 +31,6 @@ small {font-size:11px;border-color:#ffffff20;color:#bdb2bf}
 .briefing {display:grid;grid-template-columns:1.7fr 1fr;gap:16px}.briefing h3 {line-height:1.15}
 @media(max-width:767px) {
   header {display:none}
-  .opening {grid-template-columns:1fr;gap:24px;padding:42px 0 32px}
   .briefing {grid-template-columns:1fr;gap:0}
   .glass {padding:18px;margin-bottom:24px}
 }
@@ -79,10 +78,8 @@ nav [aria-current] {
 #company-results li {display:flex;align-items:center;justify-content:space-between;gap:12px;border-radius:12px;padding:10px 12px;cursor:pointer}
 #company-results span {font-size:12px;color:#cbc8d7}
 #company-results li:hover,#company-results li[aria-selected=true] {background:#393449}
-.index-tape {color-scheme:dark;min-width:0;background:#15141e;color:#f4f1ea;border:1px solid #ffffff22;border-radius:18px;padding:14px 0 16px;overflow:hidden;font-variant-numeric:tabular-nums}
-.index-caption,.security-profile footer {display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:4px 16px;font-size:12px}
-.index-caption {padding:0 16px 12px;color:#ded8e0}
-.index-caption span,.security-profile footer span,.security-heading>div>span,.security-facts dt {color:#bdb5c3}
+.security-profile footer {display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:4px 16px;font-size:12px}
+.security-profile footer span,.security-heading>div>span,.security-facts dt {color:#bdb5c3}
 .market-gain {color:#78e2af}.market-loss {color:#ff919d}
 .security-profile {padding:clamp(20px,4vw,40px);margin:24px 0;background:linear-gradient(135deg,#252638,#171720 66%);border:1px solid #ffffff21;border-radius:20px}
 .security-heading {display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:14px}
@@ -95,13 +92,6 @@ nav [aria-current] {
 .security-facts dt {font-size:12px}.security-facts dd {margin:4px 0;font-size:17px;font-variant-numeric:tabular-nums}
 .security-profile footer {border-top:1px solid #ffffff24;padding-top:16px;margin-top:24px}
 
-.index-tape {background:#131722;padding-bottom:0}
-.index-caption a {color:#c5cad6;text-decoration:none}
-.tape-slot {position:relative;min-height:46px}
-.tape-host {min-height:46px;width:100%}
-.tape-host iframe {display:block;color-scheme:dark}
-.tape-sample {position:absolute;inset:0;display:flex;align-items:center;gap:7px;padding:0 14px;background:#131722;font-size:12px}
-.tape-sample span {color:#b9bfcc}
 
 .news-brief { display: grid; gap: 16px; min-width: 0; }
 .news-brief .glass { min-width: 0; }
@@ -113,3 +103,17 @@ nav [aria-current] {
 .news-story h3 { overflow-wrap: anywhere; }
 .fund-moves { list-style: none; padding: 0; margin: 16px 0 0; }
 .fund-moves li { padding: 4px 0; font-variant-numeric: tabular-nums; }
+
+.greeting-glass {
+  width: min(100%, 37rem);
+  padding: clamp(28px, 4vw, 50px) clamp(16px, 3vw, 36px);
+  text-align: center;
+  border-radius: clamp(28px, 4vw, 42px);
+  border: 1px solid rgba(255, 255, 255, .23);
+  background: linear-gradient(145deg, #fff2, #ffffff06 36%, #ffffff03 68%, #ffffff15);
+  -webkit-backdrop-filter: blur(12px) saturate(150%);
+  backdrop-filter: blur(12px) saturate(150%);
+  box-shadow: inset 0 1px 1px #ffffff70, inset 1px 0 2px #ffffff26,
+    inset 0 -1px 2px #ffffff24, 0 12px 36px #110d1b28;
+}
+.greeting-glass .conditions { justify-content: center; }

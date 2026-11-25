@@ -1,6 +1,6 @@
 import {useState, type FormEvent} from 'react'
 import companies from './companies.json'
-import {SecurityProfile, Overview} from './SecurityData'
+import {SecurityProfile} from './SecurityData'
 import {Chart} from './Today'
 import {MarketWidget} from './MarketWidget'
 
@@ -71,6 +71,5 @@ export default function Markets() {
       <SecurityProfile key={symbol} symbol={symbol} name={name}/>
       <MarketWidget kind="advanced-chart" symbol={symbol}>{symbol === 'AMEX:SPY' ? <Chart/> : <p>Loading the price chart for {name}…</p>}</MarketWidget>
     </section>
-    <Overview/>
   </>
 }
