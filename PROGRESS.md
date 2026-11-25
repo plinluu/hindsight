@@ -25,3 +25,5 @@ Phase 5 complete — Cached Finnhub news and recap with server-only credentials 
 Phase 6 complete — Local FIFO review, historical comparisons, exports, lessons and privacy controls integrated. Next: performance and end-to-end checks.
 
 Phase 1 revision — Cloud-only loader, dusk dashboard, greeting with weather and index ticker, and paired briefing panels. Build passed.
+
+Phase 1 refinement — Checked the live Prolepsis home and revised the dusk palette, active navigation pill and translucent glass rims. Production build passed.

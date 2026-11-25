@@ -11,8 +11,6 @@ body {
     linear-gradient(180deg,#29222e,#211c26 300px,#111016 575px,#101015);
 }
 .loader:before {background: url('/journal-sky.png') center/cover}
-.desktop,.mobile,aside {background-color:#18161f;--glass:linear-gradient(#ffffff06,#ffffff02);--rim:1px solid #ffffff24;--shadow:0 4px 18px #0003}
-nav [aria-current] {background:#443b49;color:#fff}
 .opening {display:grid;grid-template-columns:minmax(0,1fr) 380px;align-items:center;gap:40px;padding:96px 0 76px}
 .opening time,.ticker-heading,.axis {font-size:12px;color:#c2b6c3}
 .opening time {display:block;margin-bottom:12px}
@@ -21,8 +19,7 @@ nav [aria-current] {background:#443b49;color:#fff}
 .conditions span {color:#eebb89;font-size:19px}
 .conditions i {height:3px;width:3px;background:#9e919d;border-radius:50%}
 small {font-size:11px;border-color:#ffffff20;color:#bdb2bf}
-.ticker,.glass {border:1px solid #ffffff20;border-radius:16px;background:linear-gradient(125deg,#26222c,#191820);box-shadow:inset 0 1px #ffffff06,0 10px 30px #0002}
-.ticker {padding:14px 18px;background:#201c26ce}
+.ticker {padding:14px 18px}
 .ticker-heading,.section-line {display:flex;align-items:center;justify-content:space-between}
 .ticker-values {display:grid;grid-template-columns:repeat(3,1fr);margin-top:10px}
 .ticker-values>div+div {padding-left:12px;border-left:1px solid #ffffff18}
@@ -37,5 +34,34 @@ small {font-size:11px;border-color:#ffffff20;color:#bdb2bf}
   .opening {grid-template-columns:1fr;gap:24px;padding:42px 0 32px}
   .briefing {grid-template-columns:1fr;gap:0}
   .glass {padding:18px;margin-bottom:24px}
-  .mobile {background-color:#211d27}
+}
+
+body {
+  background:
+    radial-gradient(ellipse 45% 210px at 90% 190px, #c48f9370, transparent 90%),
+    radial-gradient(ellipse 65% 260px at 14% 370px, #89455160, transparent 92%),
+    linear-gradient(180deg, #1b1c39, #362440 205px, #462e37 405px, #252028 680px, #13131c 1000px);
+}
+.ticker,.glass,.desktop,.mobile,aside {
+  border:1px solid;
+  border-color:rgba(255,244,235,.27) rgba(255,244,235,.07) rgba(255,244,235,.04);
+  background:
+    linear-gradient(128deg,rgba(255,231,225,.10),transparent 28%),
+    linear-gradient(175deg,rgba(225,214,244,.105),rgba(240,229,249,.025) 58%,transparent),
+    radial-gradient(ellipse at center,rgba(15,13,27,.48) 18%,rgba(15,13,27,.14) 96%);
+  backdrop-filter:blur(24px) saturate(160%);
+  -webkit-backdrop-filter:blur(24px) saturate(160%);
+  box-shadow:inset 0 1px 1px #fff5ee15,0 12px 32px #100a191f;
+}
+.ticker,.glass {border-radius:24px}
+.desktop,.mobile,aside {background-color:rgba(20,17,32,.58)}
+nav [aria-current] {
+  color:#251a20;
+  background:linear-gradient(150deg,#ffe1a8,#e5af7e);
+  box-shadow:inset 0 1px 1px #ffffff80,0 2px 14px #ffcb8526;
+}
+.opening h1 {color:#ffdcc3}
+.section-line a,.glass>a {color:#f2d5ae}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))) {
+  .glass,.ticker,.desktop,.mobile,aside {background:rgba(28,24,40,.88)}
 }

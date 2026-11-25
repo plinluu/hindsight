@@ -26,3 +26,5 @@
 - Motion uses opacity and transform only. Controls ease out over 150ms, sheets over 250ms. Scene crossfade 700ms and loader fade 600ms are explicit exceptions. Reduced motion shows the destination immediately. Avoid flashing.
 
 Revision — Show sky.png alone on load. Today uses a plum-to-charcoal horizon, left-aligned greeting with weather, adjacent market ticker, and compact briefing panels. Stack these on mobile.
+
+Surface refinement — Use tinted frosted centers, a narrow top reflection, and side and bottom rims fading to 7% and 4% opacity over the dusk horizon.
