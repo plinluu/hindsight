@@ -8,6 +8,18 @@ export function localSeason(now, latitude, timeZone) {
   const month = new Intl.DateTimeFormat('en', { month: 'numeric', timeZone }).format(now)
   return season(Number(month) - 1, latitude)
 }
+export function winterWeatherReason(now, weather) {
+  if (!weather?.current) return null
+  const { time, weather_code, temperature_2m } = weather.current
+  const seconds = now / 1000
+  const fresh = time <= seconds && time >= seconds - 3600
+  if (fresh && condition(weather_code) === 'Snow') return 'snow reported'
+  if (fresh && Number.isFinite(temperature_2m) && temperature_2m <= 0) return 'freezing temperature'
+  const recentSnow = weather.hourly?.time.some((hour, index) =>
+    hour >= seconds - 86400 && hour <= Math.min(time, seconds) &&
+    condition(weather.hourly.weather_code[index]) === 'Snow')
+  return recentSnow ? 'snow in the past 24 hours' : null
+}
 export function sunState(now, rise, set) {
   if (!Number.isFinite(rise) || !Number.isFinite(set) || !Number.isFinite(now) || set <= rise) return undefined
   if (now < rise || now >= set) return 'night'

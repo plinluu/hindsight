@@ -9,7 +9,7 @@ export default function Settings() {
   const motion = useValue('motion') || 'system'
   const daylight = useValue('daylight') || 'auto'
   const season = useValue('season') || 'auto'
-  const {detectedSeason, locationName} = useLocalScene()
+  const {detectedSeason, reason, locationName} = useLocalScene()
   const stored = useValue('watchlist')
   const symbols: string[] = stored ? JSON.parse(stored) : []
   const [query, setQuery] = useState('')
@@ -32,7 +32,7 @@ export default function Settings() {
       </select></label>
       <p>{season === 'auto'
         ? detectedSeason
-          ? `Automatic · ${detectedSeason} at ${locationName === 'Current location' ? 'your current location' : locationName}.`
+          ? `Automatic · ${detectedSeason} at ${locationName === 'Current location' ? 'your current location' : locationName}${reason ? ` (${reason})` : ''}.`
           : 'Choose a weather location below to match your background to its season.'
         : 'Choose Automatic to follow your weather location again.'}</p>
     </section>

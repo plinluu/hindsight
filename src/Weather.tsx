@@ -33,6 +33,7 @@ export function WeatherSync() {
           timezone: 'auto',
           timeformat: 'unixtime',
           forecast_days: '2',
+          past_hours: '24',
           current: 'temperature_2m,apparent_temperature,weather_code',
           hourly: 'temperature_2m,weather_code',
           daily: 'sunrise,sunset',

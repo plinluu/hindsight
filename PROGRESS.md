@@ -25,6 +25,7 @@ Revision — Restored the original Today sky wallpaper. Winter brings snowfall, 
 Revision — Mixed two branched crystal shapes into the winter snowfall and framed the spring sky with flowering Japanese cherry branches and drifting petals.
 Revision — Automatic shows the detected season in Settings and uses the weather location’s hemisphere and local date on Today. Without a location it shows the original sky.
 Revision — Autumn uses the spring branch composition with copper, gold and russet maple leaves and matching drifting foliage.
+Revision — Automatic uses winter scenery for reported snow, snowfall within the previous 24 hours, or current temperatures at or below freezing. Settings explains the weather trigger.
 Next — Phase 6 products.
 TODO — Replace sky.png with original artwork before public launch.
 
