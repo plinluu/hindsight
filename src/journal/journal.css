@@ -230,15 +230,22 @@ body:has(.opening)::before { display: none; }
 .scene[data-season="winter"] .sky-particle:nth-child(3n + 1)::before {
   background: var(--crystal) center / contain no-repeat; border-radius: 0; box-shadow: none;
 }
-.scene[data-season="autumn"] { --particle-color: #d78b42; --particle-width: 14px; --particle-height: 8px; }
+.scene[data-season="autumn"] { --particle-color: #d78b42; --particle-width: 17px; --particle-height: 17px; }
 .scene[data-season="autumn"] .sky-particle:nth-child(3n) { --particle-color: #ae5637; }
+.scene[data-season="autumn"] .sky-particle:nth-child(3n + 1) { --particle-color: #e3af5a; }
 .scene[data-season="autumn"] .sky-particle::before {
-  border-radius: 1% 85% 3% 90%;
+  border-radius: 0;
+  mask: url('/assets/bg/maple-leaf.svg') center / contain no-repeat;
   background: linear-gradient(32deg, transparent 44%, #723e2d88 49%, transparent 55%), var(--particle-color);
 }
 .scene[data-season="spring"] { --particle-color: #f6cbda; --particle-width: 9px; --particle-height: 6px; }
 .scene[data-season="spring"]::before {
   background-image: url('/assets/bg/sakura-left.svg'), url('/assets/bg/sakura-right.svg');
+}
+.scene[data-season="autumn"]::before {
+  background-image: url('/assets/bg/maple-left.svg'), url('/assets/bg/maple-right.svg');
+}
+.scene:is([data-season="spring"], [data-season="autumn"])::before {
   background-position: left top, right top;
   background-size: clamp(155px, 35vw, 580px) auto, clamp(125px, 30vw, 500px) auto;
   background-repeat: no-repeat;
