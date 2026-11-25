@@ -24,3 +24,5 @@
 - Loader on every document load. Center sky.png at cover × 1.03. Place an opaque navy core in a feathered radial scrim centered behind the wordmark, at least 10% of the rendered image width and 12% of its height to fully mask the cloud at any crop. Add a 56/64px serif wordmark (40/48 mobile) and a 96 × 2px progress line beneath.
 - Render Today underneath immediately. Begin the 600ms loader crossfade when first content is ready after 1.2s, or by 1.9s so the loader is gone by 2.5s. Route changes bypass the loader.
 - Motion uses opacity and transform only. Controls ease out over 150ms, sheets over 250ms. Scene crossfade 700ms and loader fade 600ms are explicit exceptions. Reduced motion shows the destination immediately. Avoid flashing.
+
+Revision — Show sky.png alone on load. Today uses a plum-to-charcoal horizon, left-aligned greeting with weather, adjacent market ticker, and compact briefing panels. Stack these on mobile.

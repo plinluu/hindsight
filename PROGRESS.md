@@ -23,3 +23,5 @@ Phase 3 complete — Open-Meteo forecast, cached refresh, temperature units and 
 Phase 4 complete — Six TradingView views, default symbols, symbol entry and persistent watchlist. Secondary widgets load on demand. Next: news and recap.
 Phase 5 complete — Cached Finnhub news and recap with server-only credentials and optional generated prose. Live provider verification requires keys. Next: legacy products.
 Phase 6 complete — Local FIFO review, historical comparisons, exports, lessons and privacy controls integrated. Next: performance and end-to-end checks.
+
+Phase 1 revision — Cloud-only loader, dusk dashboard, greeting with weather and index ticker, and paired briefing panels. Build passed.
