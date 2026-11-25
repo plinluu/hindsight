@@ -4,12 +4,6 @@
 :root{color-scheme:dark;--ink:#f4f1ea;--muted:rgba(244,241,234,.70);--rim:1px solid rgba(255,255,255,.28);--glass:linear-gradient(135deg,#ffffff19,transparent 40%),linear-gradient(#ffffff29,#ffffff12);--shadow:inset 0 1px 0 #ffffff59,0 12px 32px #0005;font:16px/1.5 'DM Sans',sans-serif;color:var(--ink);background:#101626}
 *{box-sizing:border-box}body{margin:0;min-height:100vh;background:linear-gradient(155deg,#101626,#1d2940);background-attachment:fixed}h1,h2,h3,.brand,.loader strong{font-family:Newsreader,Georgia,serif;font-weight:500;margin:0}p{color:var(--muted);margin:8px 0 0}header{height:72px;display:grid;place-items:center;position:relative}.brand{position:absolute;left:24px;font-size:24px}.desktop,.mobile,aside,.glass{background:var(--glass);border:var(--rim);box-shadow:var(--shadow);backdrop-filter:blur(24px) saturate(160%)}nav{display:flex;padding:4px;border-radius:999px;position:relative;z-index:3}nav a,button,aside a{display:grid;place-items:center;min-height:44px;padding:0 14px;border-radius:999px;font:inherit;font-size:14px;color:inherit;text-decoration:none;background:none;border:0;cursor:pointer}nav [aria-current],nav a:hover,button:hover{background:#ffffff20}a:focus-visible,button:focus-visible{outline:2px solid #a6c8ff;outline-offset:2px}aside{position:absolute;right:0;top:100%;padding:8px;background:#202a40;border-radius:20px;min-width:150px}.mobile{display:none}main{width:min(1048px,calc(100% - 32px));margin:auto;padding-bottom:64px}.hero{text-align:center;padding:48px 0}.hero time{display:block;text-transform:uppercase;color:#abbfdc;letter-spacing:.15em;font-size:12px;margin-bottom:12px}h1{font-size:42px;line-height:48px}h2{font-size:24px;line-height:30px}h3{font-size:26px;margin-top:20px}.glass{padding:32px;border-radius:40px;margin-bottom:48px}.row,.quote,.axis{display:flex;justify-content:space-between;align-items:center;gap:12px}small{border:var(--rim);border-radius:999px;padding:3px 10px;font-size:12px;color:var(--muted);white-space:nowrap}.quote{margin:32px 0 16px}.quote strong,.indices strong{display:block;font-size:24px;font-variant-numeric:tabular-nums}.quote>div:last-child{text-align:right}em{font-size:14px;color:#a2d6bc;font-style:normal}.chart{display:block;width:100%;height:150px}.axis{font-size:12px;color:var(--muted)}a{color:#c0d7ff}.after{display:block;width:fit-content;margin:-36px 0 48px auto}.indices{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}.glass>a{display:inline-block;margin:16px 24px 0 0}.loader{position:fixed;inset:0;z-index:10;display:flex;align-items:center;justify-content:center;flex-direction:column;overflow:hidden;background:#101626;transition:opacity .6s ease-out}.loader:before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse max(16vw,30vh) max(12vw,20vh) at center,#101626 40%,transparent 100%),url('/journal-sky.png') center/cover;transform:scale(1.03)}.loader strong,.loader i{position:relative}.loader strong{font-size:56px;line-height:64px}.loader i{width:96px;height:2px;background:#f4f1ea;animation:grow 1.2s ease-out;transform-origin:left}.fade{opacity:0;pointer-events:none}@keyframes grow{from{transform:scaleX(.05)}}@supports not (backdrop-filter:blur(1px)){.glass,nav,aside{background:rgba(18,24,40,.95)}}@media(max-width:950px){.brand{display:none}}@media(max-width:767px){header{height:52px}.brand{display:block;position:static}.desktop{display:none}.mobile{position:fixed;display:grid;grid-template-columns:repeat(5,1fr);bottom:0;left:0;right:0;border-radius:24px 24px 0 0;background-color:#192237;padding:8px 4px calc(8px + env(safe-area-inset-bottom));min-height:64px}.mobile a,.mobile button{padding:0 4px}.mobile aside{top:auto;bottom:100%;left:8px;right:8px}.hero{padding:32px 0}h1{font-size:32px;line-height:36px}.glass{padding:20px 16px;border-radius:28px;margin-bottom:32px}.after{margin:-24px 0 32px auto}.indices{gap:8px}.indices strong{font-size:17px}.quote p{font-size:14px}.quote strong{font-size:21px}.loader strong{font-size:40px}main{padding-bottom:calc(80px + env(safe-area-inset-bottom))}}@media(prefers-reduced-motion:reduce){.loader{display:none}}
 
-/* A wide dusk horizon behind the compact journal workspace. */
-body {
-  background: radial-gradient(ellipse 90% 400px at 12% 112px, #63414b99, transparent 78%),
-    radial-gradient(ellipse 85% 360px at 95% 70px, #46345488, transparent 80%),
-    linear-gradient(180deg,#29222e,#211c26 300px,#111016 575px,#101015);
-}
 .loader:before {background: url('/journal-sky.png') center/cover}
 .opening {display:grid;justify-items:center;padding:clamp(32px,6vw,80px) 0}
 .opening time,.ticker-heading,.axis {font-size:12px;color:#c2b6c3}
@@ -33,36 +27,6 @@ small {font-size:11px;border-color:#ffffff20;color:#bdb2bf}
   header {display:none}
   .briefing {grid-template-columns:1fr;gap:0}
   .glass {padding:18px;margin-bottom:24px}
-}
-
-body {
-  background:
-    radial-gradient(ellipse 45% 210px at 90% 190px, #c48f9370, transparent 90%),
-    radial-gradient(ellipse 65% 260px at 14% 370px, #89455160, transparent 92%),
-    linear-gradient(180deg, #1b1c39, #362440 205px, #462e37 405px, #252028 680px, #13131c 1000px);
-}
-.ticker,.glass,.desktop,.mobile,aside {
-  border:1px solid;
-  border-color:rgba(255,244,235,.27) rgba(255,244,235,.07) rgba(255,244,235,.04);
-  background:
-    linear-gradient(128deg,rgba(255,231,225,.10),transparent 28%),
-    linear-gradient(175deg,rgba(225,214,244,.105),rgba(240,229,249,.025) 58%,transparent),
-    radial-gradient(ellipse at center,rgba(15,13,27,.48) 18%,rgba(15,13,27,.14) 96%);
-  backdrop-filter:blur(24px) saturate(160%);
-  -webkit-backdrop-filter:blur(24px) saturate(160%);
-  box-shadow:inset 0 1px 1px #fff5ee15,0 12px 32px #100a191f;
-}
-.ticker,.glass {border-radius:24px}
-.desktop,.mobile,aside {background-color:rgba(20,17,32,.58)}
-nav [aria-current] {
-  color:#251a20;
-  background:linear-gradient(150deg,#ffe1a8,#e5af7e);
-  box-shadow:inset 0 1px 1px #ffffff80,0 2px 14px #ffcb8526;
-}
-.opening h1 {color:#ffdcc3}
-.section-line a,.glass>a {color:#f2d5ae}
-@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))) {
-  .glass,.ticker,.desktop,.mobile,aside {background:rgba(28,24,40,.88)}
 }
 
 .market-widget {min-width:0;max-width:100%;overflow:hidden;border-radius:24px}
@@ -109,11 +73,85 @@ nav [aria-current] {
   padding: clamp(28px, 4vw, 50px) clamp(16px, 3vw, 36px);
   text-align: center;
   border-radius: clamp(28px, 4vw, 42px);
-  border: 1px solid rgba(255, 255, 255, .23);
-  background: linear-gradient(145deg, #fff2, #ffffff06 36%, #ffffff03 68%, #ffffff15);
-  -webkit-backdrop-filter: blur(12px) saturate(150%);
-  backdrop-filter: blur(12px) saturate(150%);
-  box-shadow: inset 0 1px 1px #ffffff70, inset 1px 0 2px #ffffff26,
-    inset 0 -1px 2px #ffffff24, 0 12px 36px #110d1b28;
 }
 .greeting-glass .conditions { justify-content: center; }
+
+/* One lighting direction across the glass, with narrow opposing edge reflections. */
+:root {
+  --ink: #f6f8ff;
+  --muted: #d1dbe8;
+  --lens: radial-gradient(ellipse at 2% 0%, #f3ffff22, transparent 33%),
+    radial-gradient(ellipse at 101% 95%, #a5caff13, transparent 34%),
+    linear-gradient(118deg, #d4efff0e, #effaff03 46%, #061a3014 78%, #e6f5ff0d);
+  --edge: linear-gradient(145deg, #ffffffdc, #e3faff36 16%, #b4ddff12 42%, #8baad84d 71%, #e6fcffbf 93%, #fff5);
+  --depth: inset 1px 1px 2px #ffffff45, inset -1px -1px 2px #b7dfff48,
+    inset 0 -5px 12px -8px #d0e7ff99, 0 7px 20px -10px #030a1ec2;
+}
+body {
+  background-color: #101929;
+  background-image: radial-gradient(ellipse 56% 47% at 18% 21%, #328b9994, transparent 92%),
+    radial-gradient(ellipse 62% 44% at 86% 36%, #74758e99, transparent 88%),
+    radial-gradient(ellipse 68% 34% at 46% 85%, #284ba685, transparent 86%),
+    linear-gradient(148deg, #172c39, #1e344d 40%, #192443 67%, #121924);
+  background-attachment: fixed;
+}
+.greeting-glass, .glass, .security-profile, .market-widget, .desktop, .mobile, aside,
+#company-results, .market-controls input, .market-controls button, .news-filters button,
+small, .section-line a, .glass > a {
+  position: relative;
+  background: var(--lens);
+  border: 1px solid #e1f5ff24;
+  box-shadow: var(--depth);
+  -webkit-backdrop-filter: blur(9px) saturate(145%);
+  backdrop-filter: blur(9px) saturate(145%);
+}
+:is(.greeting-glass,.glass,.security-profile,.market-widget,.desktop,.mobile,aside,
+#company-results,.market-controls input,.market-controls button,.news-filters button,
+.section-line a,.glass > a)::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: var(--edge);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+}
+.glass, .security-profile, .market-widget { border-radius: clamp(24px, 3vw, 36px); }
+.market-widget { padding: 7px; margin-bottom: 28px; }
+.market-widget > .glass { margin: 0; border: 0; box-shadow: none; background: transparent; backdrop-filter: none; }
+.market-widget > .glass::before { content: none; }
+.market-widget > tv-advanced-chart { overflow: hidden; border-radius: calc(clamp(24px, 3vw, 36px) - 7px); }
+.opening h1 { color: #f9fcff; text-shadow: 0 2px 12px #17283e55; }
+.opening time, .conditions, .news-story > div, .fund-moves time, .security-facts dt,
+.security-profile footer span, .security-heading > div > span { color: #d0dcea; }
+.section-line a, .glass > a { display: inline-flex; align-items: center; border-radius: 999px; padding: 7px 14px; color: #eaf7ff; }
+small { color: #e3edf6; background-color: #11213b33; }
+.desktop, .mobile, aside, #company-results { background-color: #11243d91; }
+aside { position: absolute; z-index: 4; }
+.mobile { position: fixed; }
+nav [aria-current], nav [aria-expanded=true], .news-filters button[aria-pressed=true], .market-controls form button {
+  color: #102237;
+  background: linear-gradient(150deg, #f4fbffff, #daeefaed 43%, #bcd3e6ef);
+  box-shadow: inset 0 1px 2px white, inset 0 -2px 3px #7791af80, 0 2px 7px #09152238;
+}
+nav a:hover:not([aria-current]), nav button:hover:not([aria-expanded=true]),
+.news-filters button:hover:not([aria-pressed=true]), #company-results li:hover,
+#company-results li[aria-selected=true], .section-line a:hover, .glass > a:hover {
+  background-color: #c8edff25;
+}
+.market-controls input { background-color: #0d1c305c; }
+.market-controls input::placeholder { color: #c2cfdf; }
+:focus-visible { outline: 2px solid #c1eeff; outline-offset: 3px; }
+@media (max-width: 767px) {
+  .mobile { left: 8px; right: 8px; bottom: max(8px, env(safe-area-inset-bottom)); border-radius: 30px; min-height: 56px; padding: 5px; }
+  .mobile aside { bottom: calc(100% + 8px); }
+}
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .glass, .security-profile, .greeting-glass, .desktop, .mobile, aside, #company-results { background-color: #213247; }
+}
+@media (prefers-reduced-transparency: reduce) {
+  :root { --lens: linear-gradient(135deg, #31445a, #203044); }
+  .desktop, .mobile, aside, #company-results { background-color: #1c2c42; }
+}
