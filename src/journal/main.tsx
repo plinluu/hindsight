@@ -23,6 +23,6 @@ function App(){
  useEffect(()=>{if(loader!=='fade')return;const end=setTimeout(()=>setLoader('gone'),600);return ()=>clearTimeout(end)},[loader])
  const link=(n:string)=><a key={n} aria-current={page===n?'page':undefined} href={path(n)}>{n}</a>
  const toggle=(n:string)=><button aria-expanded={menu===n} onClick={()=>setMenu(menu===n?'':n)}>{n} ⌄</button>
- return <><header><nav className="desktop">{names.slice(0,6).map(link)}{toggle('Tools')}{menu==='Tools'&&<aside>{['Tools','Review','Learn'].map(link)}</aside>}</nav></header><nav className="mobile">{names.slice(0,4).map(link)}{toggle('More')}{menu==='More'&&<aside>{names.slice(4).map(link)}</aside>}</nav><main>{page==='Today'?<Today/>:<Suspense fallback={<p>Loading…</p>}><Detail page={page}/></Suspense>}</main>{loader!=='gone'&&<div className={'loader '+loader} role="status" aria-label="Loading Hindsight"><span className="eclipse" aria-hidden="true"/><strong aria-hidden="true">Hindsight</strong></div>}</>
+ return <><header><nav className="desktop">{names.slice(0,6).map(link)}{toggle('Tools')}{menu==='Tools'&&<aside>{['Tools','Review','Learn'].map(link)}</aside>}</nav></header><nav className="mobile">{names.slice(0,4).map(link)}{toggle('More')}{menu==='More'&&<aside>{names.slice(4).map(link)}</aside>}</nav><main>{page==='Today'?<Today/>:<Suspense fallback={<p>Loading…</p>}><Detail page={page}/></Suspense>}</main>{loader!=='gone'&&<div className={'loader '+loader} role="status" aria-label="Loading Hindsight"/>}</>
 }
 createRoot(document.getElementById('root')!).render(<App/>)

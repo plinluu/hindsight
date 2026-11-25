@@ -9,6 +9,7 @@ Done — Connected Today and Markets to TradingView with symbol search, local wa
 Done — Sky loader, responsive navigation and sample journal screens. Production build passed.
 Done — Recorded desktop and mobile measurements, the available local artwork, and implementation dimensions in DESIGN_SPEC.md.
 Phase 3 complete
+Revision — Restored the original sky intro and a logo-free version of the cloud artwork on Today.
 Revision — Replaced the startup clouds with an eclipse title, gave Today a charcoal background and set headings in Cormorant Garamond.
 Revision — Removed the sky overlay and panel tints. Glass uses neutral reflections and a light backdrop blur.
 Revision — Set the cloud artwork behind every route and added peach, orchid and mint accents to the liquid-glass theme.

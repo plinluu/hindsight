@@ -198,24 +198,10 @@ nav a[href="/markets"]:not([aria-current]) { color: var(--mint); }
 nav a[href="/news"]:not([aria-current]), nav a[href="/learn"]:not([aria-current]) { color: var(--orchid); }
 nav a[href="/review"]:not([aria-current]) { color: #ffc7bc; }
 
-/* The eclipse belongs to the opening title only. */
-body:has(.opening) { background: #19191e; }
-body:has(.opening)::before { content: none; }
-.loader {
-  background: radial-gradient(ellipse at 50% 45%, #392b29 0%, #1a171b 38%, #0d0e12 78%);
-  gap: clamp(24px, 5vh, 48px);
-}
-.eclipse {
-  width: clamp(90px, 13vmin, 164px);
-  aspect-ratio: 1;
-  border-radius: 50%;
-  background: radial-gradient(circle at 30% 25%, #292426, #131419 64%);
-  box-shadow: 1px -1px 1px #fff3ce, 3px -3px 4px #e8b27f,
-    5px -5px 15px #ba714f80, 10px -8px 45px #b8764b3b;
-}
-.loader strong {
-  font-size: clamp(48px, 8vw, 104px);
-  line-height: 1;
-  letter-spacing: -.045em;
-  color: #fff4de;
+body:has(.opening)::before { background-image: url('/home-sky.png'); }
+.loader::before {
+  content: '';
+  position: absolute;
+  inset: -2vmax;
+  background: url('/journal-sky.png') center / cover no-repeat;
 }
