@@ -12,9 +12,9 @@ The v2 journal includes Today, Markets, News, Review, Learn, Settings, and Tools
 | **Autumn** | **Winter** |
 | ![Autumn homepage](docs/screenshots/home-autumn.png) | ![Winter homepage](docs/screenshots/home-winter.png) |
 
-![Hindsight settings menu](docs/screenshots/settings.png)
+![Hindsight settings menu](https://raw.githubusercontent.com/plinluu/hindsight/32748fbc6c63cac287bdb714b7717c6c52a84a54/docs/screenshots/settings.png)
 
-![Review glass theme](docs/screenshots/review-glass-theme.png)
+![Review glass theme](https://raw.githubusercontent.com/plinluu/hindsight/32748fbc6c63cac287bdb714b7717c6c52a84a54/docs/screenshots/review-glass-theme.png)
 
 ![Hindsight mark](public/brand/hindsight-mark.svg)
 
