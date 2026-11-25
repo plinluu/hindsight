@@ -380,7 +380,7 @@ export function renderReport(root, state, select) {
     ];
 
     values.forEach(function (entry) {
-      var box = el("div");
+      var box = el("div","glass-inset");
       box.appendChild(el("b", entry[2] || null, entry[0]));
       box.appendChild(el("span", null, entry[1]));
       host.appendChild(box);
@@ -537,7 +537,7 @@ export function renderReport(root, state, select) {
       [money(total / state.trades.length), "average fees per round trip"],
       [money(net), "your profit after fees"]
     ].forEach(function (entry) {
-      var card = el("div", "card");
+      var card = el("div", "card glass-inset");
       card.appendChild(el("b", null, entry[0]));
       card.appendChild(el("span", null, entry[1]));
       totals.appendChild(card);
@@ -545,13 +545,13 @@ export function renderReport(root, state, select) {
     host.appendChild(totals);
 
     if (total === 0) {
-      var none = el("div", "card");
+      var none = el("div", "card glass-inset");
       none.appendChild(el("p", "empty-note", "No commissions or fees were found in this file. If your broker lists fees in a separate column, choose it in the column check."));
       host.appendChild(none);
       return;
     }
 
-    var card = el("div", "card");
+    var card = el("div", "card glass-inset");
     var bar = svgEl("svg", {
       class: "fees-bar",
       viewBox: "0 0 100 10",
@@ -591,10 +591,10 @@ export function renderReport(root, state, select) {
   }
 
   function habitCard(name, text, on, notEnough) {
-    var card = el("div", "card");
+    var card = el("div", "card glass-inset");
     card.appendChild(el("h3", null, name));
     card.appendChild(el("p", null, text));
-    var tag = el("span", "tag" + (on ? "" : " ok"), notEnough ? "Not enough data" : on ? "Pattern found" : "No clear pattern");
+    var tag = el("span", "glass-inset tag" + (on ? "" : " ok"), notEnough ? "Not enough data" : on ? "Pattern found" : "No clear pattern");
     card.appendChild(tag);
     return card;
   }
@@ -743,8 +743,7 @@ export function renderReport(root, state, select) {
     });
   }
 
-  function drawShareCard() {
-    var canvas = $("#share-canvas");
+  function drawShareCard(canvas = $("#share-canvas"), exporting = false) {
     var ctx = canvas.getContext("2d");
     if (!ctx) {
       return;
@@ -776,11 +775,13 @@ export function renderReport(root, state, select) {
     canvas.dataset.total = String(entries.length);
     canvas.dataset.hiddenRows = String(extra);
 
-    var bg = ctx.createLinearGradient(0, 0, width * 0.5, height);
-    bg.addColorStop(0, "#423546");
-    bg.addColorStop(1, "#191c2a");
-    ctx.fillStyle = bg;
-    ctx.fillRect(0, 0, width, height);
+    if (exporting) {
+      const backdrop = ctx.createLinearGradient(0, 0, width, height);
+      backdrop.addColorStop(0, "#47403e");
+      backdrop.addColorStop(1, "#302c2d");
+      ctx.fillStyle = backdrop;
+      ctx.fillRect(0, 0, width, height);
+    }
 
     var glow = ctx.createRadialGradient(width - 80, 20, 20, width - 80, 20, 640);
     glow.addColorStop(0, "rgba(255, 255, 255, 0.07)");
@@ -1001,7 +1002,8 @@ export function renderReport(root, state, select) {
       setMsg($("#share-msg"), "Import some trades first, then the card can be built.", "bad");
       return;
     }
-    var canvas = $("#share-canvas");
+    const canvas = document.createElement("canvas");
+    drawShareCard(canvas, true);
     canvas.toBlob(function (blob) {
       if (!blob) {
         setMsg($("#share-msg"), "This browser could not build the image. Try another one.", "bad");

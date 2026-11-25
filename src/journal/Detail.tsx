@@ -19,7 +19,7 @@ export default function Detail({page}: {page: string}) {
     About: <About/>,
     Declined: <Declined homeHref="/"/>,
   }
-  if (products[page]) return <div className="journal-product">{products[page]}</div>
+  if (products[page]) return <div className={page === 'Review' ? 'review-page' : 'journal-product'}>{products[page]}</div>
   return <><div className="hero"><h1>{page}</h1></div>
     {page === 'News' ? <Briefing/> : page === 'Tools' ? <Products/> : <a href="/">Return to Today</a>}
   </>

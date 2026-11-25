@@ -79,7 +79,7 @@ export default function Results({sales}:{sales?:Sale[]}) {
     if(root.current)return renderReport(root.current,{trades,series,horizon,mode:sales?'mine':'demo',selected:index,hideTicker,hideAmounts},select)
   },[trades,series,horizon,sales,index,hideTicker,hideAmounts,width])
   return <div className="review-report" ref={root}>
-    <section className="panel sale-card" id="review-chart"><span className="sale-tag">{sales?'Your trades · private':'Demo portfolio · simulated prices'}</span>
+    <section className="glass" id="review-chart"><small>{sales?'Your trades · private':'Demo portfolio · simulated prices'}</small>
       <h2>One sale, up close</h2><p id="review-sent" aria-live="polite"/>
       <div className="sale-switch" role="group" aria-label="Price after the sale">{[0,30,90].map(n=><button key={n} aria-pressed={horizon===n} onClick={()=>setHorizon(n)}>{n?n+' days':'Today'}</button>)}</div>
       <div id="results-chart"/><div className="sale-key"><span>━ Share price</span><span>■ Left on the table</span><span>■ Saved by selling</span></div>
@@ -88,13 +88,13 @@ export default function Results({sales}:{sales?:Sale[]}) {
       <p>{trade.q} shares · Bought {trade.bd} · Sold {trade.sd}{series[trade.tk]?.length?' · Latest available close '+series[trade.tk].at(-1)!.d:''}</p>
       {sales && <PriceSource key={trade.tk} ticker={trade.tk} target={target} onAdd={points=>setHistory(old=>({...old,[trade.tk]:mergePoints(old[trade.tk]??[],points)}))}/>}
     </section>
-    <section className="panel"><h2>What you gave up by selling</h2><p>Compare each exit with the selected later price. Your actual profit and the change after selling are shown separately.</p>
-      <div id="kpi"/><div className="review-pair"><div><h3>Largest missed gains</h3><div id="lb"/></div><div><h3>Running profit after fees</h3><div id="cum"/></div></div>
+    <section className="glass"><h2>What you gave up by selling</h2><p>Compare each exit with the selected later price. Your actual profit and the change after selling are shown separately.</p>
+      <div id="kpi"/><div className="review-pair"><div className="glass-inset"><h3>Largest missed gains</h3><div id="lb"/></div><div className="glass-inset"><h3>Running profit after fees</h3><div id="cum"/></div></div>
     </section>
-    <section className="panel"><h2>What the broker kept</h2><div id="fees-body"/></section>
-    <section className="panel"><h2>Three patterns worth checking</h2><div id="fp"/></section>
-    <section className="panel"><h2>Every trade in one picture</h2><p>Preview your share card. Hide amounts to show percentages, or hide symbols to label each row by trade number.</p>
-      <canvas id="share-canvas"/><div className="review-actions"><label><input type="checkbox" checked={hideTicker} onChange={e=>maskTicker(e.target.checked)}/> Hide ticker names</label>
+    <section className="glass"><h2>What the broker kept</h2><div id="fees-body"/></section>
+    <section className="glass"><h2>Three patterns worth checking</h2><div id="fp"/></section>
+    <section className="glass"><h2>Every trade in one picture</h2><p>Preview your share card. Hide amounts to show percentages, or hide symbols to label each row by trade number.</p>
+      <div className="glass-inset share-preview"><canvas id="share-canvas"/></div><div className="review-actions"><label><input type="checkbox" checked={hideTicker} onChange={e=>maskTicker(e.target.checked)}/> Hide ticker names</label>
       <label><input type="checkbox" checked={hideAmounts} onChange={e=>maskAmounts(e.target.checked)}/> Hide dollar amounts</label></div>
       <div className="review-actions"><button id="share-download">Download PNG</button><button id="export">Export trades as CSV</button></div><p id="share-msg" role="status"/>
     </section>

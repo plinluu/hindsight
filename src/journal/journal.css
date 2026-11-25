@@ -95,6 +95,7 @@ body {
 }
 .greeting-glass, .glass, .security-profile, .market-widget, .desktop, .mobile, aside,
 #company-results, .market-controls input, .market-controls button, .news-filters button,
+.glass-inset, .review-page button, .review-page :is(textarea,select,input:not([type=checkbox])),
 small, .section-line a, .glass > a {
   position: relative;
   background: var(--lens);
@@ -105,6 +106,7 @@ small, .section-line a, .glass > a {
 }
 :is(.greeting-glass,.glass,.security-profile,.market-widget,.desktop,.mobile,aside,
 #company-results,.market-controls input,.market-controls button,.news-filters button,
+.glass-inset, .review-page button, .review-page :is(textarea,select,input:not([type=checkbox])),
 .section-line a,.glass > a)::before {
   content: '';
   position: absolute;
@@ -129,13 +131,13 @@ small { color: #ece5db; background-color: #ffffff08; }
 .desktop, .mobile, aside, #company-results { background-color: #ffffff08; }
 aside { position: absolute; z-index: 4; }
 .mobile { position: fixed; }
-nav [aria-current], nav [aria-expanded=true], .news-filters button[aria-pressed=true], .market-controls form button {
+nav [aria-current], nav [aria-expanded=true], .review-page button[aria-pressed=true], .news-filters button[aria-pressed=true], .market-controls form button {
   color: #261f1e;
   background: linear-gradient(150deg, #ffe8c9, #ffd0a1 43%, #e6a884);
   box-shadow: inset 0 1px 2px white, inset 0 -2px 3px #786d6480, 0 2px 7px #18131538;
 }
 nav a:hover:not([aria-current]), nav button:hover:not([aria-expanded=true]),
-.news-filters button:hover:not([aria-pressed=true]), #company-results li:hover,
+.review-page button:hover:not([aria-pressed=true]):not(:disabled), .news-filters button:hover:not([aria-pressed=true]), #company-results li:hover,
 #company-results li[aria-selected=true], .section-line a:hover, .glass > a:hover {
   background-color: #fff6e825;
 }
@@ -147,7 +149,7 @@ nav a:hover:not([aria-current]), nav button:hover:not([aria-expanded=true]),
   .mobile aside { bottom: calc(100% + 8px); }
 }
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-  .glass, .security-profile, .greeting-glass, .desktop, .mobile, aside, #company-results { background-color: #393434; }
+  .glass, .glass-inset, .review-page button, .security-profile, .greeting-glass, .desktop, .mobile, aside, #company-results { background-color: #393434; }
 }
 @media (prefers-reduced-transparency: reduce) {
   :root { --lens: linear-gradient(135deg, #443d3c, #302c2d); }

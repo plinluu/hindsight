@@ -17,40 +17,29 @@
 .journal-product button:disabled { opacity: .5; cursor: default; }
 .journal-product summary { cursor: pointer; padding: 8px 0; }
 .journal-product svg { display: block; color: #bfd5fb; margin: 18px 0; }
-.journal-product:has(.sale-card) { max-width: 990px; }
-.journal-product .sale-card { background: linear-gradient(135deg,rgba(45,41,61,.94),rgba(22,25,38,.93)); border:1px solid #e6d4ed40; padding:clamp(18px,3vw,34px); }
-.sale-tag { display:inline-block; border:1px solid #e6d4ed45; border-radius:24px; padding:6px 12px; font-size:.76rem; letter-spacing:.055em; color:#ebdae8; }
-.sale-card h2 { font: 500 clamp(1.85rem,4vw,3.1rem)/1.13 'Instrument Serif',Georgia,serif; margin:22px 0 4px; }
-.sale-outcome { font-size:clamp(1rem,2vw,1.3rem); color:#e3dce4; }
-.sale-switch,.sale-key { display:flex; flex-wrap:wrap; gap:6px; align-items:center; }
-.sale-switch { margin:18px 0 8px; }
-.journal-product .sale-switch button { min-height:36px; border:1px solid #ffffff30; background:#ffffff09; color:#ece6ee; padding:6px 13px; }
-.journal-product .sale-switch button[aria-pressed=true] { background:#f2e3d6; color:#291f29; }
-.journal-product .sale-plot { width:100%; margin:12px 0; overflow:visible; }
-.sale-plot text { fill:#e6dce6; font:11px 'IBM Plex Sans',sans-serif; }
-.sale-key { gap:14px; font-size:.78rem; color:#ddd3df; }
-.sale-key span:nth-child(2) { color:#f5bbcc; }
-.sale-key span:nth-child(3) { color:#a0ddc5; }
-.sale-source { border-top:1px solid #ffffff26; margin-top:16px; }
-.sale-source input { padding:10px; border-radius:10px; font:inherit; background:#252332; color:inherit; border:1px solid #ffffff42; }
-.sale-totals { display:grid; grid-template-columns:repeat(auto-fit,minmax(130px,1fr)); gap:18px; }
-.sale-totals dt { font-size:.85rem; color:#dad1de; }
-.sale-totals dd { margin:3px 0; font-size:1.45rem; }
-.sale-ranking { border-top:1px solid #ffffff26; margin-top:18px; padding-top:8px; }
-.sale-ranking ol { margin:0; padding:0; list-style:none; }
-.sale-ranking li { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:10px; padding:6px 0; }
-.journal-product .sale-ranking button { background:transparent; color:inherit; text-decoration:underline; padding:0; }
+.review-page .hero { padding-bottom:16px; }
+.review-page > .review-actions { justify-content:center; }
+.review-page p { margin:12px 0; line-height:1.6; }
+.review-page label { display:grid; gap:6px; margin:14px 0; }
+.review-page :is(textarea,select,input:not([type=checkbox])) { width:100%; min-width:0; padding:10px 14px; color:inherit; color-scheme:dark; border-radius:16px; font:inherit; }
+.review-page select option { background:#393434; }
+.review-page textarea { resize:vertical; }
+.review-page .row,.sale-switch,.sale-key { display:flex; flex-wrap:wrap; align-items:center; justify-content:flex-start; gap:8px; }
+.review-page .grid2 { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(210px,100%),1fr)); gap:0 16px; }
+.review-page button { padding:8px 14px; }
+.review-page button:disabled { opacity:.5; cursor:default; }
+.review-page summary { cursor:pointer; padding:8px 0; }
+.sale-switch { margin:16px 0; }
+.sale-key { gap:14px; font-size:.8rem; }
+.sale-key span:nth-child(2) { color:var(--orchid); }
+.sale-key span:nth-child(3) { color:var(--mint); }
 .review-actions { display:flex; flex-wrap:wrap; align-items:center; justify-content:flex-start; gap:14px; margin:16px 0 24px; }
-.journal-product > .review-actions { justify-content:center; }
-.review-report .panel { background:var(--glass); border:var(--rim); box-shadow:var(--shadow); }
-.review-report h2 { font:500 clamp(1.75rem,3.1vw,2.55rem)/1.12 'Cormorant Garamond',Georgia,serif; margin:0 0 12px; }
-.review-report .sale-tag + h2 { margin-top:20px; }
-.review-report h3 { font:600 1.05rem/1.35 'IBM Plex Sans',sans-serif; margin:0 0 10px; }
+.review-report small + h2 { margin-top:16px; }
 .review-report #review-sent { font-size:clamp(1.1rem,2.2vw,1.55rem); }
-.review-report #review-sent em { color:#f8b7cb; font-style:normal; }
-.review-report #review-sent i { color:#b4e7d0; font-style:normal; }
+.review-report #review-sent em { color:var(--orchid); font-style:normal; }
+.review-report #review-sent i { color:var(--mint); font-style:normal; }
 .review-report #results-chart svg,.review-report #cum svg,.review-report canvas { display:block; width:100%; height:auto; }
-.review-report .ln { fill:none; stroke:#f5e4d8; stroke-width:2.4; }
+.review-report .ln { fill:none; stroke:var(--ink); stroke-width:2.4; }
 .review-report .miss { fill:#ec98b250; }.review-report .save { fill:#8cdbbe55; }
 .review-report .gl { stroke:#ffffff21; }.review-report .sl { stroke:#d6c7d090; stroke-dasharray:3 4; }
 .review-report .sm,.review-report .bm { stroke:#fff0dc; stroke-width:2; }
@@ -58,26 +47,29 @@
 .review-report .ax,.review-report .lb { fill:#ede2e8; font:11px 'IBM Plex Sans',sans-serif; }
 .review-report .lb { paint-order:stroke; stroke:#2a2634; stroke-width:3px; }
 .review-report .chart-empty { padding:24px 0; }
-.review-report .good { color:#b1e4ce; }.review-report .bad { color:#f6b8cd; }
-.review-report .ln.good { stroke:#b1e4ce; }.review-report .ln.bad { stroke:#f6b8cd; }
+.review-report .good { color:var(--mint); }.review-report .bad { color:var(--orchid); }
+.review-report .ln.good { stroke:var(--mint); }.review-report .ln.bad { stroke:var(--orchid); }
 .review-report .cum-dot { fill:#f4decf; }
 .review-report #kpi,.review-report .totals,.review-report #fp,.review-pair { display:grid; gap:12px; grid-template-columns:repeat(auto-fit,minmax(min(145px,100%),1fr)); margin:20px 0; }
-.review-report #kpi > div,.review-report .card,.review-pair > div { padding:16px; border-radius:18px; background:#251f302e; border:1px solid #f2deeb2a; min-width:0; }
+.review-report #kpi > div,.review-report .card,.review-pair > div { padding:16px; border-radius:18px; min-width:0; }
 .review-report #kpi b,.review-report .totals b { display:block; font:500 1.7rem 'Cormorant Garamond',Georgia,serif; }
 .review-report #kpi span,.review-report .totals span,.review-report .cap { font-size:.83rem; }
 .review-pair { grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr)); }
-.review-report .rg { display:grid; grid-template-columns:minmax(65px,1fr) 1fr auto; width:100%; align-items:center; gap:8px; padding:10px 4px; border-radius:8px; border-bottom:1px solid #ffffff24; background:transparent; color:inherit; text-align:left; }
+.review-report .rg { display:grid; grid-template-columns:minmax(65px,1fr) 1fr auto; width:100%; align-items:center; gap:8px; padding:10px 4px; border-radius:8px; border-bottom:1px solid #ffffff24; color:inherit; text-align:left; }
 .review-report .rg small { display:block; font-size:.68rem; }
-.review-report .rg[aria-pressed=true] { background:#ffffff12; }
-.review-report progress { width:100%; height:5px; accent-color:#e2adc2; }
+
+.review-report progress { width:100%; height:5px; accent-color:var(--peach); }
 .review-report .fees-bar { width:100%; height:14px; border-radius:10px; }
-.review-report .fee-comm { fill:#d5bedf; }.review-report .fee-fx { fill:#a7dac7; }
+.review-report .fee-comm { fill:var(--orchid); }.review-report .fee-fx { fill:var(--mint); }
 .review-report .leg { display:flex; flex-wrap:wrap; gap:18px; }
 .review-report .dot { display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:6px; }
-.review-report .dot-comm { background:#d5bedf; }.review-report .dot-fx { background:#a7dac7; }
+.review-report .dot-comm { background:var(--orchid); }.review-report .dot-fx { background:var(--mint); }
 .review-report #fp { grid-template-columns:repeat(auto-fit,minmax(min(210px,100%),1fr)); }
-.review-report .tag { display:inline-block; border-radius:99px; background:#e6c6d825; padding:5px 10px; font-size:.78rem; }
+.review-report .tag { display:inline-block; border-radius:99px; padding:5px 10px; font-size:.78rem; }
 .review-report .habit-note { grid-column:1/-1; }.review-report canvas { border-radius:16px; }
 .review-report .review-actions label { display:flex; align-items:center; gap:8px; }
 .review-prices form,.review-prices input[type=number] { margin-top:10px; }
 .review-drop { border:1px dashed #e6d4ed65; border-radius:16px; padding:16px; }
+
+.share-preview { border-radius:20px; overflow:hidden; }
+.review-page input[type=checkbox] { accent-color:var(--peach); }

@@ -52,13 +52,13 @@ export default function Review({aboutHref = '#/About', declineHref = '#/Declined
   }
   return (
     <>
-      <h1 ref={heading} tabIndex={-1}>Trade review</h1>
+      <div className="hero"><h1 ref={heading} tabIndex={-1}>Trade review</h1></div>
       <div className="review-actions"><button aria-expanded={importing} onClick={()=>setImporting(!importing)}>{importing?'Close import':'Import my trades'}</button>
         {!!report?.sales.length && <button onClick={()=>{reset('');setImporting(false)}}>Back to demo</button>}</div>
       {report && <p role="status">{report.sales.length} matched lots · {report.skipped} skipped rows · {report.unmatched} unmatched shares sold</p>}
       {report && !report.sales.length && <p>Include the purchases that came before your sales in the export.</p>}
       {importing && (terms !== 'v1' ? (
-        <section className="panel">
+        <section className="glass">
           <h2>Before reviewing trades</h2>
           <p>
             Hindsight uses historical prices to illustrate past decisions. Results are estimates for learning.
@@ -72,7 +72,7 @@ export default function Review({aboutHref = '#/About', declineHref = '#/Declined
         </section>
       ) : (
         <>
-          <section className="panel stack">
+          <section className="glass stack">
             <h2>Import your activity</h2>
             <p>
               Choose a broker export in one currency or paste a table. Trades stay in this tab. Include
@@ -112,7 +112,7 @@ export default function Review({aboutHref = '#/About', declineHref = '#/Declined
             </div>
           </section>
           {parsed && (
-            <section className="panel">
+            <section className="glass">
               <h2>Column mapping</h2>
               <div className="grid2">
                 {(Object.keys(parsed.mapping) as (keyof Fields)[]).map((k) => (

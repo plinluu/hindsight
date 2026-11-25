@@ -36,6 +36,7 @@ Phase 6 complete
 The legacy project is named hindsight (lowercase). About contains the methodology, privacy details and local data controls.
 Revision — Review opens with an interactive simulated sale chart. Imported lots use broker fills, an optional TradingView chart, latest quotes for recognized listings, and user-entered historical closes. Removed the Alpha Vantage endpoint.
 Revision — Ported the complete original five-section Review and eight-trade demo into journal glass panels. All horizons drive the chart, rankings, totals and exports. Broker imports support separate conversion fees, and local TradingView history imports power historical comparisons and habit checks.
+Revision — Review uses the journal’s shared lens, rim, shadow, headings and selected pills across reports and import controls.
 Next — Phase 7 polish.
 TODO — Replace sky.png with original artwork before public launch.
 
