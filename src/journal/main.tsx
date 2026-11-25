@@ -1,8 +1,8 @@
 import React,{lazy,Suspense,useEffect,useState} from 'react'
 import {createRoot} from 'react-dom/client'
-import '@fontsource/newsreader/latin-500.css'
-import '@fontsource/dm-sans/latin-400.css'
-import '@fontsource/dm-sans/latin-600.css'
+import '@fontsource/instrument-serif/latin-400.css'
+import '@fontsource/ibm-plex-sans/latin-400.css'
+import '@fontsource/ibm-plex-sans/latin-600.css'
 import Today from './Today'
 import './journal.css'
 const Detail=lazy(()=>import('./Detail'))

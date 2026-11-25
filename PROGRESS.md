@@ -9,6 +9,7 @@ Done — Connected Today and Markets to TradingView with symbol search, local wa
 Done — Sky loader, responsive navigation and sample journal screens. Production build passed.
 Done — Recorded desktop and mobile measurements, the available local artwork, and implementation dimensions in DESIGN_SPEC.md.
 Phase 3 complete
+Revision — Warm graphite backdrop, clearer neutral glass and self-hosted Instrument Serif with IBM Plex Sans. Today visually checked in the production preview.
 Revision — Applied shared liquid-glass surfaces to navigation, cards, search, filters, badges and chart frames.
 Revision — Removed the market overview ticker site-wide and centered the Today greeting in a clear glass panel.
 Revision — News aggregates business and world reporting from direct publisher feeds and multi-outlet search. Live check returned 60 stories across 19 source labels without a Finnhub key. Production build passed.
