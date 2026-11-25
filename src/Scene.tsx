@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { type CSSProperties, useEffect, useState } from 'react'
 import { useValue } from './data'
 import { season, sunState, condition } from './season'
 export default function Scene() {
@@ -6,9 +6,7 @@ export default function Scene() {
     sky = useValue('sky'),
     seasonOverride = useValue('season'),
     lightOverride = useValue('daylight'),
-    [tick, setTick] = useState(Date.now()),
-    [shown, show] = useState(''),
-    [old, previous] = useState('')
+    [tick, setTick] = useState(Date.now())
   useEffect(() => {
     const id = setInterval(() => setTick(Date.now()), 60000)
     return () => clearInterval(id)
@@ -25,54 +23,20 @@ export default function Scene() {
   const manualLight = lightOverride && ['day', 'sunset', 'night'].includes(lightOverride) ? lightOverride : null
   const light = manualLight ?? state ?? 'day'
   const weather = valid ? condition(s.code) : 'Clear'
-  const url = (v: string) => import.meta.env.BASE_URL + 'assets/bg/' + which + '-' + v + '.webp'
-  const src = url(light),
-    next = manualLight ? null : url(light === 'day' ? 'sunset' : light === 'sunset' ? 'night' : 'day')
-  useEffect(() => {
-    let active = true
-    const img = new Image()
-    img.onload = () => {
-      if (active) {
-        show(src)
-        if (next) {
-          const preload = new Image()
-          preload.src = next
-        }
-      }
-    }
-    img.src = src
-    return () => {
-      active = false
-    }
-  }, [src, next])
-  useEffect(() => {
-    const timer = setTimeout(() => previous(shown), 700)
-    return () => clearTimeout(timer)
-  }, [shown])
-  useEffect(() => {
-    document.documentElement.dataset.sun = state ?? 'unknown'
-    document.documentElement.dataset.season = which
-  }, [state, which])
   return (
-    <div
-      aria-hidden="true"
-      className="scene"
-      style={{ backgroundImage: old ? 'url(' + old + ')' : undefined }}
-    >
-      {shown && (
-        <div
-          key={shown}
-          style={{
-            backgroundImage: 'url(' + shown + ')',
-            
-          }}
-        />
-      )}
-      <i
-        style={{
-          background: weather === 'Snow' ? '#d1e5f530' : weather === 'Cloudy' || weather === 'Fog' ? '#80889732' : weather === 'Clear' ? 'transparent' : '#344f7244',
-        }}
-      />
+    <div className="scene" aria-hidden="true" data-season={which} data-light={light} data-weather={weather}>
+      {Array.from({ length: which === 'winter' ? 42 : 20 }, (_, i) => {
+        const duration = (which === 'summer' ? 28 : 15) + (i * 7 % 13)
+        const style = {
+          left: ((i * 61.8) % 105 - 3) + '%',
+          '--depth': 0.48 + (i * 11 % 17) / 25,
+          '--tilt': (i * 47 % 180) + 'deg',
+          '--duration': duration + 's',
+          '--delay': -(i * 0.382 % 1) * duration + 's',
+          '--still-y': (i * 37.2 % 100) + '%',
+        } as CSSProperties
+        return <span className="sky-particle" key={i} style={style} />
+      })}
     </div>
   )
 }
