@@ -1,43 +1,75 @@
 import {useState, type FormEvent} from 'react'
-import {save, useValue} from '../data'
-import {defaults} from '../Charts'
+import companies from './companies.json'
 import {Chart, Overview} from './Today'
 import {MarketWidget} from './MarketWidget'
 
-const valid = /^(?:[A-Z0-9_]+:)?[A-Z0-9.^/-]{1,20}$/
-const names: Record<string,string> = {'AMEX:SPY':'S&P 500 ETF', 'NASDAQ:QQQ':'Nasdaq 100 ETF', 'NASDAQ:AAPL':'Apple', 'NASDAQ:MSFT':'Microsoft'}
-function watchlist(raw: string | null): string[] {
-  try {
-    const list: unknown = JSON.parse(raw ?? 'null')
-    if (Array.isArray(list)) return [...new Set(list.filter((s): s is string => typeof s === 'string' && valid.test(s)))]
-  } catch { /* Use starter symbols when stored data is damaged. */ }
-  return defaults.slice(0, 2)
+const initial = ['S&P 500 ETF', 'AMEX:SPY']
+const normalize = (s: string) => s.toLowerCase().replace(/[^a-z0-9]/g, '')
+const listings = companies.map(row => ({
+  row, name:normalize(row[0]), ticker:normalize(row[1].split(':')[1]), alias:normalize(row[2])
+}))
+
+function suggestions(query: string) {
+  const term = normalize(query)
+  if (!term) return []
+  const matches = listings.map(entry => {
+    const {ticker,name,alias,row} = entry
+    const exact = ticker === term || name === term || alias === term || row[1].toLowerCase() === query.toLowerCase()
+    const rank = exact ? 0 : name.startsWith(term) || alias.startsWith(term) ? 1 : ticker.startsWith(term) ? 2 : name.includes(term) || alias.includes(term) ? 3 : 4
+    return {rank,row}
+  }).filter(hit => hit.rank < 4).sort((a,b) => a.rank - b.rank)
+  return matches.slice(0,8).map(hit => hit.row)
 }
 
 export default function Markets() {
-  const [symbol, select] = useState('AMEX:SPY')
+  const [[name,symbol], select] = useState(initial)
   const [query, search] = useState('')
+  const [active, highlight] = useState(-1)
+  const [expanded, expand] = useState(false)
   const [error, setError] = useState('')
-  const saved = watchlist(useValue('watchlist'))
-  function open(event: FormEvent) {
-    event.preventDefault()
-    const term = query.trim().toUpperCase()
-    const match = [...defaults, ...saved].find(s => s.split(':').pop() === term || names[s]?.toUpperCase() === term)
-    if (!match && !valid.test(term)) { setError('Enter a ticker such as SPY or NASDAQ:MSFT.'); return }
-    select(match ?? term)
+  const results = suggestions(query.trim())
+  const visible = expanded && results.length > 0
+  function choose(row: string[]) {
+    select(row)
     search('')
+    expand(false)
+    highlight(-1)
     setError('')
   }
-  const included = saved.includes(symbol)
+  function open(event: FormEvent) {
+    event.preventDefault()
+    const term = query.trim()
+    if (results.length) choose(results[active < 0 ? 0 : active])
+    else if (/^(?:[A-Z0-9_]+:)?[A-Z0-9.^/-]{1,20}$/.test(term.toUpperCase()) && (term.includes(':') || term.length <= 5)) choose([term.toUpperCase(),term.toUpperCase()])
+    else setError('No matching company. Try a different name or an exchange and ticker.')
+  }
   return <>
-    <div className="hero"><h1>Markets</h1><p>Follow a symbol and compare its price over time.</p></div>
+    <div className="hero"><h1>Markets</h1><p>Find a company and explore its price over time.</p></div>
     <section className="glass market-controls">
-      <div className="row"><h2>{names[symbol] || symbol}</h2><button onClick={() => save('watchlist', JSON.stringify(included ? saved.filter(s => s !== symbol) : [...saved,symbol]))}>{included ? 'Remove from watchlist' : 'Add to watchlist'}</button></div>
-      <form onSubmit={open}><label htmlFor="symbol">Find a symbol</label><div><input id="symbol" value={query} onChange={e => search(e.target.value)} list="market-symbols" placeholder="Ticker or company" required/><datalist id="market-symbols">{[...new Set([...defaults,...saved])].map(s => <option key={s} value={s}>{names[s] || s}</option>)}</datalist><button>Open chart</button></div></form>
+      <h2>{name}</h2>
+      <form onSubmit={open}><label htmlFor="symbol">Find a company or ticker</label>
+        <div><input id="symbol" autoComplete="off" role="combobox" aria-autocomplete="list" aria-controls="company-results"
+          aria-expanded={visible} aria-activedescendant={visible && active >= 0 ? 'company-'+active : undefined}
+          placeholder="Company name or ticker" value={query} required
+          onFocus={() => expand(true)} onBlur={() => expand(false)}
+          onChange={e => {search(e.target.value);highlight(-1);expand(true);setError('')}}
+          onKeyDown={e => {
+            if (e.key === 'Escape') {expand(false);highlight(-1)}
+            if (results.length && (e.key === 'ArrowDown' || e.key === 'ArrowUp')) {
+              e.preventDefault()
+              expand(true)
+              highlight(e.key === 'ArrowDown' ? (active+1)%results.length : (active <= 0 ? results.length-1 : active-1))
+            }
+          }}/><button>Open chart</button></div>
+        <ul id="company-results" role="listbox" aria-label="Matching companies" hidden={!visible}>
+          {results.map((row,i) => <li key={row[1]+i} id={'company-'+i} role="option" aria-selected={active===i}
+            onMouseDown={e => e.preventDefault()} onClick={() => choose(row)}>{row[0]} <span>{row[1]}</span></li>)}
+        </ul>
+        {expanded && query.trim() && !results.length && <p role="status">No matching companies. You can also enter a ticker.</p>}
+      </form>
       {error && <p role="alert">{error}</p>}
       <MarketWidget kind="advanced-chart" symbol={symbol}><Chart/></MarketWidget>
     </section>
-    <section className="glass market-controls"><h2>Watchlist</h2><div className="watchlist">{saved.map(s => <button key={s} aria-pressed={symbol === s} onClick={() => {select(s);setError('')}}>{s}</button>)}{!saved.length && <p>Add a symbol above to follow it here.</p>}</div></section>
     <Overview/>
   </>
 }

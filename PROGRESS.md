@@ -2,6 +2,7 @@
 Phase 0 complete
 Phase 1 complete
 Phase 2 complete
+Revision — Replaced the ticker tape embed, removed sample switches and the watchlist, and added inline company-name search using the SEC listings directory.
 Done — Connected Today and Markets to TradingView with symbol search, local watchlist and sample views. Production build passed.
 Done — Sky loader, responsive navigation and sample journal screens. Production build passed.
 Done — Recorded desktop and mobile measurements, the available local artwork, and implementation dimensions in DESIGN_SPEC.md.

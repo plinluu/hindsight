@@ -23,7 +23,7 @@ export function MarketWidget({kind, symbol, children}: {kind: Kind, symbol?: str
   const host = useRef<HTMLDivElement>(null)
   const [ready, setReady] = useState(false)
   const [online, setOnline] = useState(navigator.onLine)
-  const [sample, setSample] = useState(false)
+  const tape = useRef<HTMLDivElement>(null)
   useEffect(() => {
     const sync = () => setOnline(navigator.onLine)
     window.addEventListener('online', sync)
@@ -36,21 +36,47 @@ export function MarketWidget({kind, symbol, children}: {kind: Kind, symbol?: str
   useEffect(() => {
     if (!online) return
     let active = true
+    let cleanup = () => {}
+    setReady(false)
     const observer = new IntersectionObserver(entries => {
       if (!entries.some(entry => entry.isIntersecting)) return
       observer.disconnect()
+      if (kind === 'ticker-tape' && tape.current) {
+        const container = tape.current
+        const script = document.createElement('script')
+        script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js'
+        script.async = true
+        script.textContent = JSON.stringify({
+          symbols: [{proName:'FOREXCOM:SPXUSD',title:'US 500'}, {proName:'FOREXCOM:NSXUSD',title:'US Tech 100'}, {proName:'FOREXCOM:DJI',title:'Dow 30'}],
+          displayMode:'regular', colorTheme:'dark', locale:'en', isTransparent:true,
+          isPaused:window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+        })
+        const loaded = (event: Event) => {
+          if (active && event.target instanceof HTMLIFrameElement) setReady(true)
+        }
+        container.addEventListener('load', loaded, true)
+        cleanup = () => {
+          container.removeEventListener('load', loaded, true)
+          container.replaceChildren()
+        }
+        const target = document.createElement('div')
+        target.className = 'tradingview-widget-container__widget'
+        container.append(target, script)
+        return
+      }
       load(kind).then(() => { if (active) setReady(true) }, () => {})
     })
     observer.observe(host.current!)
-    return () => { active = false; observer.disconnect() }
+    return () => { active = false; observer.disconnect(); cleanup() }
   }, [kind, online])
   const available = online && ready
-  const attrs = kind === 'advanced-chart'
-    ? {symbol, interval:'1D', style:{display:'block', width:'100%', height:'clamp(360px, 52vh, 580px)'}}
-    : {symbols:'SP:SPX,NASDAQ:IXIC,TVC:DJI', style:{display:'block',width:'100%'}}
   return <div ref={host} className="market-widget">
-    {available && <div hidden={sample}>{createElement('tv-' + kind, {...attrs, theme:'dark'})}</div>}
-    {(!available || sample) && children}
-    {available && <button className="sample-switch" onClick={() => setSample(!sample)}>{sample ? 'Show TradingView' : 'Show sample data'}</button>}
+    {kind === 'ticker-tape' && <div className={'tape-frame' + (available ? '' : ' tape-pending')} aria-hidden={!available}>
+      <div className="tradingview-widget-container" ref={tape}/>
+    </div>}
+    {kind === 'advanced-chart' && available && createElement('tv-advanced-chart', {
+      symbol, interval:'1D', theme:'dark', style:{display:'block', width:'100%', height:'clamp(360px, 52vh, 580px)'}
+    })}
+    {!available && children}
   </div>
 }
