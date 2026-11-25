@@ -1,9 +1,11 @@
 # Current Hindsight brief
 Phase 0 complete
 Phase 1 complete
+Phase 2 complete
+Done — Connected Today and Markets to TradingView with symbol search, local watchlist and sample views. Production build passed.
 Done — Sky loader, responsive navigation and sample journal screens. Production build passed.
 Done — Recorded desktop and mobile measurements, the available local artwork, and implementation dimensions in DESIGN_SPEC.md.
-Next — Phase 2 charts and Markets page.
+Next — Phase 3 news and market recap.
 TODO — Replace sky.png with original artwork before public launch.
 
 ## Earlier project history (previous phase numbering)
