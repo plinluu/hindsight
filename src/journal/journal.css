@@ -221,6 +221,15 @@ body:has(.opening)::before { display: none; }
   animation: sky-sway 5s ease-in-out var(--delay) infinite alternate;
 }
 .scene[data-season="winter"] .sky-particle::before { box-shadow: 0 0 3px #ffffff66; }
+.scene[data-season="winter"] .sky-particle:nth-child(3n + 1) {
+  --particle-width: 20px; --particle-height: 20px; --crystal: url('/assets/bg/snow-fern.svg');
+}
+.scene[data-season="winter"] .sky-particle:nth-child(6n + 1) {
+  --particle-width: 24px; --particle-height: 24px; --crystal: url('/assets/bg/snow-star.svg');
+}
+.scene[data-season="winter"] .sky-particle:nth-child(3n + 1)::before {
+  background: var(--crystal) center / contain no-repeat; border-radius: 0; box-shadow: none;
+}
 .scene[data-season="autumn"] { --particle-color: #d78b42; --particle-width: 14px; --particle-height: 8px; }
 .scene[data-season="autumn"] .sky-particle:nth-child(3n) { --particle-color: #ae5637; }
 .scene[data-season="autumn"] .sky-particle::before {
@@ -228,7 +237,17 @@ body:has(.opening)::before { display: none; }
   background: linear-gradient(32deg, transparent 44%, #723e2d88 49%, transparent 55%), var(--particle-color);
 }
 .scene[data-season="spring"] { --particle-color: #f6cbda; --particle-width: 9px; --particle-height: 6px; }
-.scene[data-season="spring"] .sky-particle::before { border-radius: 70% 20% 75% 45%; }
+.scene[data-season="spring"]::before {
+  background-image: url('/assets/bg/sakura-left.svg'), url('/assets/bg/sakura-right.svg');
+  background-position: left top, right top;
+  background-size: clamp(155px, 35vw, 580px) auto, clamp(125px, 30vw, 500px) auto;
+  background-repeat: no-repeat;
+}
+.scene[data-season="spring"] .sky-particle::before {
+  border-radius: 75% 35% 75% 25%;
+  background: linear-gradient(125deg, #ffeff0, #efbfcb 64%, #da99b1);
+  clip-path: polygon(0 0, 62% 0, 68% 23%, 84% 0, 100% 0, 100% 100%, 0 100%);
+}
 .scene[data-season="summer"] { --particle-color: #ffe4a2; --particle-width: 3px; --particle-height: 3px; }
 .scene[data-season="summer"] .sky-particle { animation-direction: reverse; }
 .scene[data-season="summer"] .sky-particle::before { box-shadow: 0 0 6px 2px #ffd89366; }
