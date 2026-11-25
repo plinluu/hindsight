@@ -1,4 +1,26 @@
-import {useEffect, useState} from 'react'
+import {useEffect, useRef, useState} from 'react'
+
+const staticHosting = import.meta.env.BASE_URL === '/hindsight/'
+
+function SymbolInfo({symbol}:{symbol:string}) {
+  const host = useRef<HTMLDivElement>(null)
+  const [failed, setFailed] = useState(false)
+  useEffect(() => {
+    const container = document.createElement('div')
+    container.className = 'tradingview-widget-container'
+    const widget = document.createElement('div')
+    widget.className = 'tradingview-widget-container__widget'
+    const script = document.createElement('script')
+    script.src = 'https://s3.tradingview.com/external-embedding/embed-widget-symbol-info.js'
+    script.async = true
+    script.textContent = JSON.stringify({symbol, width:'100%', locale:'en', colorTheme:'dark', isTransparent:true})
+    script.onerror = () => setFailed(true)
+    container.append(widget, script)
+    host.current?.append(container)
+    return () => { script.onerror = null; container.remove() }
+  }, [symbol])
+  return <><div ref={host}/>{failed && <p role="status">Open TradingView below to see details for {symbol}.</p>}</>
+}
 
 type Quote = {symbol:string;close:number;change:number|null}
 type Profile = Quote & {
@@ -11,6 +33,7 @@ type Result<T> = {key:string;at:number;data:T|null}
 function useSource<T>(key:string) {
   const [result,setResult] = useState<Result<T>>()
   useEffect(()=>{
+    if (staticHosting) return
     const controller = new AbortController()
     async function refresh() {
       try {
@@ -48,7 +71,8 @@ export function SecurityProfile({symbol,name}:{symbol:string;name:string}) {
       {p && <p>{[p.sector,p.industry].filter(Boolean).join(' · ')}</p>}</div>
       {p && <div className="security-price"><strong>{number(p.close,c)}</strong><div><Change n={p.change}/> today</div></div>}
     </div>
-    {!p ? <p role="status">{result?'Company details could not be loaded.':'Loading company details…'}</p> : <>
+    {!p ? (staticHosting || result ? <SymbolInfo key={symbol} symbol={symbol}/> :
+      <p role="status">Loading company details…</p>) : <>
       <h3>{fund?'Fund snapshot':'Valuation'}</h3>
       {facts([['Market cap',number(p.market_cap_basic,c,true)],['Enterprise value',number(p.enterprise_value_fq,f,true)],['Price / earnings',p.price_earnings_ttm==null?'Not reported':number(p.price_earnings_ttm)+'×'],['Shares outstanding',number(p.total_shares_outstanding,undefined,true)]])}
       <h3>Trading &amp; financials</h3>
