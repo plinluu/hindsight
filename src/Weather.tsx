@@ -34,8 +34,9 @@ export function WeatherSync() {
           timeformat: 'unixtime',
           forecast_days: '2',
           past_hours: '24',
-          current: 'temperature_2m,apparent_temperature,weather_code',
-          hourly: 'temperature_2m,weather_code',
+          temperature_unit: 'celsius',
+          current: 'temperature_2m,apparent_temperature,weather_code,snowfall',
+          hourly: 'temperature_2m,weather_code,snowfall',
           daily: 'sunrise,sunset',
         })
         const d: Forecast = await json('https://api.open-meteo.com/v1/forecast?' + params)

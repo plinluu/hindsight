@@ -34,9 +34,11 @@ const weather = {
 }
 assert.equal(winterWeatherReason(boundary, weather), 'snow in the past 24 hours')
 weather.hourly.time[0] = now - 90000
+assert.equal(winterWeatherReason(boundary, weather), 'snow in the local forecast')
+weather.hourly.weather_code[1] = 3
 assert.equal(winterWeatherReason(boundary, weather), null)
 weather.current.temperature_2m = 0
 assert.equal(winterWeatherReason(boundary, weather), 'freezing temperature')
 weather.current.weather_code = 71
-assert.equal(winterWeatherReason(boundary, weather), 'snow reported')
+assert.equal(winterWeatherReason(boundary, weather), 'snow or freezing precipitation reported')
 assert.equal(winterWeatherReason(boundary + 2 * 86400000, weather), null)

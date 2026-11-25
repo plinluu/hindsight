@@ -12,13 +12,19 @@ export function winterWeatherReason(now, weather) {
   if (!weather?.current) return null
   const { time, weather_code, temperature_2m } = weather.current
   const seconds = now / 1000
-  const fresh = time <= seconds && time >= seconds - 3600
-  if (fresh && condition(weather_code) === 'Snow') return 'snow reported'
+  const fresh = time <= seconds + 900 && time >= seconds - 3600
+  const snow = (code, amount) => amount > 0 || [56, 57, 66, 67].includes(code) || condition(code) === 'Snow'
+  if (fresh && snow(weather_code, weather.current.snowfall)) return 'snow or freezing precipitation reported'
   if (fresh && Number.isFinite(temperature_2m) && temperature_2m <= 0) return 'freezing temperature'
   const recentSnow = weather.hourly?.time.some((hour, index) =>
     hour >= seconds - 86400 && hour <= Math.min(time, seconds) &&
-    condition(weather.hourly.weather_code[index]) === 'Snow')
-  return recentSnow ? 'snow in the past 24 hours' : null
+    snow(weather.hourly.weather_code[index], weather.hourly.snowfall?.[index]))
+  if (recentSnow) return 'snow in the past 24 hours'
+  if (!fresh) return null
+  const upcomingSnow = weather.hourly?.time.some((hour, index) =>
+    hour > seconds && hour <= seconds + 86400 &&
+    snow(weather.hourly.weather_code[index], weather.hourly.snowfall?.[index]))
+  return upcomingSnow ? 'snow in the local forecast' : null
 }
 export function sunState(now, rise, set) {
   if (!Number.isFinite(rise) || !Number.isFinite(set) || !Number.isFinite(now) || set <= rise) return undefined
