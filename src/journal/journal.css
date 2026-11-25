@@ -236,7 +236,13 @@ nav a[href="/review"]:not([aria-current]) { color: #ffc7bc; }
 .scene[data-season="autumn"]::before {
   background-image: url('/assets/bg/maple-left.svg'), url('/assets/bg/maple-right.svg');
 }
-.scene:is([data-season="spring"], [data-season="autumn"])::before {
+.scene[data-season="summer"]::before {
+  background-image: url('/assets/bg/summer-left.svg'), url('/assets/bg/summer-right.svg');
+}
+.scene[data-season="winter"]::before {
+  background-image: url('/assets/bg/pine-left.svg'), url('/assets/bg/pine-right.svg');
+}
+.scene[data-season]::before {
   background-position: left top, right top;
   background-size: clamp(155px, 35vw, 580px) auto, clamp(125px, 30vw, 500px) auto;
   background-repeat: no-repeat;
