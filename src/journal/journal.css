@@ -84,13 +84,13 @@ small {font-size:11px;border-color:#ffffff20;color:#bdb2bf}
   --orchid: #ebccff;
   --mint: #b9efdf;
   --accent: var(--peach);
-  --lens: linear-gradient(162deg, #fff9e510, transparent 22%, #261f2210 72%, #ede6dd0c);
+  --lens: linear-gradient(162deg, #ffffff12, transparent 22% 76%, #ffffff09);
   --edge: conic-gradient(from 153deg, #fff9ed80, #ffffff12 19%, #302c2e60 31%, #fffaf0ba 47%, #ffffff34 60%, #ffffff08 78%, #fff4df70);
   --depth: inset 0 2px 3px -2px #fffae5d9, inset 1px -2px 5px -4px #fff8e6a6, 0 4px 10px -7px #090808b0;
   font-family: 'IBM Plex Sans', sans-serif;
 }
 body {
-  background: #292138;
+  background: #222;
   isolation: isolate;
 }
 body::before {
@@ -99,9 +99,7 @@ body::before {
   inset: -2vmax;
   z-index: -1;
   pointer-events: none;
-  background:
-    linear-gradient(180deg, #23173570, #31203980 44%, #20182ee0),
-    url('/journal-sky.png') center / cover no-repeat;
+  background: url('/journal-sky.png') center / cover no-repeat;
 }
 .greeting-glass, .glass, .security-profile, .market-widget, .desktop, .mobile, aside,
 #company-results, .market-controls input, .market-controls button, .news-filters button,
@@ -110,8 +108,8 @@ small, .section-line a, .glass > a {
   background: var(--lens);
   border: 1px solid #e9e2d91f;
   box-shadow: var(--depth);
-  -webkit-backdrop-filter: blur(7px) saturate(108%);
-  backdrop-filter: blur(7px) saturate(108%);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
 }
 :is(.greeting-glass,.glass,.security-profile,.market-widget,.desktop,.mobile,aside,
 #company-results,.market-controls input,.market-controls button,.news-filters button,
@@ -135,8 +133,8 @@ small, .section-line a, .glass > a {
 .opening time, .conditions, .news-story > div, .fund-moves time, .security-facts dt,
 .security-profile footer span, .security-heading > div > span { color: #dbd3cb; }
 .section-line a, .glass > a { display: inline-flex; align-items: center; border-radius: 999px; padding: 7px 14px; color: #f4ede4; }
-small { color: #ece5db; background-color: #211b1c33; }
-.desktop, .mobile, aside, #company-results { background-color: #2c1f388f; }
+small { color: #ece5db; background-color: #ffffff08; }
+.desktop, .mobile, aside, #company-results { background-color: #ffffff08; }
 aside { position: absolute; z-index: 4; }
 .mobile { position: fixed; }
 nav [aria-current], nav [aria-expanded=true], .news-filters button[aria-pressed=true], .market-controls form button {
@@ -149,7 +147,7 @@ nav a:hover:not([aria-current]), nav button:hover:not([aria-expanded=true]),
 #company-results li[aria-selected=true], .section-line a:hover, .glass > a:hover {
   background-color: #fff6e825;
 }
-.market-controls input { background-color: #1714165c; }
+.market-controls input { background-color: #00000012; }
 .market-controls input::placeholder { color: #d1c8c0; }
 :focus-visible { outline: 2px solid #ffe3b9; outline-offset: 3px; }
 @media (max-width: 767px) {
@@ -189,18 +187,13 @@ nav, .news-filters, .conditions { letter-spacing: -.012em; }
 .section-line a { background: transparent; border: 0; box-shadow: none; backdrop-filter: none; }
 .section-line a::before { content: none; }
 
-.greeting-glass, .glass, .market-widget, .security-profile {
-  background-color: #20172657;
-}
-.greeting-glass { background-color: #3e243557; }
 .opening time, .conditions span, .section-line a, .glass > a { color: var(--peach); }
 .market-controls, .market-widget, .security-profile { --accent: var(--mint); }
 .news-brief, .briefing > .glass { --accent: var(--orchid); }
 .section-line h2, .glass h2, .security-heading h2 { color: var(--accent); }
-.news-brief .glass { background-color: #30203966; }
 .news-filters button[aria-pressed=true] { background: linear-gradient(145deg, #f5dfff, #d3abe8); }
 .market-controls form button { background: linear-gradient(145deg, #dcfff0, #9cd5ca); }
-small { background-color: #422d4970; color: #fae3ff; }
+small { background-color: #ffffff08; color: #fae3ff; }
 nav a[href="/markets"]:not([aria-current]) { color: var(--mint); }
 nav a[href="/news"]:not([aria-current]), nav a[href="/learn"]:not([aria-current]) { color: var(--orchid); }
 nav a[href="/review"]:not([aria-current]) { color: #ffc7bc; }
