@@ -6,11 +6,19 @@ The v2 journal includes Today, Markets, News, Review, Learn, Settings, and Tools
 
 ## Visual previews
 
-![Today glass theme](docs/screenshots/today-glass-theme.png)
+| Spring | Summer |
+| --- | --- |
+| ![Spring homepage](docs/screenshots/home-spring.png) | ![Summer homepage](docs/screenshots/home-summer.png) |
+| **Autumn** | **Winter** |
+| ![Autumn homepage](docs/screenshots/home-autumn.png) | ![Winter homepage](docs/screenshots/home-winter.png) |
+
+![Hindsight settings menu](docs/screenshots/settings.png)
 
 ![Review glass theme](docs/screenshots/review-glass-theme.png)
 
-The original mark is available at public/brand/hindsight-mark.svg.
+![Hindsight mark](public/brand/hindsight-mark.svg)
+
+On GitHub Pages, the journal uses the sample briefing when the server API is unavailable. A server deployment enables the briefing API and quote lookups for Trade Review.
 Use Node 22 or newer. From this directory run `npm ci`, copy `.env.example` to `.env`, then run `npm run dev`. Open the local URL printed by Vite.
 Run `npm test`, `npm run lint` and `npm run build` for verification. `npm run preview` serves the production bundle with the local API handlers.
 ## Hosting

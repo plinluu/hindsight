@@ -188,9 +188,9 @@ nav, .news-filters, .conditions { letter-spacing: -.012em; }
 .news-filters button[aria-pressed=true] { background: linear-gradient(145deg, #f5dfff, #d3abe8); }
 .market-controls form button { background: linear-gradient(145deg, #dcfff0, #9cd5ca); }
 small { background-color: #ffffff08; color: #fae3ff; }
-nav a[href="/markets"]:not([aria-current]) { color: var(--mint); }
-nav a[href="/news"]:not([aria-current]), nav a[href="/learn"]:not([aria-current]) { color: var(--orchid); }
-nav a[href="/review"]:not([aria-current]) { color: #ffc7bc; }
+nav a[href$="/markets"]:not([aria-current]) { color: var(--mint); }
+nav a[href$="/news"]:not([aria-current]), nav a[href$="/learn"]:not([aria-current]) { color: var(--orchid); }
+nav a[href$="/review"]:not([aria-current]) { color: #ffc7bc; }
 
 .scene {
   position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none;
