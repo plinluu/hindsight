@@ -1,0 +1,459 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 350"><defs><g id="leaf"><path d="M0 0Q8-11 23-2Q15 8 5 4Z"/><path d="M1 0Q10 0 21-2" fill="none" stroke="#e1d99c" stroke-opacity=".55" stroke-width=".7"/></g></defs><g transform="translate(0 0)">
+<path d="M-24.5 74.5Q66.0 73.8 156.3 51.5Q67.0 58.8 -23.5 59.5Z" fill="#62604a"/>
+<path d="M50.8 69.9Q83.5 106.2 120.5 138.7Q89.6 100.8 56.9 64.6Z" fill="#62604a"/>
+<path d="M79.7 98.6Q80.1 125.0 80.1 151.2Q84.5 124.7 84.1 98.4Z" fill="#62604a"/>
+<path d="M81.4 120.5Q74.0 132.7 69.2 146.5Q76.0 134.0 83.4 121.9Z" fill="#62604a"/>
+<use href="#leaf" fill="#648651" transform="translate(81.3 122.7) rotate(91.8) scale(0.82)"/>
+<use href="#leaf" fill="#839958" transform="translate(78.8 126.7) rotate(171.6) scale(0.70)"/>
+<use href="#leaf" fill="#a3af68" transform="translate(76.4 130.9) rotate(62.4) scale(0.99)"/>
+<use href="#leaf" fill="#a3af68" transform="translate(74.1 135.1) rotate(189.8) scale(1.02)"/>
+<use href="#leaf" fill="#506e50" transform="translate(72.1 139.4) rotate(72.1) scale(0.64)"/>
+<use href="#leaf" fill="#799956" transform="translate(70.2 143.8) rotate(175.1) scale(0.99)"/>
+<path d="M81.1 135.3Q93.0 143.1 106.8 148.1Q94.4 141.3 82.5 133.4Z" fill="#62604a"/>
+<use href="#leaf" fill="#658052" transform="translate(83.3 135.5) rotate(-21.3) scale(0.69)"/>
+<use href="#leaf" fill="#506e50" transform="translate(87.2 138.3) rotate(85.4) scale(0.92)"/>
+<use href="#leaf" fill="#799956" transform="translate(91.2 140.8) rotate(-7.9) scale(0.70)"/>
+<use href="#leaf" fill="#839958" transform="translate(95.4 143.1) rotate(72.1) scale(1.09)"/>
+<use href="#leaf" fill="#799956" transform="translate(99.7 145.2) rotate(2.5) scale(0.73)"/>
+<use href="#leaf" fill="#648651" transform="translate(104.1 147.1) rotate(101.9) scale(1.10)"/>
+<path d="M79.4 148.3Q83.0 166.9 87.9 185.4Q85.4 166.5 81.7 147.9Z" fill="#62604a"/>
+<use href="#leaf" fill="#506e50" transform="translate(81.0 150.6) rotate(28.0) scale(0.83)"/>
+<use href="#leaf" fill="#a3af68" transform="translate(82.2 156.8) rotate(141.4) scale(1.10)"/>
+<use href="#leaf" fill="#648651" transform="translate(83.5 163.0) rotate(36.6) scale(1.14)"/>
+<use href="#leaf" fill="#a3af68" transform="translate(84.7 169.2) rotate(124.2) scale(1.16)"/>
+<use href="#leaf" fill="#839958" transform="translate(85.9 175.4) rotate(37.4) scale(1.07)"/>
+<use href="#leaf" fill="#a3af68" transform="translate(87.2 181.6) rotate(134.9) scale(1.16)"/>
+<use href="#leaf" fill="#648651" transform="translate(82.3 105.5) rotate(53.4) scale(0.66)"/>
+<use href="#leaf" fill="#648651" transform="translate(82.3 123.1) rotate(143.4) scale(0.74)"/>
+<use href="#leaf" fill="#658052" transform="translate(81.3 140.7) rotate(43.3) scale(1.15)"/>
+<path d="M98.2 118.4Q124.1 123.4 150.9 124.1Q125.1 119.1 99.2 114.2Z" fill="#62604a"/>
+<path d="M119.9 121.3Q127.5 133.4 135.9 145.0Q129.5 132.2 121.9 120.1Z" fill="#62604a"/>
+<use href="#leaf" fill="#658052" transform="translate(121.9 122.3) rotate(14.8) scale(0.68)"/>
+<use href="#leaf" fill="#a3af68" transform="translate(124.5 126.3) rotate(120.2) scale(0.71)"/>
+<use href="#leaf" fill="#799956" transform="translate(127.0 130.4) rotate(12.6) scale(0.99)"/>
+<use href="#leaf" fill="#839958" transform="translate(129.5 134.4) rotate(107.3) scale(0.98)"/>
+<use href="#leaf" fill="#799956" transform="translate(131.9 138.5) rotate(11.6) scale(1.15)"/>
+<use href="#leaf" fill="#a3af68" transform="translate(134.4 142.5) rotate(109.5) scale(1.10)"/>
+<path d="M134.4 123.6Q148.1 119.9 162.0 117.0Q147.4 117.7 133.6 121.4Z" fill="#62604a"/>
+<use href="#leaf" fill="#a3af68" transform="translate(135.8 121.9) rotate(-60.4) scale(0.92)"/>
+<use href="#leaf" fill="#a3af68" transform="translate(140.3 120.5) rotate(39.3) scale(1.04)"/>
+<use href="#leaf" fill="#506e50" transform="translate(145.0 119.4) rotate(-54.3) scale(0.78)"/>
+<use href="#leaf" fill="#839958" transform="translate(149.6 118.4) rotate(34.6) scale(0.64)"/>
+<use href="#leaf" fill="#506e50" transform="translate(154.3 117.7) rotate(-58.0) scale(0.66)"/>
+<use href="#leaf" fill="#839958" transform="translate(159.1 117.2) rotate(34.2) scale(0.70)"/>
+<path d="M147.4 125.0Q166.1 128.4 185.4 128.4Q166.7 126.1 148.0 122.7Z" fill="#62604a"/>
+<use href="#leaf" fill="#799956" transform="translate(150.2 124.4) rotate(-49.8) scale(0.90)"/>
+<use href="#leaf" fill="#506e50" transform="translate(156.4 125.7) rotate(62.2) scale(1.13)"/>
+<use href="#leaf" fill="#648651" transform="translate(162.6 126.8) rotate(-44.6) scale(1.10)"/>
+<use href="#leaf" fill="#a3af68" transform="translate(168.9 127.6) rotate(71.6) scale(0.88)"/>
+<use href="#leaf" fill="#506e50" transform="translate(175.2 128.1) rotate(-29.0) scale(0.91)"/>
+<use href="#leaf" fill="#a3af68" transform="translate(181.6 128.4) rotate(51.3) scale(1.01)"/>
+<use href="#leaf" fill="#658052" transform="translate(105.5 117.8) rotate(-41.6) scale(1.14)"/>
+<use href="#leaf" fill="#839958" transform="translate(122.8 121.0) rotate(54.8) scale(0.80)"/>
+<use href="#leaf" fill="#506e50" transform="translate(140.3 123.2) rotate(-47.0) scale(0.94)"/>
+<path d="M114.6 135.8Q133.4 165.5 151.1 195.7Q137.0 163.0 118.2 133.3Z" fill="#62604a"/>
+<path d="M131.6 160.2Q136.2 178.7 143.2 196.5Q138.5 178.2 133.9 159.7Z" fill="#62604a"/>
+<use href="#leaf" fill="#839958" transform="translate(133.3 162.5) rotate(38.8) scale(0.97)"/>
+<use href="#leaf" fill="#506e50" transform="translate(134.7 168.6) rotate(113.1) scale(0.68)"/>
+<use href="#leaf" fill="#506e50" transform="translate(136.3 174.7) rotate(40.7) scale(0.91)"/>
+<use href="#leaf" fill="#648651" transform="translate(138.1 180.8) rotate(123.5) scale(1.10)"/>
+<use href="#leaf" fill="#a3af68" transform="translate(139.9 186.9) rotate(39.5) scale(0.72)"/>
+<use href="#leaf" fill="#658052" transform="translate(141.9 192.9) rotate(117.2) scale(1.02)"/>
+<path d="M140.9 176.5Q158.9 182.6 176.8 188.9Q159.6 180.4 141.6 174.3Z" fill="#62604a"/>
+<use href="#leaf" fill="#a3af68" transform="translate(143.7 176.1) rotate(-18.1) scale(1.12)"/>
+<use href="#leaf" fill="#648651" transform="translate(149.7 178.1) rotate(64.6) scale(0.65)"/>
+<use href="#leaf" fill="#506e50" transform="translate(155.7 180.2) rotate(-21.9) scale(1.00)"/>
+<use href="#leaf" fill="#799956" transform="translate(161.6 182.4) rotate(80.6) scale(0.95)"/>
+<use href="#leaf" fill="#506e50" transform="translate(167.5 184.8) rotate(-17.6) scale(0.83)"/>
+<use href="#leaf" fill="#648651" transform="translate(173.3 187.3) rotate(73.0) scale(1.15)"/>
+<path d="M148.4 192.5Q162.6 213.5 177.7 233.8Q164.6 212.2 150.3 191.2Z" fill="#62604a"/>
+<use href="#leaf" fill="#648651" transform="translate(151.2 194.7) rotate(5.3) scale(0.65)"/>
+<use href="#leaf" fill="#506e50" transform="translate(156.0 201.6) rotate(112.2) scale(1.14)"/>
+<use href="#leaf" fill="#648651" transform="translate(160.7 208.6) rotate(13.4) scale(0.96)"/>
+<use href="#leaf" fill="#506e50" transform="translate(165.5 215.6) rotate(94.8) scale(0.95)"/>
+<use href="#leaf" fill="#506e50" transform="translate(170.2 222.6) rotate(-8.6) scale(0.81)"/>
+<use href="#leaf" fill="#658052" transform="translate(174.9 229.6) rotate(109.8) scale(0.85)"/>
+<use href="#leaf" fill="#a3af68" transform="translate(121.7 142.3) rotate(1.1) scale(0.96)"/>
+<use href="#leaf" fill="#799956" transform="translate(134.0 162.2) rotate(104.1) scale(1.13)"/>
+<use href="#leaf" fill="#648651" transform="translate(145.1 182.9) rotate(1.3) scale(0.86)"/>
+<path d="M100.7 66.2Q142.9 41.6 178.3 5.4Q139.5 34.2 97.3 58.9Z" fill="#62604a"/>
+<path d="M135.3 44.0Q161.7 44.1 188.1 36.7Q162.2 39.8 135.8 39.7Z" fill="#62604a"/>
+<path d="M157.5 43.1Q168.6 52.1 180.9 59.5Q170.1 50.3 159.0 41.4Z" fill="#62604a"/>
+<use href="#leaf" fill="#a3af68" transform="translate(159.7 43.5) rotate(-5.8) scale(1.05)"/>
+<use href="#leaf" fill="#799956" transform="translate(163.4 46.5) rotate(86.2) scale(0.88)"/>
+<use href="#leaf" fill="#658052" transform="translate(167.1 49.5) rotate(-21.4) scale(0.97)"/>
+<use href="#leaf" fill="#799956" transform="translate(170.8 52.4) rotate(89.2) scale(0.89)"/>
+<use href="#leaf" fill="#a3af68" transform="translate(174.7 55.2) rotate(-11.5) scale(0.74)"/>
+<use href="#leaf" fill="#799956" transform="translate(178.6 57.9) rotate(93.9) scale(1.03)"/>
+<path d="M172.1 41.6Q184.4 34.5 196.8 27.6Q183.1 32.5 170.8 39.7Z" fill="#62604a"/>
+<use href="#leaf" fill="#a3af68" transform="translate(173.0 39.6) rotate(-74.4) scale(0.88)"/>
+<use href="#leaf" fill="#648651" transform="translate(177.1 37.2) rotate(12.4) scale(0.95)"/>
+<use href="#leaf" fill="#658052" transform="translate(181.2 34.8) rotate(-96.8) scale(1.15)"/>
+<use href="#leaf" fill="#a3af68" transform="translate(185.5 32.6) rotate(5.2) scale(0.73)"/>
+<use href="#leaf" fill="#839958" transform="translate(189.8 30.6) rotate(-88.9) scale(0.67)"/>
+<use href="#leaf" fill="#a3af68" transform="translate(194.1 28.7) rotate(2.6) scale(0.78)"/>
+<path d="M184.9 38.7Q203.9 39.1 222.9 35.0Q204.1 36.8 185.1 36.4Z" fill="#62604a"/>
+<use href="#leaf" fill="#839958" transform="translate(187.5 37.8) rotate(-57.3) scale(1.00)"/>
+<use href="#leaf" fill="#648651" transform="translate(193.8 38.2) rotate(61.0) scale(0.82)"/>
+<use href="#leaf" fill="#658052" transform="translate(200.2 38.1) rotate(-48.6) scale(0.76)"/>
+<use href="#leaf" fill="#839958" transform="translate(206.5 37.7) rotate(49.6) scale(0.76)"/>
+<use href="#leaf" fill="#839958" transform="translate(212.9 37.0) rotate(-55.5) scale(0.89)"/>
+<use href="#leaf" fill="#a3af68" transform="translate(219.2 35.8) rotate(58.4) scale(0.77)"/>
+<use href="#leaf" fill="#a3af68" transform="translate(142.6 42.4) rotate(-32.0) scale(0.83)"/>
+<use href="#leaf" fill="#506e50" transform="translate(160.2 42.1) rotate(53.0) scale(0.95)"/>
+<use href="#leaf" fill="#648651" transform="translate(177.7 39.4) rotate(-48.4) scale(0.98)"/>
+<path d="M157.1 28.1Q171.3 5.8 186.9 -15.2Q167.4 3.8 153.3 26.0Z" fill="#62604a"/>
+<path d="M167.7 8.8Q180.7 3.1 194.0 -1.8Q179.6 1.0 166.6 6.7Z" fill="#62604a"/>
+<use href="#leaf" fill="#648651" transform="translate(168.8 6.9) rotate(-83.6) scale(0.63)"/>
+<use href="#leaf" fill="#a3af68" transform="translate(173.1 4.9) rotate(23.5) scale(0.84)"/>
+<use href="#leaf" fill="#658052" transform="translate(177.5 3.0) rotate(-83.4) scale(0.75)"/>
+<use href="#leaf" fill="#506e50" transform="translate(182.0 1.4) rotate(35.1) scale(0.70)"/>
+<use href="#leaf" fill="#658052" transform="translate(186.5 -0.0) rotate(-67.1) scale(0.82)"/>
+<use href="#leaf" fill="#a3af68" transform="translate(191.2 -1.2) rotate(16.8) scale(0.69)"/>
+<path d="M176.4 -3.0Q171.1 -16.3 162.8 -28.3Q168.8 -15.5 174.2 -2.3Z" fill="#62604a"/>
+<use href="#leaf" fill="#839958" transform="translate(174.7 -4.5) rotate(-153.6) scale(0.92)"/>
+<use href="#leaf" fill="#648651" transform="translate(173.0 -8.9) rotate(-56.3) scale(1.06)"/>
+<use href="#leaf" fill="#658052" transform="translate(171.2 -13.3) rotate(-170.3) scale(1.10)"/>
+<use href="#leaf" fill="#a3af68" transform="translate(169.1 -17.6) rotate(-53.6) scale(0.66)"/>
+<use href="#leaf" fill="#799956" transform="translate(166.8 -21.8) rotate(-169.5) scale(1.02)"/>
+<use href="#leaf" fill="#648651" transform="translate(164.3 -25.9) rotate(-68.6) scale(0.65)"/>
+<path d="M185.6 -12.3Q195.2 -28.7 203.2 -46.0Q193.2 -29.9 183.6 -13.5Z" fill="#62604a"/>
+<use href="#leaf" fill="#506e50" transform="translate(185.9 -15.1) rotate(-117.2) scale(0.80)"/>
+<use href="#leaf" fill="#799956" transform="translate(189.1 -20.5) rotate(-20.7) scale(0.78)"/>
+<use href="#leaf" fill="#658052" transform="translate(192.3 -26.0) rotate(-111.7) scale(1.10)"/>
+<use href="#leaf" fill="#658052" transform="translate(195.4 -31.5) rotate(-4.2) scale(0.72)"/>
+<use href="#leaf" fill="#506e50" transform="translate(198.5 -37.1) rotate(-113.3) scale(0.72)"/>
+<use href="#leaf" fill="#648651" transform="translate(201.5 -42.6) rotate(-14.3) scale(0.71)"/>
+<use href="#leaf" fill="#799956" transform="translate(158.6 20.9) rotate(-110.8) scale(0.99)"/>
+<use href="#leaf" fill="#839958" transform="translate(168.3 6.2) rotate(-16.2) scale(0.64)"/>
+<use href="#leaf" fill="#a3af68" transform="translate(179.5 -7.5) rotate(-124.8) scale(0.91)"/>
+<path d="M175.2 11.6Q207.0 -3.6 239.7 -15.8Q204.8 -7.4 173.0 7.8Z" fill="#62604a"/>
+<path d="M201.2 -2.5Q220.2 -2.8 239.2 -6.8Q220.3 -5.2 201.3 -4.8Z" fill="#62604a"/>
+<use href="#leaf" fill="#648651" transform="translate(203.8 -3.6) rotate(-46.2) scale(1.01)"/>
+<use href="#leaf" fill="#839958" transform="translate(210.2 -3.5) rotate(52.9) scale(0.96)"/>
+<use href="#leaf" fill="#a3af68" transform="translate(216.5 -3.7) rotate(-30.8) scale(0.82)"/>
+<use href="#leaf" fill="#658052" transform="translate(222.8 -4.2) rotate(41.1) scale(1.08)"/>
+<use href="#leaf" fill="#839958" transform="translate(229.1 -5.0) rotate(-59.1) scale(0.99)"/>
+<use href="#leaf" fill="#648651" transform="translate(235.4 -6.1) rotate(57.7) scale(0.97)"/>
+<path d="M218.9 -9.2Q230.0 -24.5 242.6 -38.6Q228.0 -25.7 216.8 -10.4Z" fill="#62604a"/>
+<use href="#leaf" fill="#799956" transform="translate(219.2 -11.9) rotate(-103.9) scale(1.13)"/>
+<use href="#leaf" fill="#506e50" transform="translate(222.8 -17.1) rotate(-0.1) scale(0.63)"/>
+<use href="#leaf" fill="#658052" transform="translate(226.6 -22.2) rotate(-97.0) scale(0.76)"/>
+<use href="#leaf" fill="#839958" transform="translate(230.7 -27.0) rotate(-1.3) scale(0.97)"/>
+<use href="#leaf" fill="#648651" transform="translate(235.1 -31.7) rotate(-97.3) scale(1.15)"/>
+<use href="#leaf" fill="#648651" transform="translate(239.7 -36.1) rotate(2.7) scale(0.73)"/>
+<path d="M236.1 -13.7Q259.6 -23.0 283.4 -31.7Q258.7 -25.1 235.1 -15.9Z" fill="#62604a"/>
+<use href="#leaf" fill="#658052" transform="translate(238.7 -16.1) rotate(-84.6) scale(0.82)"/>
+<use href="#leaf" fill="#506e50" transform="translate(246.5 -19.3) rotate(17.3) scale(0.94)"/>
+<use href="#leaf" fill="#506e50" transform="translate(254.4 -22.3) rotate(-73.7) scale(1.06)"/>
+<use href="#leaf" fill="#a3af68" transform="translate(262.4 -25.2) rotate(27.9) scale(1.16)"/>
+<use href="#leaf" fill="#799956" transform="translate(270.4 -27.8) rotate(-86.9) scale(1.03)"/>
+<use href="#leaf" fill="#839958" transform="translate(278.5 -30.3) rotate(33.3) scale(1.02)"/>
+<use href="#leaf" fill="#648651" transform="translate(182.4 5.2) rotate(-92.6) scale(0.90)"/>
+<use href="#leaf" fill="#799956" transform="translate(203.7 -4.6) rotate(12.6) scale(0.71)"/>
+<use href="#leaf" fill="#a3af68" transform="translate(226.0 -12.3) rotate(-76.5) scale(0.97)"/>
+<path d="M145.1 58.0Q210.0 63.2 275.9 56.4Q211.2 55.1 146.2 50.0Z" fill="#62604a"/>
+<path d="M200.0 60.5Q226.5 83.7 255.1 104.5Q229.4 80.5 202.9 57.3Z" fill="#62604a"/>
+<path d="M223.0 79.2Q228.1 97.5 235.1 115.3Q230.4 96.9 225.3 78.6Z" fill="#62604a"/>
+<use href="#leaf" fill="#648651" transform="translate(224.8 81.3) rotate(41.5) scale(1.06)"/>
+<use href="#leaf" fill="#839958" transform="translate(226.5 87.5) rotate(122.7) scale(0.78)"/>
+<use href="#leaf" fill="#a3af68" transform="translate(228.2 93.5) rotate(19.2) scale(1.16)"/>
+<use href="#leaf" fill="#799956" transform="translate(230.0 99.6) rotate(113.2) scale(0.64)"/>
+<use href="#leaf" fill="#a3af68" transform="translate(231.9 105.7) rotate(14.9) scale(0.78)"/>
+<use href="#leaf" fill="#799956" transform="translate(233.9 111.7) rotate(114.9) scale(0.74)"/>
+<path d="M237.4 91.4Q256.0 95.2 274.7 98.5Q256.5 92.8 237.8 89.1Z" fill="#62604a"/>
+<use href="#leaf" fill="#839958" transform="translate(240.1 90.7) rotate(-23.7) scale(1.11)"/>
+<use href="#leaf" fill="#a3af68" transform="translate(246.3 91.9) rotate(59.2) scale(0.87)"/>
+<use href="#leaf" fill="#799956" transform="translate(252.5 93.2) rotate(-40.8) scale(0.86)"/>
+<use href="#leaf" fill="#658052" transform="translate(258.7 94.5) rotate(65.3) scale(1.09)"/>
+<use href="#leaf" fill="#a3af68" transform="translate(264.9 96.0) rotate(-34.8) scale(0.76)"/>
+<use href="#leaf" fill="#839958" transform="translate(271.0 97.6) rotate(68.5) scale(1.12)"/>
+<path d="M251.0 102.8Q269.6 120.0 286.9 138.3Q271.1 118.2 252.5 100.9Z" fill="#62604a"/>
+<use href="#leaf" fill="#839958" transform="translate(254.4 104.0) rotate(-17.2) scale(0.75)"/>
+<use href="#leaf" fill="#506e50" transform="translate(260.7 109.6) rotate(77.4) scale(1.07)"/>
+<use href="#leaf" fill="#799956" transform="translate(266.8 115.5) rotate(3.4) scale(0.95)"/>
+<use href="#leaf" fill="#a3af68" transform="translate(272.7 121.5) rotate(79.7) scale(0.73)"/>
+<use href="#leaf" fill="#658052" transform="translate(278.3 127.8) rotate(-18.0) scale(0.89)"/>
+<use href="#leaf" fill="#799956" transform="translate(283.8 134.3) rotate(94.7) scale(0.80)"/>
+<use href="#leaf" fill="#839958" transform="translate(208.5 65.2) rotate(-7.7) scale(0.62)"/>
+<use href="#leaf" fill="#a3af68" transform="translate(226.2 80.6) rotate(84.1) scale(0.76)"/>
+<use href="#leaf" fill="#648651" transform="translate(244.1 95.6) rotate(7.1) scale(1.03)"/>
+<path d="M235.5 60.7Q262.8 38.5 290.0 16.4Q260.0 35.2 232.7 57.4Z" fill="#62604a"/>
+<path d="M257.5 41.0Q276.5 40.1 295.4 37.6Q276.4 37.8 257.4 38.7Z" fill="#62604a"/>
+<use href="#leaf" fill="#799956" transform="translate(260.0 39.8) rotate(-65.8) scale(0.82)"/>
+<use href="#leaf" fill="#839958" transform="translate(266.3 39.5) rotate(31.7) scale(1.13)"/>
+<use href="#leaf" fill="#799956" transform="translate(272.7 39.2) rotate(-46.1) scale(1.03)"/>
+<use href="#leaf" fill="#648651" transform="translate(279.0 38.8) rotate(51.7) scale(1.01)"/>
+<use href="#leaf" fill="#658052" transform="translate(285.3 38.4) rotate(-42.2) scale(1.05)"/>
+<use href="#leaf" fill="#839958" transform="translate(291.6 37.9) rotate(58.3) scale(1.10)"/>
+<path d="M272.7 29.6Q278.3 11.4 284.0 -6.6Q276.0 10.8 270.4 29.0Z" fill="#62604a"/>
+<use href="#leaf" fill="#658052" transform="translate(272.2 26.8) rotate(-119.0) scale(0.70)"/>
+<use href="#leaf" fill="#506e50" transform="translate(274.0 20.7) rotate(-16.4) scale(0.80)"/>
+<use href="#leaf" fill="#a3af68" transform="translate(275.9 14.7) rotate(-117.5) scale(1.14)"/>
+<use href="#leaf" fill="#648651" transform="translate(278.0 8.7) rotate(-36.0) scale(0.70)"/>
+<use href="#leaf" fill="#648651" transform="translate(280.2 2.8) rotate(-113.0) scale(0.70)"/>
+<use href="#leaf" fill="#658052" transform="translate(282.5 -3.1) rotate(-38.4) scale(0.91)"/>
+<path d="M287.4 19.5Q302.8 -0.6 313.9 -23.9Q301.1 -2.2 285.7 17.9Z" fill="#62604a"/>
+<use href="#leaf" fill="#658052" transform="translate(288.8 16.2) rotate(-102.9) scale(0.73)"/>
+<use href="#leaf" fill="#648651" transform="translate(294.2 9.7) rotate(-11.8) scale(0.75)"/>
+<use href="#leaf" fill="#a3af68" transform="translate(299.2 2.9) rotate(-98.7) scale(0.75)"/>
+<use href="#leaf" fill="#648651" transform="translate(303.8 -4.2) rotate(3.9) scale(1.06)"/>
+<use href="#leaf" fill="#a3af68" transform="translate(308.0 -11.6) rotate(-102.9) scale(1.06)"/>
+<use href="#leaf" fill="#799956" transform="translate(311.8 -19.2) rotate(-4.8) scale(0.79)"/>
+<use href="#leaf" fill="#658052" transform="translate(241.3 53.0) rotate(-85.4) scale(1.04)"/>
+<use href="#leaf" fill="#a3af68" transform="translate(259.5 38.3) rotate(10.5) scale(0.65)"/>
+<use href="#leaf" fill="#839958" transform="translate(278.4 24.3) rotate(-98.6) scale(0.93)"/>
+<path d="M267.7 59.3Q313.1 70.8 358.0 84.0Q314.0 66.5 268.6 55.0Z" fill="#62604a"/>
+<path d="M306.4 67.7Q325.7 84.2 347.6 97.5Q327.3 82.5 308.1 66.0Z" fill="#62604a"/>
+<use href="#leaf" fill="#506e50" transform="translate(309.7 69.2) rotate(-15.5) scale(0.78)"/>
+<use href="#leaf" fill="#a3af68" transform="translate(316.0 74.8) rotate(98.2) scale(0.97)"/>
+<use href="#leaf" fill="#658052" transform="translate(322.5 80.2) rotate(-18.4) scale(0.78)"/>
+<use href="#leaf" fill="#506e50" transform="translate(329.2 85.3) rotate(86.1) scale(0.67)"/>
+<use href="#leaf" fill="#799956" transform="translate(336.2 90.2) rotate(-15.3) scale(0.69)"/>
+<use href="#leaf" fill="#658052" transform="translate(343.3 94.8) rotate(81.7) scale(0.79)"/>
+<path d="M330.0 74.9Q354.8 69.8 379.9 66.8Q354.2 67.5 329.4 72.6Z" fill="#62604a"/>
+<use href="#leaf" fill="#a3af68" transform="translate(333.0 72.9) rotate(-50.1) scale(1.02)"/>
+<use href="#leaf" fill="#a3af68" transform="translate(341.2 71.0) rotate(33.8) scale(0.68)"/>
+<use href="#leaf" fill="#799956" transform="translate(349.5 69.4) rotate(-55.5) scale(1.10)"/>
+<use href="#leaf" fill="#506e50" transform="translate(357.9 68.2) rotate(23.8) scale(0.89)"/>
+<use href="#leaf" fill="#658052" transform="translate(366.3 67.4) rotate(-68.0) scale(0.85)"/>
+<use href="#leaf" fill="#658052" transform="translate(374.8 66.9) rotate(31.1) scale(0.73)"/>
+<path d="M352.6 83.1Q385.8 89.4 418.0 99.5Q386.1 87.0 352.9 80.8Z" fill="#62604a"/>
+<use href="#leaf" fill="#799956" transform="translate(357.2 82.5) rotate(-27.3) scale(1.04)"/>
+<use href="#leaf" fill="#506e50" transform="translate(368.3 84.2) rotate(70.0) scale(0.75)"/>
+<use href="#leaf" fill="#506e50" transform="translate(379.4 86.5) rotate(-43.8) scale(0.82)"/>
+<use href="#leaf" fill="#839958" transform="translate(390.3 89.4) rotate(61.6) scale(1.11)"/>
+<use href="#leaf" fill="#506e50" transform="translate(401.1 92.9) rotate(-49.0) scale(0.88)"/>
+<use href="#leaf" fill="#799956" transform="translate(411.7 96.9) rotate(50.9) scale(1.11)"/>
+<use href="#leaf" fill="#799956" transform="translate(280.3 59.9) rotate(-25.8) scale(0.99)"/>
+<use href="#leaf" fill="#658052" transform="translate(310.6 67.8) rotate(66.5) scale(1.14)"/>
+<use href="#leaf" fill="#506e50" transform="translate(340.4 77.4) rotate(-29.0) scale(1.16)"/>
+<path d="M-18.5 13.7Q20.5 40.0 62.0 62.4Q25.5 32.5 -13.5 6.3Z" fill="#62604a"/>
+<path d="M15.1 32.8Q16.7 58.1 19.1 83.3Q21.5 57.7 19.9 32.4Z" fill="#62604a"/>
+<path d="M17.8 53.8Q11.4 65.9 4.5 77.7Q13.8 67.0 20.2 54.9Z" fill="#62604a"/>
+<path d="M13.3 64.2Q6.4 67.0 -0.3 70.0Q7.0 68.3 13.9 65.5Z" fill="#62604a"/>
+<use href="#leaf" fill="#658052" transform="translate(12.7 65.2) rotate(114.9) scale(0.69)"/>
+<use href="#leaf" fill="#839958" transform="translate(10.4 66.2) rotate(216.8) scale(1.06)"/>
+<use href="#leaf" fill="#648651" transform="translate(8.1 67.1) rotate(106.3) scale(1.00)"/>
+<use href="#leaf" fill="#a3af68" transform="translate(5.8 68.0) rotate(195.0) scale(0.71)"/>
+<use href="#leaf" fill="#839958" transform="translate(3.5 68.8) rotate(110.1) scale(1.12)"/>
+<use href="#leaf" fill="#799956" transform="translate(1.1 69.5) rotate(204.9) scale(0.65)"/>
+<path d="M9.2 70.7Q10.5 78.0 12.9 85.1Q11.9 77.8 10.6 70.5Z" fill="#62604a"/>
+<use href="#leaf" fill="#799956" transform="translate(10.0 71.6) rotate(23.2) scale(0.65)"/>
+<use href="#leaf" fill="#648651" transform="translate(10.5 74.0) rotate(124.1) scale(0.72)"/>
+<use href="#leaf" fill="#799956" transform="translate(10.9 76.4) rotate(38.2) scale(0.86)"/>
+<use href="#leaf" fill="#799956" transform="translate(11.4 78.9) rotate(123.0) scale(1.03)"/>
+<use href="#leaf" fill="#658052" transform="translate(12.0 81.3) rotate(29.9) scale(0.77)"/>
+<use href="#leaf" fill="#506e50" transform="translate(12.5 83.7) rotate(136.1) scale(1.07)"/>
+<path d="M5.0 76.0Q-0.9 83.9 -7.1 91.5Q0.3 84.7 6.2 76.8Z" fill="#62604a"/>
+<use href="#leaf" fill="#648651" transform="translate(4.9 77.5) rotate(81.6) scale(0.81)"/>
+<use href="#leaf" fill="#506e50" transform="translate(3.0 80.2) rotate(167.1) scale(1.13)"/>
+<use href="#leaf" fill="#658052" transform="translate(1.0 82.8) rotate(83.5) scale(0.71)"/>
+<use href="#leaf" fill="#658052" transform="translate(-1.2 85.3) rotate(165.0) scale(1.04)"/>
+<use href="#leaf" fill="#506e50" transform="translate(-3.4 87.7) rotate(59.1) scale(0.64)"/>
+<use href="#leaf" fill="#658052" transform="translate(-5.7 90.1) rotate(178.2) scale(0.89)"/>
+<use href="#leaf" fill="#648651" transform="translate(17.4 57.7) rotate(55.2) scale(0.71)"/>
+<use href="#leaf" fill="#839958" transform="translate(13.0 65.7) rotate(168.7) scale(0.75)"/>
+<use href="#leaf" fill="#839958" transform="translate(7.9 73.3) rotate(53.8) scale(0.96)"/>
+<path d="M18.4 68.1Q29.5 76.1 42.6 81.4Q31.2 74.1 20.1 66.1Z" fill="#62604a"/>
+<path d="M28.0 74.2Q29.4 81.4 32.2 88.5Q30.8 81.2 29.4 74.0Z" fill="#62604a"/>
+<use href="#leaf" fill="#506e50" transform="translate(28.9 75.1) rotate(25.4) scale(0.83)"/>
+<use href="#leaf" fill="#839958" transform="translate(29.3 77.5) rotate(138.6) scale(1.01)"/>
+<use href="#leaf" fill="#a3af68" transform="translate(29.8 79.9) rotate(39.1) scale(0.74)"/>
+<use href="#leaf" fill="#658052" transform="translate(30.4 82.3) rotate(139.3) scale(0.72)"/>
+<use href="#leaf" fill="#a3af68" transform="translate(31.0 84.7) rotate(28.9) scale(1.11)"/>
+<use href="#leaf" fill="#839958" transform="translate(31.7 87.1) rotate(129.4) scale(0.99)"/>
+<path d="M34.5 78.3Q41.5 80.6 48.3 83.3Q41.8 79.2 34.8 76.9Z" fill="#62604a"/>
+<use href="#leaf" fill="#658052" transform="translate(35.6 77.8) rotate(-47.6) scale(1.11)"/>
+<use href="#leaf" fill="#839958" transform="translate(38.0 78.5) rotate(75.4) scale(0.92)"/>
+<use href="#leaf" fill="#648651" transform="translate(40.3 79.3) rotate(-45.6) scale(1.11)"/>
+<use href="#leaf" fill="#658052" transform="translate(42.6 80.3) rotate(72.3) scale(1.01)"/>
+<use href="#leaf" fill="#799956" transform="translate(44.8 81.4) rotate(-51.1) scale(0.90)"/>
+<use href="#leaf" fill="#658052" transform="translate(47.0 82.6) rotate(66.9) scale(0.96)"/>
+<path d="M40.5 81.2Q46.1 89.3 51.0 97.8Q47.2 88.4 41.6 80.3Z" fill="#62604a"/>
+<use href="#leaf" fill="#648651" transform="translate(41.9 81.8) rotate(15.2) scale(0.84)"/>
+<use href="#leaf" fill="#a3af68" transform="translate(43.8 84.4) rotate(111.7) scale(1.05)"/>
+<use href="#leaf" fill="#506e50" transform="translate(45.7 87.2) rotate(-5.9) scale(0.72)"/>
+<use href="#leaf" fill="#506e50" transform="translate(47.3 90.0) rotate(104.5) scale(1.14)"/>
+<use href="#leaf" fill="#839958" transform="translate(48.9 93.0) rotate(15.9) scale(1.11)"/>
+<use href="#leaf" fill="#648651" transform="translate(50.2 96.0) rotate(113.4) scale(0.97)"/>
+<use href="#leaf" fill="#648651" transform="translate(22.1 69.4) rotate(-1.0) scale(0.81)"/>
+<use href="#leaf" fill="#648651" transform="translate(29.6 74.6) rotate(97.2) scale(0.82)"/>
+<use href="#leaf" fill="#839958" transform="translate(37.6 79.1) rotate(5.7) scale(0.66)"/>
+<path d="M17.9 80.4Q19.8 98.6 23.7 116.5Q22.4 98.3 20.5 80.1Z" fill="#62604a"/>
+<path d="M20.2 95.6Q15.5 104.3 11.6 113.4Q16.8 104.9 21.4 96.2Z" fill="#62604a"/>
+<use href="#leaf" fill="#648651" transform="translate(20.2 97.1) rotate(76.2) scale(0.73)"/>
+<use href="#leaf" fill="#799956" transform="translate(18.6 100.0) rotate(161.2) scale(0.95)"/>
+<use href="#leaf" fill="#839958" transform="translate(17.1 102.9) rotate(69.6) scale(0.85)"/>
+<use href="#leaf" fill="#506e50" transform="translate(15.6 105.8) rotate(171.3) scale(1.12)"/>
+<use href="#leaf" fill="#648651" transform="translate(14.0 108.7) rotate(78.6) scale(0.72)"/>
+<use href="#leaf" fill="#658052" transform="translate(12.5 111.6) rotate(168.0) scale(1.11)"/>
+<path d="M21.6 105.6Q29.6 111.3 37.3 117.3Q30.3 110.1 22.4 104.4Z" fill="#62604a"/>
+<use href="#leaf" fill="#506e50" transform="translate(23.1 105.7) rotate(-15.5) scale(0.94)"/>
+<use href="#leaf" fill="#648651" transform="translate(25.8 107.6) rotate(73.8) scale(0.76)"/>
+<use href="#leaf" fill="#658052" transform="translate(28.4 109.5) rotate(-20.7) scale(0.96)"/>
+<use href="#leaf" fill="#658052" transform="translate(31.0 111.6) rotate(93.0) scale(0.92)"/>
+<use href="#leaf" fill="#799956" transform="translate(33.5 113.7) rotate(-6.6) scale(0.91)"/>
+<use href="#leaf" fill="#648651" transform="translate(35.9 116.0) rotate(66.2) scale(1.04)"/>
+<path d="M22.6 114.3Q23.1 127.5 26.0 140.5Q24.5 127.5 24.1 114.4Z" fill="#62604a"/>
+<use href="#leaf" fill="#799956" transform="translate(23.3 116.1) rotate(44.8) scale(0.85)"/>
+<use href="#leaf" fill="#648651" transform="translate(23.4 120.5) rotate(151.7) scale(0.83)"/>
+<use href="#leaf" fill="#658052" transform="translate(23.6 124.9) rotate(36.4) scale(0.85)"/>
+<use href="#leaf" fill="#a3af68" transform="translate(24.0 129.3) rotate(147.3) scale(1.14)"/>
+<use href="#leaf" fill="#506e50" transform="translate(24.6 133.6) rotate(52.2) scale(0.98)"/>
+<use href="#leaf" fill="#a3af68" transform="translate(25.4 138.0) rotate(154.4) scale(0.96)"/>
+<use href="#leaf" fill="#839958" transform="translate(19.6 85.1) rotate(36.2) scale(0.94)"/>
+<use href="#leaf" fill="#506e50" transform="translate(21.0 97.2) rotate(119.8) scale(0.82)"/>
+<use href="#leaf" fill="#648651" transform="translate(22.6 109.3) rotate(21.2) scale(0.91)"/>
+<path d="M36.6 48.1Q61.0 54.9 84.7 63.1Q61.9 50.2 37.5 43.3Z" fill="#62604a"/>
+<path d="M57.3 52.4Q68.6 60.2 81.3 65.9Q70.2 58.1 58.9 50.3Z" fill="#62604a"/>
+<path d="M67.1 58.3Q68.5 65.5 70.1 72.7Q69.9 65.2 68.5 58.0Z" fill="#62604a"/>
+<use href="#leaf" fill="#799956" transform="translate(68.0 59.1) rotate(37.7) scale(0.94)"/>
+<use href="#leaf" fill="#658052" transform="translate(68.5 61.5) rotate(138.7) scale(0.95)"/>
+<use href="#leaf" fill="#a3af68" transform="translate(69.0 63.9) rotate(12.6) scale(1.08)"/>
+<use href="#leaf" fill="#839958" transform="translate(69.4 66.4) rotate(135.7) scale(0.93)"/>
+<use href="#leaf" fill="#506e50" transform="translate(69.7 68.8) rotate(37.8) scale(0.83)"/>
+<use href="#leaf" fill="#839958" transform="translate(70.0 71.3) rotate(124.1) scale(0.64)"/>
+<path d="M73.4 62.4Q80.5 64.4 88.0 65.2Q81.0 63.0 73.8 61.0Z" fill="#62604a"/>
+<use href="#leaf" fill="#a3af68" transform="translate(74.6 62.0) rotate(-35.3) scale(0.71)"/>
+<use href="#leaf" fill="#839958" transform="translate(76.9 62.7) rotate(61.7) scale(0.98)"/>
+<use href="#leaf" fill="#658052" transform="translate(79.3 63.3) rotate(-35.9) scale(1.07)"/>
+<use href="#leaf" fill="#658052" transform="translate(81.7 63.9) rotate(54.3) scale(0.80)"/>
+<use href="#leaf" fill="#506e50" transform="translate(84.1 64.5) rotate(-46.2) scale(1.05)"/>
+<use href="#leaf" fill="#a3af68" transform="translate(86.5 64.9) rotate(68.3) scale(1.05)"/>
+<path d="M79.4 65.7Q85.9 73.0 91.9 80.8Q86.9 72.0 80.4 64.7Z" fill="#62604a"/>
+<use href="#leaf" fill="#648651" transform="translate(80.8 66.1) rotate(9.7) scale(1.03)"/>
+<use href="#leaf" fill="#648651" transform="translate(83.1 68.5) rotate(95.9) scale(0.70)"/>
+<use href="#leaf" fill="#658052" transform="translate(85.2 71.0) rotate(-4.5) scale(0.79)"/>
+<use href="#leaf" fill="#a3af68" transform="translate(87.2 73.6) rotate(92.0) scale(0.84)"/>
+<use href="#leaf" fill="#648651" transform="translate(89.1 76.3) rotate(-14.7) scale(1.03)"/>
+<use href="#leaf" fill="#799956" transform="translate(90.9 79.1) rotate(103.1) scale(0.84)"/>
+<use href="#leaf" fill="#799956" transform="translate(61.0 53.5) rotate(-24.9) scale(1.04)"/>
+<use href="#leaf" fill="#a3af68" transform="translate(68.6 58.7) rotate(92.8) scale(0.76)"/>
+<use href="#leaf" fill="#648651" transform="translate(76.5 63.3) rotate(-4.2) scale(0.93)"/>
+<path d="M70.4 57.2Q83.7 54.0 97.0 51.5Q82.9 51.5 69.6 54.7Z" fill="#62604a"/>
+<path d="M81.1 53.7Q88.0 56.5 95.4 58.0Q88.6 55.2 81.7 52.4Z" fill="#62604a"/>
+<use href="#leaf" fill="#839958" transform="translate(82.3 53.5) rotate(-39.0) scale(1.11)"/>
+<use href="#leaf" fill="#506e50" transform="translate(84.6 54.4) rotate(67.3) scale(1.07)"/>
+<use href="#leaf" fill="#a3af68" transform="translate(86.9 55.3) rotate(-32.9) scale(0.77)"/>
+<use href="#leaf" fill="#506e50" transform="translate(89.2 56.2) rotate(58.1) scale(0.96)"/>
+<use href="#leaf" fill="#a3af68" transform="translate(91.6 56.9) rotate(-11.0) scale(0.68)"/>
+<use href="#leaf" fill="#a3af68" transform="translate(94.0 57.6) rotate(87.6) scale(0.87)"/>
+<path d="M88.8 52.5Q92.7 46.2 95.2 39.0Q91.5 45.4 87.6 51.7Z" fill="#62604a"/>
+<use href="#leaf" fill="#648651" transform="translate(88.8 51.3) rotate(-113.2) scale(0.70)"/>
+<use href="#leaf" fill="#506e50" transform="translate(90.1 49.2) rotate(1.9) scale(0.66)"/>
+<use href="#leaf" fill="#648651" transform="translate(91.4 47.1) rotate(-108.3) scale(0.91)"/>
+<use href="#leaf" fill="#648651" transform="translate(92.5 44.9) rotate(-9.3) scale(0.68)"/>
+<use href="#leaf" fill="#648651" transform="translate(93.6 42.7) rotate(-112.2) scale(0.70)"/>
+<use href="#leaf" fill="#a3af68" transform="translate(94.6 40.4) rotate(-9.4) scale(1.14)"/>
+<path d="M95.5 52.2Q105.1 49.8 114.1 45.4Q104.8 48.4 95.2 50.8Z" fill="#62604a"/>
+<use href="#leaf" fill="#799956" transform="translate(96.7 51.3) rotate(-69.7) scale(0.63)"/>
+<use href="#leaf" fill="#648651" transform="translate(99.9 50.5) rotate(45.9) scale(0.65)"/>
+<use href="#leaf" fill="#839958" transform="translate(103.0 49.7) rotate(-56.2) scale(1.00)"/>
+<use href="#leaf" fill="#506e50" transform="translate(106.2 48.7) rotate(40.6) scale(1.12)"/>
+<use href="#leaf" fill="#506e50" transform="translate(109.3 47.5) rotate(-70.4) scale(1.07)"/>
+<use href="#leaf" fill="#658052" transform="translate(112.3 46.2) rotate(50.6) scale(1.03)"/>
+<use href="#leaf" fill="#839958" transform="translate(73.5 54.9) rotate(-72.4) scale(1.07)"/>
+<use href="#leaf" fill="#a3af68" transform="translate(82.4 52.9) rotate(44.9) scale(1.05)"/>
+<use href="#leaf" fill="#a3af68" transform="translate(91.5 51.8) rotate(-61.5) scale(0.82)"/>
+<path d="M81.8 63.0Q100.1 63.5 118.4 58.9Q100.4 60.9 82.2 60.4Z" fill="#62604a"/>
+<path d="M97.2 62.9Q104.3 69.7 112.0 75.9Q105.3 68.7 98.2 61.9Z" fill="#62604a"/>
+<use href="#leaf" fill="#799956" transform="translate(98.6 63.3) rotate(-18.3) scale(0.83)"/>
+<use href="#leaf" fill="#658052" transform="translate(101.0 65.6) rotate(93.0) scale(1.03)"/>
+<use href="#leaf" fill="#799956" transform="translate(103.3 67.9) rotate(-6.5) scale(0.77)"/>
+<use href="#leaf" fill="#506e50" transform="translate(105.7 70.1) rotate(100.1) scale(0.76)"/>
+<use href="#leaf" fill="#839958" transform="translate(108.1 72.4) rotate(2.3) scale(1.01)"/>
+<use href="#leaf" fill="#648651" transform="translate(110.6 74.6) rotate(108.8) scale(1.10)"/>
+<path d="M107.1 62.1Q116.4 58.8 125.8 55.9Q115.9 57.5 106.6 60.8Z" fill="#62604a"/>
+<use href="#leaf" fill="#658052" transform="translate(108.1 60.9) rotate(-68.2) scale(0.90)"/>
+<use href="#leaf" fill="#799956" transform="translate(111.1 59.8) rotate(41.6) scale(0.76)"/>
+<use href="#leaf" fill="#648651" transform="translate(114.2 58.7) rotate(-76.2) scale(0.67)"/>
+<use href="#leaf" fill="#506e50" transform="translate(117.4 57.8) rotate(21.3) scale(0.88)"/>
+<use href="#leaf" fill="#799956" transform="translate(120.6 57.0) rotate(-58.0) scale(1.14)"/>
+<use href="#leaf" fill="#799956" transform="translate(123.8 56.2) rotate(37.5) scale(0.75)"/>
+<path d="M116.3 60.2Q129.4 60.5 142.5 61.3Q129.4 59.1 116.3 58.8Z" fill="#62604a"/>
+<use href="#leaf" fill="#a3af68" transform="translate(118.0 59.4) rotate(-56.9) scale(0.96)"/>
+<use href="#leaf" fill="#648651" transform="translate(122.4 59.5) rotate(62.1) scale(0.71)"/>
+<use href="#leaf" fill="#658052" transform="translate(126.8 59.6) rotate(-34.7) scale(1.15)"/>
+<use href="#leaf" fill="#658052" transform="translate(131.2 59.9) rotate(36.4) scale(0.76)"/>
+<use href="#leaf" fill="#648651" transform="translate(135.6 60.4) rotate(-38.7) scale(1.11)"/>
+<use href="#leaf" fill="#799956" transform="translate(139.9 60.9) rotate(38.9) scale(1.12)"/>
+<use href="#leaf" fill="#506e50" transform="translate(86.8 62.2) rotate(-51.8) scale(0.73)"/>
+<use href="#leaf" fill="#839958" transform="translate(99.0 62.3) rotate(68.1) scale(0.79)"/>
+<use href="#leaf" fill="#a3af68" transform="translate(111.2 60.7) rotate(-29.4) scale(0.81)"/>
+<path d="M56.1 61.4Q85.9 77.4 118.1 89.0Q88.4 73.3 58.6 57.2Z" fill="#62604a"/>
+<path d="M81.6 73.6Q86.8 91.1 93.0 108.4Q89.3 90.4 84.1 72.9Z" fill="#62604a"/>
+<path d="M86.8 87.9Q80.4 95.4 73.7 102.6Q81.5 96.3 87.9 88.7Z" fill="#62604a"/>
+<use href="#leaf" fill="#839958" transform="translate(86.6 89.4) rotate(92.7) scale(1.04)"/>
+<use href="#leaf" fill="#648651" transform="translate(84.5 91.9) rotate(176.6) scale(0.96)"/>
+<use href="#leaf" fill="#648651" transform="translate(82.3 94.4) rotate(66.9) scale(0.74)"/>
+<use href="#leaf" fill="#658052" transform="translate(80.1 96.8) rotate(169.8) scale(0.70)"/>
+<use href="#leaf" fill="#658052" transform="translate(77.7 99.1) rotate(70.0) scale(0.65)"/>
+<use href="#leaf" fill="#799956" transform="translate(75.2 101.3) rotate(185.3) scale(0.70)"/>
+<path d="M89.4 97.6Q96.8 104.1 105.7 108.9Q97.8 103.1 90.4 96.6Z" fill="#62604a"/>
+<use href="#leaf" fill="#799956" transform="translate(90.8 98.0) rotate(-18.2) scale(0.86)"/>
+<use href="#leaf" fill="#648651" transform="translate(93.2 100.3) rotate(99.4) scale(0.70)"/>
+<use href="#leaf" fill="#658052" transform="translate(95.7 102.4) rotate(-4.7) scale(0.80)"/>
+<use href="#leaf" fill="#a3af68" transform="translate(98.4 104.4) rotate(109.0) scale(1.15)"/>
+<use href="#leaf" fill="#658052" transform="translate(101.1 106.2) rotate(2.5) scale(0.85)"/>
+<use href="#leaf" fill="#839958" transform="translate(104.0 107.9) rotate(87.8) scale(0.63)"/>
+<path d="M91.7 106.4Q94.8 119.1 100.5 131.3Q96.2 118.9 93.1 106.1Z" fill="#62604a"/>
+<use href="#leaf" fill="#799956" transform="translate(92.7 108.0) rotate(37.1) scale(0.87)"/>
+<use href="#leaf" fill="#799956" transform="translate(93.6 112.3) rotate(124.6) scale(0.71)"/>
+<use href="#leaf" fill="#a3af68" transform="translate(94.7 116.5) rotate(20.0) scale(0.81)"/>
+<use href="#leaf" fill="#839958" transform="translate(96.1 120.7) rotate(120.7) scale(0.97)"/>
+<use href="#leaf" fill="#799956" transform="translate(97.6 124.8) rotate(16.4) scale(1.06)"/>
+<use href="#leaf" fill="#658052" transform="translate(99.4 128.9) rotate(133.2) scale(1.08)"/>
+<use href="#leaf" fill="#839958" transform="translate(84.3 77.9) rotate(28.1) scale(0.66)"/>
+<use href="#leaf" fill="#506e50" transform="translate(87.7 89.6) rotate(132.0) scale(1.03)"/>
+<use href="#leaf" fill="#a3af68" transform="translate(91.1 101.3) rotate(22.5) scale(1.16)"/>
+<path d="M98.3 81.8Q116.3 78.5 133.5 71.3Q116.0 75.9 98.0 79.2Z" fill="#62604a"/>
+<path d="M113.3 78.4Q122.2 82.7 131.9 85.2Q122.9 81.5 114.0 77.2Z" fill="#62604a"/>
+<use href="#leaf" fill="#506e50" transform="translate(114.8 78.4) rotate(-5.3) scale(0.79)"/>
+<use href="#leaf" fill="#648651" transform="translate(117.7 79.9) rotate(84.2) scale(1.05)"/>
+<use href="#leaf" fill="#658052" transform="translate(120.7 81.3) rotate(-23.8) scale(0.71)"/>
+<use href="#leaf" fill="#839958" transform="translate(123.7 82.6) rotate(75.0) scale(0.86)"/>
+<use href="#leaf" fill="#658052" transform="translate(126.9 83.7) rotate(-25.4) scale(1.01)"/>
+<use href="#leaf" fill="#a3af68" transform="translate(130.0 84.7) rotate(69.2) scale(1.00)"/>
+<path d="M122.8 75.9Q131.1 70.6 138.7 64.1Q130.4 69.4 122.1 74.7Z" fill="#62604a"/>
+<use href="#leaf" fill="#658052" transform="translate(123.6 74.6) rotate(-83.7) scale(0.66)"/>
+<use href="#leaf" fill="#799956" transform="translate(126.4 72.9) rotate(20.4) scale(1.04)"/>
+<use href="#leaf" fill="#839958" transform="translate(129.1 71.1) rotate(-79.5) scale(0.95)"/>
+<use href="#leaf" fill="#648651" transform="translate(131.8 69.2) rotate(17.6) scale(0.85)"/>
+<use href="#leaf" fill="#658052" transform="translate(134.5 67.3) rotate(-70.2) scale(1.04)"/>
+<use href="#leaf" fill="#799956" transform="translate(137.1 65.3) rotate(33.9) scale(0.93)"/>
+<path d="M131.6 72.8Q144.2 68.9 156.0 62.6Q143.9 67.5 131.3 71.4Z" fill="#62604a"/>
+<use href="#leaf" fill="#648651" transform="translate(133.2 71.7) rotate(-70.8) scale(1.12)"/>
+<use href="#leaf" fill="#506e50" transform="translate(137.4 70.5) rotate(23.1) scale(0.72)"/>
+<use href="#leaf" fill="#648651" transform="translate(141.6 69.1) rotate(-69.0) scale(0.66)"/>
+<use href="#leaf" fill="#a3af68" transform="translate(145.7 67.6) rotate(28.3) scale(0.92)"/>
+<use href="#leaf" fill="#658052" transform="translate(149.7 65.8) rotate(-59.5) scale(1.13)"/>
+<use href="#leaf" fill="#839958" transform="translate(153.7 63.9) rotate(33.9) scale(1.15)"/>
+<use href="#leaf" fill="#799956" transform="translate(103.0 79.9) rotate(-49.3) scale(0.88)"/>
+<use href="#leaf" fill="#799956" transform="translate(114.9 77.5) rotate(41.1) scale(0.66)"/>
+<use href="#leaf" fill="#a3af68" transform="translate(126.6 73.9) rotate(-62.5) scale(0.91)"/>
+<path d="M113.7 88.6Q135.4 99.6 159.7 105.5Q136.8 97.4 115.1 86.4Z" fill="#62604a"/>
+<path d="M132.2 97.4Q136.0 110.0 140.8 122.3Q137.3 109.6 133.6 97.0Z" fill="#62604a"/>
+<use href="#leaf" fill="#506e50" transform="translate(133.4 98.9) rotate(17.0) scale(1.09)"/>
+<use href="#leaf" fill="#506e50" transform="translate(134.6 103.1) rotate(107.7) scale(1.15)"/>
+<use href="#leaf" fill="#799956" transform="translate(135.9 107.3) rotate(23.7) scale(0.85)"/>
+<use href="#leaf" fill="#506e50" transform="translate(137.2 111.5) rotate(129.6) scale(0.70)"/>
+<use href="#leaf" fill="#658052" transform="translate(138.6 115.7) rotate(30.3) scale(0.86)"/>
+<use href="#leaf" fill="#839958" transform="translate(140.0 119.8) rotate(112.0) scale(0.65)"/>
+<path d="M144.6 102.2Q157.4 99.4 170.4 97.7Q157.0 98.0 144.2 100.8Z" fill="#62604a"/>
+<use href="#leaf" fill="#658052" transform="translate(146.1 101.0) rotate(-68.5) scale(0.86)"/>
+<use href="#leaf" fill="#839958" transform="translate(150.3 100.0) rotate(25.0) scale(0.92)"/>
+<use href="#leaf" fill="#506e50" transform="translate(154.6 99.1) rotate(-53.9) scale(1.15)"/>
+<use href="#leaf" fill="#506e50" transform="translate(159.0 98.5) rotate(19.1) scale(0.66)"/>
+<use href="#leaf" fill="#658052" transform="translate(163.4 98.0) rotate(-69.9) scale(1.10)"/>
+<use href="#leaf" fill="#648651" transform="translate(167.8 97.7) rotate(23.6) scale(0.74)"/>
+<path d="M156.4 105.5Q171.8 113.9 187.7 121.3Q172.5 112.7 157.1 104.2Z" fill="#62604a"/>
+<use href="#leaf" fill="#a3af68" transform="translate(158.8 106.0) rotate(-5.3) scale(0.79)"/>
+<use href="#leaf" fill="#648651" transform="translate(163.9 108.9) rotate(90.9) scale(0.70)"/>
+<use href="#leaf" fill="#506e50" transform="translate(169.0 111.7) rotate(-16.6) scale(0.97)"/>
+<use href="#leaf" fill="#a3af68" transform="translate(174.2 114.4) rotate(88.1) scale(0.77)"/>
+<use href="#leaf" fill="#799956" transform="translate(179.4 117.1) rotate(-23.0) scale(0.91)"/>
+<use href="#leaf" fill="#839958" transform="translate(184.6 119.7) rotate(67.8) scale(0.96)"/>
+<use href="#leaf" fill="#a3af68" transform="translate(119.9 90.8) rotate(-3.5) scale(1.05)"/>
+<use href="#leaf" fill="#648651" transform="translate(134.6 97.9) rotate(77.0) scale(0.87)"/>
+<use href="#leaf" fill="#506e50" transform="translate(150.0 103.2) rotate(-31.3) scale(1.05)"/></g></svg>
