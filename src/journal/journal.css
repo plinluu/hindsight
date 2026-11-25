@@ -93,14 +93,6 @@ body {
   background: #222;
   isolation: isolate;
 }
-body::before {
-  content: '';
-  position: fixed;
-  inset: -2vmax;
-  z-index: -1;
-  pointer-events: none;
-  background: url('/journal-sky.png') center / cover no-repeat;
-}
 .greeting-glass, .glass, .security-profile, .market-widget, .desktop, .mobile, aside,
 #company-results, .market-controls input, .market-controls button, .news-filters button,
 small, .section-line a, .glass > a {
@@ -198,7 +190,6 @@ nav a[href="/markets"]:not([aria-current]) { color: var(--mint); }
 nav a[href="/news"]:not([aria-current]), nav a[href="/learn"]:not([aria-current]) { color: var(--orchid); }
 nav a[href="/review"]:not([aria-current]) { color: #ffc7bc; }
 
-body:has(.opening)::before { display: none; }
 .scene {
   position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none;
   background: #273345 url('/home-sky.png') center / cover no-repeat;

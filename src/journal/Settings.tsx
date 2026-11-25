@@ -26,7 +26,7 @@ export default function Settings() {
         <button onClick={()=>save('daylight',daylight==='auto'?'day':daylight==='day'?'sunset':daylight==='sunset'?'night':'auto')}><b aria-hidden="true">{daylight==='night'?'☾':'☼'}</b>Light · {daylight}</button>
       </div>
     </section>
-    <section className="glass pref-form"><h2>Today’s background</h2>
+    <section className="glass pref-form"><h2>Journal background</h2>
       <label>Season <select value={season} onChange={event=>save('season',event.target.value)}>
         {['auto','spring','summer','autumn','winter'].map(value=><option key={value} value={value}>{value==='auto'?'Automatic':value[0].toUpperCase()+value.slice(1)}</option>)}
       </select></label>

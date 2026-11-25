@@ -26,6 +26,7 @@ Revision — Mixed two branched crystal shapes into the winter snowfall and fram
 Revision — Automatic shows the detected season in Settings and uses the weather location’s hemisphere and local date on Today. Without a location it shows the original sky.
 Revision — Autumn uses the spring branch composition with copper, gold and russet maple leaves and matching drifting foliage.
 Revision — Automatic uses winter scenery for reported snow, snowfall within the previous 24 hours, or current temperatures at or below freezing. Settings explains the weather trigger.
+Revision — All journal routes share the Today wallpaper and one persistent seasonal scene, so branches and particle animations carry through navigation.
 Next — Phase 6 products.
 TODO — Replace sky.png with original artwork before public launch.
 
