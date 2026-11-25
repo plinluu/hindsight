@@ -1,8 +1,6 @@
-import { useState } from 'react'
-import { json } from './data'
+import SaleChart from './SaleChart'
 import type { Sale } from './trades'
 import Exports from './Exports'
-type Point = { date: string; close: number }
 export function Line({ points }: { points: number[] }) {
   const min = Math.min(...points),
     max = Math.max(...points)
@@ -32,95 +30,30 @@ export function Line({ points }: { points: number[] }) {
   )
 }
 export default function Results({ sales }: { sales: Sale[] }) {
-  const [index, select] = useState(0),
-    [days, horizon] = useState('30'),
-    [history, setHistory] = useState<Record<string, Point[]>>({}),
-    [status, msg] = useState('')
   if (!sales.length)
     return <p>No sales matched earlier purchases. Include the earlier purchases in your export.</p>
-  const s = sales[index],
-    sum = (f: (r: Sale) => number) => sales.reduce((n, v) => n + f(v), 0),
+  const sum = (f: (r: Sale) => number) => sales.reduce((n, v) => n + f(v), 0),
     wins = sales.filter((r) => r.net > 0),
     losses = sales.filter((r) => r.net < 0),
     average = (rows: Sale[]) =>
       rows.length ? (rows.reduce((a, r) => a + r.days, 0) / rows.length).toFixed(1) : '—'
-  function after(r: Sale) {
-    const target = days === 'today' ? Date.now() : Date.parse(r.sell) + Number(days) * 86400000
-    return target <= Date.now()
-      ? history[r.symbol]?.filter((p) => p.date >= r.sell && Date.parse(p.date) <= target).at(-1)
-      : undefined
-  }
-  const end = after(s),
-    ordered = sales
-      .map((r) => ({ r, miss: after(r) ? (after(r)!.close - r.exit) * r.quantity : null }))
-      .sort((a, b) => (b.miss ?? -Infinity) - (a.miss ?? -Infinity))
-  const chases = sales.filter((r) => {
-    const pts = history[r.symbol]?.filter((p) => p.date < r.buy).slice(-5)
-    return pts?.length === 5 && pts[4].close > pts[0].close
-  })
   const lossDates = new Set(losses.map((r) => r.sell))
   let running = 0
   return (
     <>
-      <section className="panel stack">
-        <h2>Your results</h2>
-        <p>
-          Net after fees <strong>{sum((r) => r.net).toFixed(2)}</strong> · Fees{' '}
-          {sum((r) => r.fees).toFixed(2)} · Profitable lots {((100 * wins.length) / sales.length).toFixed(0)}%
-          · Average hold {average(sales)} days
-        </p>
-        <label>
-          Matched sale
-          <select value={index} onChange={(e) => select(Number(e.target.value))}>
-            {sales.map((r, i) => (
-              <option key={i} value={i}>
-                {r.symbol} · {r.sell} · {r.quantity} shares from {r.buy}
-              </option>
-            ))}
-          </select>
-        </label>
-        <label>
-          Compare through
-          <select value={days} onChange={(e) => horizon(e.target.value)}>
-            <option value="30">30 days later</option>
-            <option value="90">90 days later</option>
-            <option value="today">Today</option>
-          </select>
-        </label>
-        <Line points={[s.entry, s.exit, ...(end ? [end.close] : [])]} />
-        <p>
-          Buy {s.entry} · Sale {s.exit} ·{' '}
-          {end ? 'Weekly close ' + end.close + ' on ' + end.date : 'Later close unavailable'}
-        </p>
-        <button
-          onClick={async () => {
-            msg('Loading weekly closes…')
-            try {
-              const points = await json('api/history?symbol=' + encodeURIComponent(s.symbol))
-              if (!Array.isArray(points)) throw Error()
-              setHistory((h) => ({ ...h, [s.symbol]: points }))
-              msg('Weekly closes loaded.')
-            } catch {
-              msg('History unavailable. Check the server key or retry later.')
-            }
-          }}
-        >
-          Load history for {s.symbol}
-        </button>
-        <small role="status">{status}</small>
+      <SaleChart sales={sales}/>
+      <section className="panel">
+        <h2>Your completed trades</h2>
+        <dl className="sale-totals">{[
+          ['Profit after fees',sum(r=>r.net).toFixed(2)],
+          ['Broker fees',sum(r=>r.fees).toFixed(2)],
+          ['Profitable lots',wins.length+' of '+sales.length],
+          ['Average time held',average(sales)+' days'],
+        ].map(([label,value])=><div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}</dl>
       </section>
-      <details>
-        <summary>Missed upside and fees by lot</summary>
-        <p>
-          Difference between proceeds at sale and at the last weekly close through the selected horizon.
-          Amounts use the currency of your file.
-        </p>
-        {ordered.map(({ r, miss }, i) => (
-          <p key={i}>
-            {r.symbol} · {r.sell} · Difference {miss?.toFixed(2) ?? 'unavailable'} · Fees {r.fees.toFixed(2)}{' '}
-            · Net {r.net.toFixed(2)}
-          </p>
-        ))}
+      <details><summary>Results and fees by lot</summary>
+        <p>Each lot pairs shares sold with their earliest matching purchase. Amounts use the currency of your file.</p>
+        {sales.map((r,i)=><p key={i}>{r.symbol} · {r.sell} · {r.quantity} shares · Fees {r.fees.toFixed(2)} · Net {r.net.toFixed(2)}</p>)}
       </details>
       <details>
         <summary>Cumulative result</summary>
@@ -144,14 +77,9 @@ export default function Results({ sales }: { sales: Sale[] }) {
           }{' '}
           matched lots opened within five days of a losing sale.
         </p>
-        <p>
-          Momentum ·{' '}
-          {Object.keys(history).length
-            ? chases.length + ' matched lots bought after a four-week rise, among loaded histories.'
-            : 'Load weekly history to check for purchases after a rise.'}
-        </p>
+
       </details>
-      <Exports sales={ordered.map((o) => o.r)} />
+      <Exports sales={sales} />
     </>
   )
 }

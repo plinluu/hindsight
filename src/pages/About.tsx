@@ -6,14 +6,12 @@ export default function About() {
       <section className="panel">
         <h2>How reviews work</h2>
         <p>
-          Sales are paired with the oldest available purchase first. Fees are allocated by share. Later prices
-          use weekly closes when available. Import one currency at a time. The comparisons exclude dividends,
+          Sales are paired with the oldest available purchase first. Fees are allocated by share. Later comparisons use a TradingView quote or a closing price you enter. Import one currency at a time. The comparisons exclude dividends,
           taxes and corporate-action adjustments.
         </p>
         <h2>Privacy and terms</h2>
         <p>
-          Version 1 · Trade files remain in browser memory. Loading weekly history sends only the selected
-          symbol to the proxy and price provider. Charts connect to TradingView. Weather uses Open-Meteo and
+          Version 1 · Trade files remain in browser memory. Opening a trade’s market chart requests the selected symbol from TradingView. Charts connect to TradingView. Weather uses Open-Meteo and
           optional city detection. Preferences and public feed caches stay on this device.
         </p>
         <p>

@@ -34,6 +34,7 @@ Phase 6 complete
 - Markets — Symbol lookup and charts are available from Markets and Tools.
 - Market briefing — Headlines and the daily recap are available from News and Tools.
 The legacy project is named hindsight (lowercase). About contains the methodology, privacy details and local data controls.
+Revision — Review opens with an interactive simulated sale chart. Imported lots use broker fills, an optional TradingView chart, latest quotes for recognized listings, and user-entered historical closes. Removed the Alpha Vantage endpoint.
 Next — Phase 7 polish.
 TODO — Replace sky.png with original artwork before public launch.
 

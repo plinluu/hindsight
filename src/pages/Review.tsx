@@ -1,5 +1,6 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { table, match, example, type Fields } from '../trades'
+import SaleChart from '../SaleChart'
 import Results from '../ReviewResults'
 import { useValue, save } from '../data'
 const brokers = [
@@ -17,21 +18,25 @@ export default function Review({aboutHref = '#/About', declineHref = '#/Declined
     [raw, set] = useState(''),
     [parsed, parse] = useState<ReturnType<typeof table>>(),
     [report, show] = useState<ReturnType<typeof match>>(),
-    [note, msg] = useState(''),
-    [demo, mark] = useState(false)
+    [note, msg] = useState('')
+  const heading = useRef<HTMLHeadingElement>(null)
+  useEffect(() => {
+    if (report) {
+      heading.current?.focus({preventScroll:true})
+      heading.current?.scrollIntoView({block:'center'})
+    }
+  }, [report])
   function reset(text: string) {
     set(text)
     parse(undefined)
     show(undefined)
     msg('')
-    mark(false)
   }
   function inspect(text: string, sample = false) {
     try {
       const t = table(text)
       parse(t)
       msg('')
-      mark(sample)
       show(sample ? match(t.rows, t.mapping) : undefined)
     } catch (e) {
       msg((e as Error).message)
@@ -39,13 +44,16 @@ export default function Review({aboutHref = '#/About', declineHref = '#/Declined
   }
   return (
     <>
-      <h1>Trade review</h1>
+      <h1 ref={heading} tabIndex={-1}>Trade review</h1>
+      {report?.sales.length ? <Results sales={report.sales}/> : <SaleChart demo/>}
+      {report && <p role="status">{report.sales.length} matched lots · {report.skipped} skipped rows · {report.unmatched} unmatched shares sold</p>}
+      {report && !report.sales.length && <p>Include the purchases that came before your sales in the export.</p>}
       {terms !== 'v1' ? (
         <section className="panel">
           <h2>Before reviewing trades</h2>
           <p>
             Hindsight uses historical prices to illustrate past decisions. Results are estimates for learning.
-            You choose whether to request price history for a symbol.
+            Open TradingView when you want to compare a sale with the market.
           </p>
           <a href={aboutHref}>Read terms and privacy</a>
           <div className="row">
@@ -108,7 +116,7 @@ export default function Review({aboutHref = '#/About', declineHref = '#/Declined
                   inspect(example, true)
                 }}
               >
-                Try example trades
+                Try a sample import
               </button>
             </div>
           </section>
@@ -152,16 +160,7 @@ export default function Review({aboutHref = '#/About', declineHref = '#/Declined
             </section>
           )}
           <p role="status">{note}</p>
-          {report && (
-            <>
-              <p>
-                {demo ? 'Example data · ' : ''}
-                {report.sales.length} matched lots · {report.skipped} skipped rows · {report.unmatched}{' '}
-                unmatched shares sold
-              </p>
-              <Results sales={report.sales} />
-            </>
-          )}
+
         </>
       )}
     </>

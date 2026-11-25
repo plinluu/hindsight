@@ -17,3 +17,26 @@
 .journal-product button:disabled { opacity: .5; cursor: default; }
 .journal-product summary { cursor: pointer; padding: 8px 0; }
 .journal-product svg { display: block; color: #bfd5fb; margin: 18px 0; }
+.journal-product:has(.sale-card) { max-width: 990px; }
+.journal-product .sale-card { background: linear-gradient(135deg,rgba(45,41,61,.94),rgba(22,25,38,.93)); border:1px solid #e6d4ed40; padding:clamp(18px,3vw,34px); }
+.sale-tag { display:inline-block; border:1px solid #e6d4ed45; border-radius:24px; padding:6px 12px; font-size:.76rem; letter-spacing:.055em; color:#ebdae8; }
+.sale-card h2 { font: 500 clamp(1.85rem,4vw,3.1rem)/1.13 'Instrument Serif',Georgia,serif; margin:22px 0 4px; }
+.sale-outcome { font-size:clamp(1rem,2vw,1.3rem); color:#e3dce4; }
+.sale-switch,.sale-key { display:flex; flex-wrap:wrap; gap:6px; align-items:center; }
+.sale-switch { margin:18px 0 8px; }
+.journal-product .sale-switch button { min-height:36px; border:1px solid #ffffff30; background:#ffffff09; color:#ece6ee; padding:6px 13px; }
+.journal-product .sale-switch button[aria-pressed=true] { background:#f2e3d6; color:#291f29; }
+.journal-product .sale-plot { width:100%; margin:12px 0; overflow:visible; }
+.sale-plot text { fill:#e6dce6; font:11px 'IBM Plex Sans',sans-serif; }
+.sale-key { gap:14px; font-size:.78rem; color:#ddd3df; }
+.sale-key span:nth-child(2) { color:#f5bbcc; }
+.sale-key span:nth-child(3) { color:#a0ddc5; }
+.sale-source { border-top:1px solid #ffffff26; margin-top:16px; }
+.sale-source input { padding:10px; border-radius:10px; font:inherit; background:#252332; color:inherit; border:1px solid #ffffff42; }
+.sale-totals { display:grid; grid-template-columns:repeat(auto-fit,minmax(130px,1fr)); gap:18px; }
+.sale-totals dt { font-size:.85rem; color:#dad1de; }
+.sale-totals dd { margin:3px 0; font-size:1.45rem; }
+.sale-ranking { border-top:1px solid #ffffff26; margin-top:18px; padding-top:8px; }
+.sale-ranking ol { margin:0; padding:0; list-style:none; }
+.sale-ranking li { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:10px; padding:6px 0; }
+.journal-product .sale-ranking button { background:transparent; color:inherit; text-decoration:underline; padding:0; }
