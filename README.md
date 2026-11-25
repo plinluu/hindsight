@@ -29,3 +29,7 @@ Weather, city search and TradingView use public services. Chart and quote availa
 ## Artwork
 Replace the twelve gradient WebPs in `public/assets/bg` using `docs/IMAGE_PROMPTS.md`. Export 2560×1440 originals and 768×432 mobile versions with the existing -small suffix.
 
+
+## Copyright and security
+
+© 2026 plinluu. All rights reserved. See [LICENSE](LICENSE) and [security reporting](SECURITY.md).

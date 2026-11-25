@@ -274,3 +274,6 @@ html[data-motion="reduce"] .sky-particle { top: var(--still-y); transform: rotat
   inset: -2vmax;
   background: url('/journal-sky.png') center / cover no-repeat;
 }
+
+.journal-footer { width:min(100% - 32px,1048px); margin:24px auto 96px; text-align:center; }
+.journal-footer a { color:inherit; }

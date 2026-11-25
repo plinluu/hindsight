@@ -32,7 +32,7 @@ function useBriefing() {
   useEffect(() => {
     const controller = new AbortController()
     let timer: ReturnType<typeof setTimeout>
-    let current = cached()
+    const current = cached()
     async function refresh() {
       try {
         if (!fresh(current.news) || !fresh(current.quotes)) {
@@ -64,6 +64,12 @@ function timestamp(time: number) {
   const date = new Date(time * 1000)
   return <time dateTime={date.toISOString()}>{date.toLocaleString(undefined, {dateStyle:'medium', timeStyle:'short'})}</time>
 }
+function headlineLink(url: string) {
+  try {
+    const link = new URL(url)
+    if (link.protocol === 'https:' || link.protocol === 'http:') return link.href
+  } catch { /* Headlines can be displayed without a link. */ }
+}
 export default function Briefing({ preview = false }: { preview?: boolean }) {
   const { news, quotes } = useBriefing()
   const [category, select] = useState('All')
@@ -85,11 +91,13 @@ export default function Briefing({ preview = false }: { preview?: boolean }) {
     <section className="glass">
       <div className="row"><h2>{preview ? 'Market headlines' : 'Across the news'}</h2><small>{label(news, new Set(stories.map(item => item.source)).size + ' publishers')}</small></div>
       {!preview && <div className="news-filters" role="group" aria-label="Filter headlines by category">{categories.map(c => <button type="button" key={c} aria-pressed={active === c} onClick={() => select(c)}>{c}</button>)}</div>}
-      {visible.map(story => <article className="news-story" key={story.headline}>
+      {visible.map(story => {
+        const url = headlineLink(story.url)
+        return <article className="news-story" key={story.headline}>
         <div>{story.category} · {story.source} · {timestamp(story.time)}</div>
-        <h3>{story.url ? <a href={story.url} target="_blank" rel="noreferrer">{story.headline} ↗</a> : story.headline}</h3>
+        <h3>{url ? <a href={url} target="_blank" rel="noreferrer">{story.headline} ↗</a> : story.headline}</h3>
         <p><b>Why it matters</b> · {story.why}</p>
-      </article>)}
+      </article>})}
     </section>
   </div>
 }
