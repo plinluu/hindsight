@@ -6,11 +6,13 @@ Hindsight is a browser-based market journal for reviewing completed trades. Impo
 
 ## Screenshots
 
-| Today · desktop | Trade Review · desktop |
+| Spring | Autumn |
 | --- | --- |
-| ![Winter Today page with the evening greeting and market chart](docs/screenshots/v3.2-today.png) | ![Trade Review with a simulated sale](docs/screenshots/v3.2-review.png) |
+| ![Spring Today page](docs/screenshots/v3.2-spring.png) | ![Autumn Today page](docs/screenshots/v3.2-autumn.png) |
 
-<details><summary>Learn on mobile</summary>
+<details><summary>Trade Review and mobile Learn</summary>
+
+![Trade Review with a simulated sale](docs/screenshots/v3.2-review.png)
 
 <img src="docs/screenshots/v3.2-learn.png" alt="Mobile lesson selector and illustrative price chart" width="320">
 
