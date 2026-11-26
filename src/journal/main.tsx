@@ -1,4 +1,4 @@
-import React,{lazy,Suspense,useEffect,useState} from 'react'
+import React,{lazy,Suspense,useEffect,useRef,useState} from 'react'
 import {createRoot} from 'react-dom/client'
 import '@fontsource/jacquard-12/latin-400.css'
 import '@fontsource/cormorant-garamond/latin-500.css'
@@ -14,6 +14,25 @@ import './settings.css'
 const Detail=lazy(()=>import('./Detail'))
 const names=['Today','Markets','News','Review','Learn','Settings','Tools']
 const path=(name:string)=>name==='Today'?'/':'/'+name.toLowerCase()
+function JournalPage({children}: {children: React.ReactNode}) {
+ const main = useRef<HTMLElement>(null)
+ useEffect(() => {
+   if (!main.current || !('IntersectionObserver' in window)) return
+   const observer = new IntersectionObserver(entries => {
+     for (const entry of entries) {
+       if (!entry.isIntersecting) continue
+       observer.unobserve(entry.target)
+       entry.target.classList.add('scroll-reveal')
+     }
+   })
+   const sections = main.current.querySelectorAll('section, .news-story, .market-widget')
+   for (const section of sections) {
+     if (section.getBoundingClientRect().top >= window.innerHeight) observer.observe(section)
+   }
+   return () => observer.disconnect()
+ }, [])
+ return <main ref={main} className="journal-page">{children}</main>
+}
 function App(){
  const [url,setUrl]=useState(location.pathname),[menu,setMenu]=useState(''),[loader,setLoader]=useState(read('motion')==='reduce'||matchMedia('(prefers-reduced-motion: reduce)').matches?'gone':'visible')
  const seen=useValue('location-seen'), motion=useValue('motion'), light=useValue('daylight')
@@ -31,6 +50,6 @@ function App(){
  useEffect(()=>{if(loader!=='fade')return;const end=setTimeout(()=>setLoader('gone'),600);return ()=>clearTimeout(end)},[loader])
  const link=(n:string)=><a key={n} aria-current={page===n?'page':undefined} href={path(n)}>{n}</a>
  const toggle=(n:string)=><button aria-expanded={menu===n} onClick={()=>setMenu(menu===n?'':n)}>{n} ⌄</button>
- return <><WeatherSync/><Scene/><header><nav className="desktop"><a href="/" aria-label="Hindsight home"><img src="/brand/hindsight-mark.svg" width="26" height="26" alt=""/></a>{names.slice(0,6).map(link)}{toggle('Tools')}{menu==='Tools'&&<aside>{['Review','Learn','Markets','News','About'].map(link)}</aside>}</nav></header><nav className="mobile">{names.slice(0,4).map(link)}{toggle('More')}{menu==='More'&&<aside>{names.slice(4).map(link)}</aside>}</nav><main>{page==='Today'?<Today/>:<Suspense fallback={<p>Loading…</p>}><Detail page={page}/></Suspense>}{!seen&&page!=='Settings'&&<Location/>}</main>{loader!=='gone'&&<div className={'loader '+loader} role="status" aria-label="Loading Hindsight"/>}</>
+ return <><WeatherSync/><Scene/><header><nav className="desktop"><a href="/" aria-label="Hindsight home"><img src="/brand/hindsight-mark.svg" width="26" height="26" alt=""/></a>{names.slice(0,6).map(link)}{toggle('Tools')}{menu==='Tools'&&<aside>{['Review','Learn','Markets','News','About'].map(link)}</aside>}</nav></header><nav className="mobile">{names.slice(0,4).map(link)}{toggle('More')}{menu==='More'&&<aside>{names.slice(4).map(link)}</aside>}</nav><Suspense fallback={<main><p>Loading…</p></main>}><JournalPage key={url}>{page==='Today'?<Today/>:<Detail page={page}/>}{!seen&&page!=='Settings'&&<Location/>}</JournalPage></Suspense>{loader!=='gone'&&<div className={'loader '+loader} role="status" aria-label="Loading Hindsight"/>}</>
 }
 createRoot(document.getElementById('root')!).render(<App/>)
