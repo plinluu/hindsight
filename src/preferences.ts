@@ -1,10 +1,12 @@
 const memory = new Map<string, string | null>()
 const prefix = 'hs2:'
+const latchKey = 'hindsight.winterLatch'
+const storageKey = (key: string) => key === latchKey ? key : prefix + key
 const event = 'hindsight-preference'
 export function read(key: string) {
   if (!memory.has(key)) {
     try {
-      memory.set(key, localStorage.getItem(prefix + key))
+      memory.set(key, localStorage.getItem(storageKey(key)))
     } catch {
       memory.set(key, null)
     }
@@ -15,8 +17,8 @@ export function save(key: string, value: string | null) {
   if (read(key) === value) return
   memory.set(key, value)
   try {
-    if (value === null) localStorage.removeItem(prefix + key)
-    else localStorage.setItem(prefix + key, value)
+    if (value === null) localStorage.removeItem(storageKey(key))
+    else localStorage.setItem(storageKey(key), value)
   } catch {
     /* Preferences remain available for this session. */
   }
@@ -24,6 +26,7 @@ export function save(key: string, value: string | null) {
 }
 window.addEventListener('storage', (e) => {
   if (e.key === null) memory.clear()
+  else if (e.key === latchKey) memory.delete(latchKey)
   else if (e.key.startsWith(prefix)) memory.delete(e.key.slice(prefix.length))
   else return
   window.dispatchEvent(new Event(event))

@@ -60,9 +60,9 @@ small {font-size:11px;border-color:#ffffff20;color:#bdb2bf}
 .news-brief { display: grid; gap: 16px; min-width: 0; }
 .news-brief .glass { min-width: 0; }
 .news-filters { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0; }
-.news-filters button { border: 1px solid #ffffff44; border-radius: 999px; padding: 8px 16px; color: inherit; background: #171d30; cursor: pointer; }
-.news-filters button[aria-pressed="true"] { color: #101626; background: #aacaff; }
-.news-story + .news-story { border-top: 1px solid #ffffff22; margin-top: 16px; padding-top: 16px; }
+.news-filters button { border-radius: 999px; padding: 8px 16px; color: inherit; cursor: pointer; }
+.glass.news-story { margin: 0; padding: 0; }
+.news-story + .news-story { margin-top: 16px; padding-top: 16px; }
 .news-story > div, .fund-moves time { font-size: .8rem; color: #c9c6c2; }
 .news-story h3 { overflow-wrap: anywhere; }
 .fund-moves { list-style: none; padding: 0; margin: 16px 0 0; }
@@ -172,6 +172,13 @@ h1, h2, h3, .brand, .loader strong {
   letter-spacing: .14em;
   text-transform: uppercase;
 }
+.opening .greeting-glass h1 {
+  font: 400 clamp(2.75rem, 8vw, 5.5rem)/1.05 'Jacquard 12', 'Cormorant Garamond', Georgia, serif;
+  letter-spacing: .01em;
+  text-transform: none;
+  text-shadow: 0 2px 24px rgba(0,0,0,.45);
+  -webkit-font-smoothing: auto;
+}
 .opening p { margin-top: 14px; }
 .section-line h2 { font-size: clamp(31px, 3.5vw, 44px); line-height: 1.08; }
 .glass h2 { font-size: clamp(27px, 3vw, 34px); line-height: 1.1; }
@@ -185,7 +192,6 @@ nav, .news-filters, .conditions { letter-spacing: -.012em; }
 .market-controls, .market-widget, .security-profile { --accent: var(--mint); }
 .news-brief, .briefing > .glass { --accent: var(--orchid); }
 .section-line h2, .glass h2, .security-heading h2 { color: var(--accent); }
-.news-filters button[aria-pressed=true] { background: linear-gradient(145deg, #f5dfff, #d3abe8); }
 .market-controls form button { background: linear-gradient(145deg, #dcfff0, #9cd5ca); }
 small { background-color: #ffffff08; color: #fae3ff; }
 nav a[href="/markets"]:not([aria-current]) { color: var(--mint); }

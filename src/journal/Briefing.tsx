@@ -85,7 +85,7 @@ export default function Briefing({ preview = false }: { preview?: boolean }) {
     <section className="glass">
       <div className="row"><h2>{preview ? 'Market headlines' : 'Across the news'}</h2><small>{label(news, new Set(stories.map(item => item.source)).size + ' publishers')}</small></div>
       {!preview && <div className="news-filters" role="group" aria-label="Filter headlines by category">{categories.map(c => <button type="button" key={c} aria-pressed={active === c} onClick={() => select(c)}>{c}</button>)}</div>}
-      {visible.map(story => <article className="news-story" key={story.headline}>
+      {visible.map(story => <article className="glass news-story" key={story.headline}>
         <div>{story.category} · {story.source} · {timestamp(story.time)}</div>
         <h3>{story.url ? <a href={story.url} target="_blank" rel="noreferrer">{story.headline} ↗</a> : story.headline}</h3>
         <p><b>Why it matters</b> · {story.why}</p>

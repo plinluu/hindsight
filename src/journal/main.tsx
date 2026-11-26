@@ -1,5 +1,6 @@
 import React,{lazy,Suspense,useEffect,useState} from 'react'
 import {createRoot} from 'react-dom/client'
+import '@fontsource/jacquard-12/latin-400.css'
 import '@fontsource/cormorant-garamond/latin-500.css'
 import '@fontsource/ibm-plex-sans/latin-400.css'
 import '@fontsource/ibm-plex-sans/latin-600.css'

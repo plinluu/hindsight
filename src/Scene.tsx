@@ -1,14 +1,13 @@
 import { type CSSProperties } from 'react'
 import { useValue } from './data'
 import { useLocalScene } from './useLocalScene'
-import { sunState, condition } from './season'
+import { sunState, condition, sceneSeason } from './season'
 export default function Scene() {
   const seasonOverride = useValue('season')
   const lightOverride = useValue('daylight')
   const { now, forecast, detectedSeason } = useLocalScene()
   const state = forecast ? sunState(now / 1000, forecast.rise, forecast.set) : undefined
-  const which = seasonOverride && ['spring', 'summer', 'autumn', 'winter'].includes(seasonOverride)
-    ? seasonOverride : detectedSeason
+  const which = sceneSeason(seasonOverride, detectedSeason)
   const manualLight = lightOverride && ['day', 'sunset', 'night'].includes(lightOverride) ? lightOverride : null
   const light = manualLight ?? state ?? 'day'
   const weather = forecast ? condition(forecast.code) : 'Clear'

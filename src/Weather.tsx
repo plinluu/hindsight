@@ -5,7 +5,7 @@ type Forecast = {
   timezone: string
   current: { temperature_2m: number; apparent_temperature: number; weather_code: number; time: number }
   hourly: { time: number[]; temperature_2m: number[]; weather_code: number[] }
-  daily: { sunrise: number[]; sunset: number[] }
+  daily: { sunrise: number[]; sunset: number[]; temperature_2m_max: number[]; temperature_2m_min: number[]; snowfall_sum: number[]; weather_code: number[] }
 }
 type Entry = { place: string; at: number; payload: Forecast }
 const ttl = 600000
@@ -33,10 +33,10 @@ export function WeatherSync() {
           timezone: 'auto',
           timeformat: 'unixtime',
           forecast_days: '2',
-          past_hours: '24',
+          past_days: '7',
           current: 'temperature_2m,apparent_temperature,weather_code',
           hourly: 'temperature_2m,weather_code',
-          daily: 'sunrise,sunset',
+          daily: 'sunrise,sunset,temperature_2m_max,temperature_2m_min,snowfall_sum,weather_code',
         })
         const d: Forecast = await json('https://api.open-meteo.com/v1/forecast?' + params)
         if (active) {
@@ -46,8 +46,8 @@ export function WeatherSync() {
             JSON.stringify({
               place,
               zone: d.timezone,
-              rise: d.daily.sunrise[0],
-              set: d.daily.sunset[0],
+              rise: d.daily.sunrise[7],
+              set: d.daily.sunset[7],
               code: d.current.weather_code,
             }),
           )
@@ -89,11 +89,12 @@ export default function Weather({compact = false}: {compact?: boolean}) {
       hour: 'numeric',
       minute: '2-digit',
     })
-  const minutes = d ? Math.ceil((d.daily.sunset[0] * 1000 - now) / 60000) : 0
+  const today = d?.daily.temperature_2m_max ? 7 : 0
+  const minutes = d ? Math.ceil((d.daily.sunset[today] * 1000 - now) / 60000) : 0
   const sample = !d || !!error
   const label = sample ? 'Toronto' : JSON.parse(place!).name
   const degrees = temp(sample ? 18 : d.current.temperature_2m)
-  const sunset = sample ? '7:42 PM' : time(d.daily.sunset[0])
+  const sunset = sample ? '7:42 PM' : time(d.daily.sunset[today])
   if (compact) return <div className="conditions"><span aria-hidden="true">☼</span> {label} · {degrees} <i/> Sunset {sunset} {sample && <small>Sample data</small>}</div>
   return (
     <section className="glass forecast">
@@ -109,8 +110,8 @@ export default function Weather({compact = false}: {compact?: boolean}) {
             {JSON.parse(place!).name} · {temp(d.current.temperature_2m)} · {condition(d.current.weather_code)}
           </p>
           <p>
-            Feels like {temp(d.current.apparent_temperature)}. Sunrise {time(d.daily.sunrise[0])}, sunset{' '}
-            {time(d.daily.sunset[0])} ({d.timezone}).{' '}
+            Feels like {temp(d.current.apparent_temperature)}. Sunrise {time(d.daily.sunrise[today])}, sunset{' '}
+            {time(d.daily.sunset[today])} ({d.timezone}).{' '}
             {minutes > 0
               ? Math.floor(minutes / 60) + 'h ' + (minutes % 60) + 'm until sunset.'
               : 'The sun has set.'}

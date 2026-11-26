@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict'
-import { season, localSeason, sunState, winterWeatherReason } from '../src/season.js'
+import { season, localSeason, sunState, winterLatch, sceneSeason } from '../src/season.js'
 for (const [m, n, s] of [
   [0, 'winter', 'summer'],
   [2, 'spring', 'autumn'],
@@ -27,16 +27,24 @@ assert.equal(localSeason(boundary, 50, 'America/Regina'), 'autumn')
 assert.equal(localSeason(boundary, -34, 'Australia/Sydney'), 'summer')
 assert.equal(localSeason(boundary, undefined, undefined), null)
 
-const now = boundary / 1000
-const weather = {
-  current: { time: now, temperature_2m: 3, weather_code: 3 },
-  hourly: { time: [now - 7200, now + 3600], weather_code: [73, 85] },
-}
-assert.equal(winterWeatherReason(boundary, weather), 'snow in the past 24 hours')
-weather.hourly.time[0] = now - 90000
-assert.equal(winterWeatherReason(boundary, weather), null)
-weather.current.temperature_2m = 0
-assert.equal(winterWeatherReason(boundary, weather), 'freezing temperature')
-weather.current.weather_code = 71
-assert.equal(winterWeatherReason(boundary, weather), 'snow reported')
-assert.equal(winterWeatherReason(boundary + 2 * 86400000, weather), null)
+const north = { latitude: 50, longitude: -105 }
+const south = { latitude: -34, longitude: 151 }
+const november = Date.UTC(2026, 10, 25)
+const july = Date.UTC(2026, 6, 25)
+const daily = { temperature_2m_max: [-1, 4, 5, 4, 5, 6, 5, 3, -2],
+  snowfall_sum: [0, 1], weather_code: [3, 3, 73] }
+const report = { daily, current: { temperature_2m: 3, weather_code: 3 } }
+const latch = winterLatch(november, north, 'UTC', report, null)
+assert.equal(latch.active, true)
+assert.deepEqual(winterLatch(november + 600000, north, 'UTC', { current: report.current }, latch), latch)
+assert.equal(sceneSeason('summer', latch.active ? 'winter' : 'autumn'), 'summer')
+const warm = { ...report, daily: { ...daily, temperature_2m_max: daily.temperature_2m_max.with(7, 16) } }
+const released = winterLatch(november, north, 'UTC', warm, latch)
+assert.equal(released.active, false)
+assert.equal(sceneSeason('auto', released.active ? 'winter' : localSeason(november, north.latitude, 'UTC')), 'autumn')
+const snow = { current: { weather_code: 85 } }
+assert.equal(winterLatch(july, north, 'UTC', snow, latch).active, false)
+assert.equal(winterLatch(july, south, 'UTC', snow, null).active, true)
+assert.equal(winterLatch(november, south, 'UTC', snow, null).active, false)
+assert.equal(winterLatch(november, { ...north, latitude: 52 }, 'UTC', null, latch).active, false)
+assert.equal(winterLatch(november, null, 'UTC', null, latch), null)
