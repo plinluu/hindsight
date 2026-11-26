@@ -1,0 +1,3 @@
+Copyright © 2026 plinluu. All rights reserved.
+
+Please obtain written permission before copying or redistributing Hindsight’s original code, artwork, or text, or using those materials to train AI models. Third-party materials remain subject to their respective licenses. This notice respects uses permitted by applicable law.

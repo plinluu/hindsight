@@ -1,9 +1,10 @@
+import copyrightNotice from '../../COPYRIGHT.txt?raw'
 import { save } from '../data'
 export default function About() {
   return (
     <>
       <h1>About Hindsight</h1>
-      <section className="panel">
+      <section className="glass about-panel">
         <h2>How reviews work</h2>
         <p>
           Sales are paired with the oldest available purchase first. Fees are allocated by share. Later comparisons use a TradingView quote or a closing price you enter. Import one currency at a time. The comparisons exclude dividends,
@@ -18,7 +19,9 @@ export default function About() {
           Use Hindsight for personal education. Verify figures with your broker before making decisions. Past
           outcomes cannot predict future returns.
         </p>
-        <button
+        <h2>Copyright and reuse</h2>
+        {copyrightNotice.trim().split(/\n\s*\n/).map(paragraph => <p key={paragraph}>{paragraph}</p>)}
+        <button className="glass-inset"
           onClick={() => {
             Object.keys(localStorage)
               .filter((k) => k.startsWith('hs2:'))

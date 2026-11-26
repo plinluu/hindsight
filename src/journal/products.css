@@ -1,5 +1,6 @@
 .journal-product { max-width: 800px; margin: 0 auto; }
 .journal-product > h1 { text-align: center; padding: 40px 0 24px; }
+.journal-product :is(.lesson-panel, .about-panel) { padding: clamp(18px, 4vw, 32px); margin-bottom: 20px; }
 .journal-product .panel, .journal-product > details {
   background: var(--glass); border: var(--rim); box-shadow: var(--shadow);
   backdrop-filter: blur(24px); border-radius: 28px; padding: clamp(18px, 4vw, 32px); margin-bottom: 20px;
@@ -8,12 +9,16 @@
 .journal-product label { display: grid; gap: 6px; margin: 14px 0; }
 .journal-product select, .journal-product textarea, .journal-product input[type=file] {
   box-sizing: border-box; width: 100%; min-width: 0; color-scheme: dark; color: inherit; font: inherit;
-  background: #252332; border: 1px solid #ffffff45; border-radius: 12px; padding: 10px;
+  border-radius: 12px; padding: 10px;
+}
+.journal-product select:not(.glass-inset), .journal-product textarea, .journal-product input[type=file] {
+  background: #252332; border: 1px solid #ffffff45;
 }
 .journal-product textarea { resize: vertical; }
 .journal-product .row { display: flex; justify-content: flex-start; flex-wrap: wrap; align-items: center; gap: 12px; margin: 14px 0; }
 .journal-product .grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(210px,100%),1fr)); gap: 0 16px; }
-.journal-product button { background: #d9cfdf; color: #24212c; padding: 8px 18px; }
+.journal-product button { padding: 8px 18px; }
+.journal-product button:not(.glass-inset) { background: #d9cfdf; color: #24212c; }
 .journal-product button:disabled { opacity: .5; cursor: default; }
 .journal-product summary { cursor: pointer; padding: 8px 0; }
 .journal-product svg { display: block; color: #bfd5fb; margin: 18px 0; }
@@ -22,7 +27,7 @@
 .review-page p { margin:12px 0; line-height:1.6; }
 .review-page label { display:grid; gap:6px; margin:14px 0; }
 .review-page :is(textarea,select,input:not([type=checkbox])) { width:100%; min-width:0; padding:10px 14px; color:inherit; color-scheme:dark; border-radius:16px; font:inherit; }
-.review-page select option { background:#393434; }
+.review-page select option, .lesson-panel select option { background:#393434; }
 .review-page textarea { resize:vertical; }
 .review-page .row,.sale-switch,.sale-key { display:flex; flex-wrap:wrap; align-items:center; justify-content:flex-start; gap:8px; }
 .review-page .grid2 { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(210px,100%),1fr)); gap:0 16px; }
@@ -56,6 +61,7 @@
 .review-report #kpi span,.review-report .totals span,.review-report .cap { font-size:.83rem; }
 .review-pair { grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr)); }
 .review-report .rg { display:grid; grid-template-columns:minmax(65px,1fr) 1fr auto; width:100%; align-items:center; gap:8px; padding:10px 4px; border-radius:8px; border-bottom:1px solid #ffffff24; color:inherit; text-align:left; }
+.review-report .rg[aria-pressed=true] { border-color: #ffffff48; }
 .review-report .rg small { display:block; font-size:.68rem; }
 
 .review-report progress { width:100%; height:5px; accent-color:var(--peach); }

@@ -43,10 +43,10 @@ export default function Learn() {
   return (
     <>
       <h1>Why prices move</h1>
-      <section className="panel stack">
+      <section className="glass lesson-panel stack">
         <label>
           Choose a lesson
-          <select value={n} onChange={(e) => set(+e.target.value)}>
+          <select className="glass-inset" value={n} onChange={(e) => set(+e.target.value)}>
             {lessons.map(([s], i) => (
               <option value={i} key={s}>
                 {s}
