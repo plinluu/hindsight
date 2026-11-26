@@ -1,22 +1,13 @@
 import { useEffect, useState } from 'react'
+import { publicHeadlines, publicQuotes } from './public-briefing'
 import type { Story } from '../feed'
 
 type Price = { symbol: string; change: number; time: number }
-type Snapshot<T> = { items: T[]; at: number }
+type Snapshot<T> = { items: T[]; at: number; provider?: string }
 type Brief = { news?: Snapshot<Story>; quotes?: Snapshot<Price> }
-const storageKey = 'hindsight.briefing.v2'
+const storageKey = 'hindsight.briefing.v3'
 const ttl = 600000
 const funds: Record<string,string> = { SPY: 'S&P 500', QQQ: 'Nasdaq-100', DIA: 'Dow Jones' }
-const samples = [
-  ['Economy', 'Borrowing costs hold steady', 'Interest rates affect the cost of loans for households and businesses.'],
-  ['Earnings', 'A retailer reports stronger sales', 'Sales show how much customers spent before the company paid its costs.'],
-  ['Deals', 'Two companies agree to merge', 'Combining businesses can change the choices customers have.'],
-].map(([category, headline, why], i) => ({
-  category, headline, why, url: '', source: 'Hindsight example', time: 1731682800 - i * 3600,
-}))
-const exampleQuotes = [0.42, 0.76, -0.12].map((change, i) => ({
-  symbol: Object.keys(funds)[i], change, time: 1731682800,
-}))
 function cached(): Brief {
   try {
     const value = JSON.parse(localStorage.getItem(storageKey) || '{}')
@@ -29,46 +20,62 @@ function cached(): Brief {
 const fresh = (part?: { at: number }) => !!part && Date.now() - part.at < ttl
 function useBriefing() {
   const [data, setData] = useState(cached)
+  const [loading, setLoading] = useState(true)
   useEffect(() => {
     const controller = new AbortController()
     let timer: ReturnType<typeof setTimeout>
-    let current = cached()
+    const current = cached()
     async function refresh() {
       try {
         if (!fresh(current.news) || !fresh(current.quotes)) {
-          const response = await fetch('/api/finnhub/briefing', { signal: controller.signal })
-          if (!response.ok) throw Error()
-          const { stories, prices } = await response.json()
-          const at = Date.now()
-          if (stories?.length) current.news = { items: stories, at }
-          if (prices?.length === 3) current.quotes = { items: prices, at }
+          const signal = AbortSignal.any([controller.signal, AbortSignal.timeout(12000)])
+          const hostedApi = location.hostname.endsWith('.github.io') ? null :
+            await fetch('/api/finnhub/briefing', { signal }).then(r => r.ok ? r.json() : null).catch(() => null)
+          await Promise.allSettled([
+            (async () => {
+              if (fresh(current.news)) return
+              const items = hostedApi?.stories?.length ? hostedApi.stories : await publicHeadlines(signal)
+              if (items.length) current.news = { items, at: Date.now() }
+            })(),
+            (async () => {
+              if (fresh(current.quotes)) return
+              const hasQuotes = hostedApi?.prices?.length === 3
+              const items = hasQuotes ? hostedApi.prices : await publicQuotes(signal)
+              current.quotes = { items, at: Date.now(), provider: hasQuotes ? 'Finnhub' : 'TradingView' }
+            })(),
+          ])
+          if (controller.signal.aborted) return
           try { localStorage.setItem(storageKey, JSON.stringify(current)) } catch { /* Storage is optional. */ }
         }
       } catch { /* Keep the last successful update for each card. */ }
       if (!controller.signal.aborted) {
+        setLoading(false)
         setData({ ...current })
         const next = Math.min(...[current.news, current.quotes].map(part =>
-          fresh(part) ? part!.at + ttl - Date.now() : ttl))
+          fresh(part) ? part!.at + ttl - Date.now() : 60000))
         timer = setTimeout(refresh, Math.max(1000, next))
       }
     }
     void refresh()
     return () => { controller.abort(); clearTimeout(timer) }
   }, [])
-  return data
-}
-function label(part?: { at: number }, provider = 'Finnhub') {
-  return part ? fresh(part) ? provider : 'Cached data' : 'Sample data'
+  return { ...data, loading }
 }
 function timestamp(time: number) {
   const date = new Date(time * 1000)
   return <time dateTime={date.toISOString()}>{date.toLocaleString(undefined, {dateStyle:'medium', timeStyle:'short'})}</time>
 }
+function headlineLink(url: string) {
+  try {
+    const link = new URL(url)
+    if (link.protocol === 'https:' || link.protocol === 'http:') return link.href
+  } catch { /* Headlines can be displayed without a link. */ }
+}
 export default function Briefing({ preview = false }: { preview?: boolean }) {
-  const { news, quotes } = useBriefing()
+  const { news, quotes, loading } = useBriefing()
   const [category, select] = useState('All')
-  const stories = news?.items ?? samples
-  const prices = quotes?.items ?? exampleQuotes
+  const stories = news?.items ?? []
+  const prices = quotes?.items ?? []
   const categories = ['All', ...new Set(stories.map(story => story.category))]
   const active = categories.includes(category) ? category : 'All'
   const visible = preview ? stories.filter((story, index) => stories.findIndex(item => item.source === story.source) === index).slice(0, 3) : stories.filter(story => active === 'All' || story.category === active)
@@ -78,18 +85,21 @@ export default function Briefing({ preview = false }: { preview?: boolean }) {
     : rising + falling === 0 ? 'All three index funds held steady' : 'The three index funds moved in different directions or held steady'
   return <div className="news-brief">
     <section className="glass">
-      <div className="row"><h2>Market recap</h2><small>{label(quotes)}</small></div>
-      <p>{summary} compared with their previous closing prices.</p>
+      <div className="row"><h2>Market recap</h2><small>{quotes ? fresh(quotes) ? quotes.provider : 'Cached quotes' : loading ? 'Loading…' : 'Unavailable'}</small></div>
+      <p>{quotes ? summary + ' compared with their previous closing prices.' : loading ? 'Fetching the latest quotes…' : 'Market quotes are temporarily unavailable.'}</p>
       <ul className="fund-moves">{prices.map(p => <li key={p.symbol}><b>{p.symbol}</b> · {funds[p.symbol]} tracker <strong>{p.change > 0 ? '+' : ''}{p.change.toFixed(2)}%</strong>{!preview && <div>{timestamp(p.time)}</div>}</li>)}</ul>
     </section>
     <section className="glass">
-      <div className="row"><h2>{preview ? 'Market headlines' : 'Across the news'}</h2><small>{label(news, new Set(stories.map(item => item.source)).size + ' publishers')}</small></div>
-      {!preview && <div className="news-filters" role="group" aria-label="Filter headlines by category">{categories.map(c => <button type="button" key={c} aria-pressed={active === c} onClick={() => select(c)}>{c}</button>)}</div>}
-      {visible.map(story => <article className="news-story" key={story.headline}>
+      <div className="row"><h2>{preview ? 'Market headlines' : 'Across the news'}</h2><small>{news ? fresh(news) ? [...new Set(stories.map(item => item.source))].join(' · ') : 'Cached headlines' : loading ? 'Loading…' : 'Unavailable'}</small></div>
+      {!news && <p>{loading ? 'Fetching headlines…' : 'Headlines are temporarily unavailable.'}</p>}
+      {!preview && news && <div className="news-filters" role="group" aria-label="Filter headlines by category">{categories.map(c => <button type="button" key={c} aria-pressed={active === c} onClick={() => select(c)}>{c}</button>)}</div>}
+      {visible.map(story => {
+        const url = headlineLink(story.url)
+        return <article className="news-story" key={story.headline}>
         <div>{story.category} · {story.source} · {timestamp(story.time)}</div>
-        <h3>{story.url ? <a href={story.url} target="_blank" rel="noreferrer">{story.headline} ↗</a> : story.headline}</h3>
+        <h3>{url ? <a href={url} target="_blank" rel="noreferrer">{story.headline} ↗</a> : story.headline}</h3>
         <p><b>Why it matters</b> · {story.why}</p>
-      </article>)}
+      </article>})}
     </section>
   </div>
 }

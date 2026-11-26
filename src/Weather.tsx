@@ -1,3 +1,4 @@
+import { journalHref } from './journal/routes'
 import { useEffect, useState } from 'react'
 import { json, read, save, useValue } from './data'
 import { condition } from './season'
@@ -34,8 +35,9 @@ export function WeatherSync() {
           timeformat: 'unixtime',
           forecast_days: '2',
           past_days: '7',
-          current: 'temperature_2m,apparent_temperature,weather_code',
-          hourly: 'temperature_2m,weather_code',
+          temperature_unit: 'celsius',
+          current: 'temperature_2m,apparent_temperature,weather_code,snowfall',
+          hourly: 'temperature_2m,weather_code,snowfall',
           daily: 'sunrise,sunset,temperature_2m_max,temperature_2m_min,snowfall_sum,weather_code',
         })
         const d: Forecast = await json('https://api.open-meteo.com/v1/forecast?' + params)
@@ -139,7 +141,7 @@ export default function Weather({compact = false}: {compact?: boolean}) {
           <p>Toronto · Feels like {temp(17)}</p>
           <p>Sunrise 6:34 AM · Sunset 7:42 PM (Toronto time)</p>
           <details><summary>Hourly forecast</summary>{[18,17,16].map((c,i)=><p key={c}>{4+i}:00 PM · {temp(c)} · Partly cloudy</p>)}</details>
-          <a href="/settings">Location settings</a>
+          <a href={journalHref("/settings")}>Location settings</a>
         </>
       )}
       {place && error && <p role="status">{error} Retrying automatically.</p>}

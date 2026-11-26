@@ -1,4 +1,7 @@
 import {useEffect, useState} from 'react'
+import {fields} from './securityFields'
+
+const staticHosting = import.meta.env.BASE_URL === '/hindsight/'
 
 type Quote = {symbol:string;close:number;change:number|null}
 type Profile = Quote & {
@@ -14,9 +17,14 @@ function useSource<T>(key:string) {
     const controller = new AbortController()
     async function refresh() {
       try {
-        const response = await fetch('/api/security?symbol='+encodeURIComponent(key),{signal:controller.signal})
+        const url = staticHosting ? new URL('https://scanner.tradingview.com/symbol') : new URL('/api/security', location.origin)
+        url.searchParams.set('symbol', key)
+        if (staticHosting) url.searchParams.set('fields', fields.join(','))
+        const response = await fetch(url,{signal:controller.signal})
         if (!response.ok) throw Error()
-        const {at,data} = await response.json()
+        const payload = await response.json()
+        const {at,data} = staticHosting ? {at:Date.now(),data:payload} : payload
+        if (!Number.isFinite(data?.close)) throw Error()
         if (!controller.signal.aborted) setResult({key,at,data})
       } catch {
         if (!controller.signal.aborted) setResult(previous => previous?.key===key ? previous : {key,at:0,data:null})

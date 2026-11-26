@@ -1,3 +1,4 @@
+import {journalHref} from './routes'
 import {lazy} from 'react'
 import Settings from './Settings'
 import Briefing from './Briefing'
@@ -14,13 +15,13 @@ export default function Detail({page}: {page: string}) {
   if (page === 'Settings') return <Settings/>
   if (page === 'Markets') return <Markets/>
   const products: Record<string, React.ReactNode> = {
-    Review: <Review aboutHref="/about" declineHref="/declined"/>,
+    Review: <Review aboutHref={journalHref('/about')} declineHref={journalHref('/declined')}/>,
     Learn: <Learn/>,
     About: <About/>,
-    Declined: <Declined homeHref="/"/>,
+    Declined: <Declined homeHref={journalHref('/')}/>,
   }
   if (products[page]) return <div className={page === 'Review' ? 'review-page' : 'journal-product'}>{products[page]}</div>
   return <><div className="hero"><h1>{page}</h1></div>
-    {page === 'News' ? <Briefing/> : page === 'Tools' ? <Products/> : <a href="/">Return to Today</a>}
+    {page === 'News' ? <Briefing/> : page === 'Tools' ? <Products/> : <a href={journalHref('/')}>Return to Today</a>}
   </>
 }

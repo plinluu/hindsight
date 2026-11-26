@@ -12,20 +12,25 @@ export default function About() {
         </p>
         <h2>Privacy and terms</h2>
         <p>
-          Version 1 · Trade files remain in browser memory. Opening a trade’s market chart requests the selected symbol from TradingView. Charts connect to TradingView. Weather uses Open-Meteo and
-          optional city detection. Preferences and public feed caches stay on this device.
+          Trade files are processed in your browser. Opening a market chart sends the selected symbol to TradingView.
+          Weather and city search send your selected location or search query to Open-Meteo. If you use automatic city
+          detection, ipapi.co receives your IP address. Hindsight saves preferences and public feed caches in your
+          browser. The hosting and data providers handle requests under their own privacy terms.
         </p>
         <p>
-          Use Hindsight for personal education. Verify figures with your broker before making decisions. Past
+          Hindsight is provided as is for personal education and offers no investment advice. Verify figures with your broker before making decisions. Past
           outcomes cannot predict future returns.
         </p>
         <h2>Copyright and reuse</h2>
         {copyrightNotice.trim().split(/\n\s*\n/).map(paragraph => <p key={paragraph}>{paragraph}</p>)}
+        <p><a href="https://github.com/plinluu/hindsight/blob/hindsight-v3.2/LICENSE">License and permitted use</a> · <a href="https://github.com/plinluu/hindsight/blob/hindsight-v3.2/SECURITY.md">Report a security issue</a></p>
         <button className="glass-inset"
           onClick={() => {
             Object.keys(localStorage)
               .filter((k) => k.startsWith('hs2:'))
               .forEach((k) => save(k.slice(4), null))
+            localStorage.removeItem('hindsight.briefing.v2')
+            save('hindsight.winterLatch', null)
             location.reload()
           }}
         >

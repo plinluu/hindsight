@@ -6,11 +6,19 @@ The v2 journal includes Today, Markets, News, Review, Learn, Settings, and Tools
 
 ## Visual previews
 
-![Today glass theme](docs/screenshots/today-glass-theme.png)
+| Spring | Summer |
+| --- | --- |
+| ![Spring homepage](docs/screenshots/home-spring.png) | ![Summer homepage](docs/screenshots/home-summer.png) |
+| **Autumn** | **Winter** |
+| ![Autumn homepage](docs/screenshots/home-autumn.png) | ![Winter homepage](docs/screenshots/home-winter.png) |
 
-![Review glass theme](docs/screenshots/review-glass-theme.png)
+![Hindsight settings menu](https://raw.githubusercontent.com/plinluu/hindsight/32748fbc6c63cac287bdb714b7717c6c52a84a54/docs/screenshots/settings.png)
 
-The original mark is available at public/brand/hindsight-mark.svg.
+![Review glass theme](https://raw.githubusercontent.com/plinluu/hindsight/32748fbc6c63cac287bdb714b7717c6c52a84a54/docs/screenshots/review-glass-theme.png)
+
+![Hindsight mark](public/brand/hindsight-mark.svg)
+
+On GitHub Pages, the journal uses the sample briefing when the server API is unavailable. A server deployment enables the briefing API and quote lookups for Trade Review.
 Use Node 22 or newer. From this directory run `npm ci`, copy `.env.example` to `.env`, then run `npm run dev`. Open the local URL printed by Vite.
 Run `npm test`, `npm run lint` and `npm run build` for verification. `npm run preview` serves the production bundle with the local API handlers.
 ## Hosting
@@ -21,3 +29,7 @@ Weather, city search and TradingView use public services. Chart and quote availa
 ## Artwork
 Replace the twelve gradient WebPs in `public/assets/bg` using `docs/IMAGE_PROMPTS.md`. Export 2560×1440 originals and 768×432 mobile versions with the existing -small suffix.
 
+
+## Copyright and security
+
+© 2026 plinluu. All rights reserved. See [LICENSE](LICENSE) and [security reporting](SECURITY.md).
