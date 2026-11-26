@@ -61,8 +61,7 @@ small {font-size:11px;border-color:#ffffff20;color:#bdb2bf}
 .news-brief .glass { min-width: 0; }
 .news-filters { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0; }
 .news-filters button { border-radius: 999px; padding: 8px 16px; color: inherit; cursor: pointer; }
-.glass.news-story { margin: 0; padding: 0; }
-.news-story + .news-story { margin-top: 16px; padding-top: 16px; }
+.news-story + .news-story { border-top: 1px solid #ffffff22; margin-top: 16px; padding-top: 16px; }
 .news-story > div, .fund-moves time { font-size: .8rem; color: #c9c6c2; }
 .news-story h3 { overflow-wrap: anywhere; }
 .fund-moves { list-style: none; padding: 0; margin: 16px 0 0; }
