@@ -1,1 +1,0 @@
-import{j as e}from"./index-84Z5Q-Jy.js";function n({homeHref:r="#/Today"}){return e.jsxs(e.Fragment,{children:[e.jsx("h1",{children:"Trade review is closed"}),e.jsx("p",{children:"You can still explore the markets and lessons."}),e.jsx("a",{href:r,children:"Return to Today"})]})}export{n as default};

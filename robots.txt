@@ -1,0 +1,6 @@
+# AI training and dataset collection
+User-agent: GPTBot
+User-agent: Google-Extended
+User-agent: ClaudeBot
+User-agent: CCBot
+Disallow: /
