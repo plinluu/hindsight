@@ -1,10 +1,6 @@
 import { feed } from '../server/feed.mjs'
 let cached, pending
 export default async function handler(req, res, env = process.env) {
-  if (env.ENABLE_LICENSED_MARKET_FEEDS !== 'true') {
-    res.statusCode = 404
-    return res.end()
-  }
   if (req.method !== 'GET') {
     res.statusCode = 405
     return res.end()

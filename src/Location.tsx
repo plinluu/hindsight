@@ -12,7 +12,8 @@ export default function Location() {
       <h2>Local weather and scenery</h2>
       {place && <p>Selected location · {JSON.parse(place).name}</p>}
       <p>
-        Location is optional. Hindsight stores your selection in this browser. Open-Meteo receives your rounded coordinates for forecasts or your city query when you search.
+        We use your location to match your local weather, sun times and season. Nothing is stored on a server. Open-Meteo receives your coordinates. If the browser can’t locate you, an IP
+        lookup estimates your city.
       </p>
       <div className="row">
         <button
@@ -37,7 +38,6 @@ export default function Location() {
           <button
             onClick={() => {
               save('place', null)
-              save('hindsight.winterLatch', null)
               msg('Location cleared.')
             }}
           >

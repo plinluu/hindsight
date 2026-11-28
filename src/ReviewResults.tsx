@@ -36,7 +36,7 @@ function PriceSource({ticker,target,onAdd}:{ticker:string;target:string;onAdd:(p
   const symbol=listings.get(ticker)??ticker
   const future=target>latestDay()
   return <details className="review-prices"><summary>TradingView prices for {ticker}</summary>
-    <MarketWidget symbol={symbol}><p>Use the full TradingView chart below to look up a close.</p></MarketWidget>
+    <MarketWidget kind="advanced-chart" symbol={symbol}><p>Use the full TradingView chart below to look up a close.</p></MarketWidget>
     <a href={'https://www.tradingview.com/chart/?symbol='+encodeURIComponent(symbol)} target="_blank" rel="noreferrer">Open {symbol} on TradingView ↗</a>
     <p>Use the same listing and currency as your broker file. Import daily or weekly closes to fill the chart, all three comparisons, and the four-week momentum check.</p>
     <label>Import TradingView chart history for {ticker}<input type="file" accept=".csv,text/csv" onChange={async e=>{
@@ -45,6 +45,12 @@ function PriceSource({ticker,target,onAdd}:{ticker:string;target:string;onAdd:(p
         const points=parseHistory(await file.text());onAdd(points);message(points.length+' closing prices added.')
       }catch(err){message((err as Error).message)}
     }}/></label>
+    {symbol.includes(':') && <button onClick={async()=>{
+      try{const r=await fetch('/api/security?symbol='+encodeURIComponent(symbol),{signal:AbortSignal.timeout(12000)})
+        if(!r.ok)throw Error();const {data,at}=await r.json();if(!(data?.close>0))throw Error()
+        onAdd([{d:new Date(at).toISOString().slice(0,10),c:data.close}]);message('Latest available TradingView quote added.')
+      }catch{message('Quote could not be loaded. Import a chart CSV or enter a close below.')}
+    }}>Get latest quote</button>}
     {future?<p>This comparison opens on {target}.</p>:<form onSubmit={e=>{e.preventDefault();onAdd([{d:target,c:+price}]);message('Closing price added for '+target);setPrice('')}}>
       <label>Closing price on or before {target}<input type="number" min="0" step="any" value={price} onChange={e=>setPrice(e.target.value)}/></label>
       <button disabled={!(+price>0)}>Use this close</button>

@@ -121,7 +121,7 @@ small, .section-line a, .glass > a {
 .market-widget { padding: 7px; margin-bottom: 28px; }
 .market-widget > .glass { margin: 0; border: 0; box-shadow: none; background: transparent; backdrop-filter: none; }
 .market-widget > .glass::before { content: none; }
-.market-widget > iframe { overflow: hidden; border-radius: calc(clamp(24px, 3vw, 36px) - 7px); }
+.market-widget > tv-advanced-chart { overflow: hidden; border-radius: calc(clamp(24px, 3vw, 36px) - 7px); }
 .opening h1 { color: #fff8ee; text-shadow: 0 2px 12px #211c1c40; }
 .opening time, .conditions, .news-story > div, .fund-moves time, .security-facts dt,
 .security-profile footer span, .security-heading > div > span { color: #dbd3cb; }
@@ -199,7 +199,7 @@ nav a[href$="/review"]:not([aria-current]) { color: #ffc7bc; }
 
 .scene {
   position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none;
-  background: radial-gradient(ellipse at 20% 75%, #354964, transparent 48%), radial-gradient(ellipse at 80% 32%, #303e5d, transparent 52%), linear-gradient(150deg, #111b34, #202f4a);
+  background: #273345 url('/home-sky.png') center / cover no-repeat;
   --particle-color: #f4f8ff; --particle-width: 5px; --particle-height: 5px;
 }
 .scene::before, .scene::after { content: ''; position: absolute; inset: 0; }

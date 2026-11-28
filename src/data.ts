@@ -14,12 +14,18 @@ export async function json(url: string, signal?: AbortSignal) {
   return r.json()
 }
 export async function locate() {
-  const position = await new Promise<GeolocationPosition>((resolve, reject) =>
-    navigator.geolocation.getCurrentPosition(resolve, reject, { timeout: 10000 }),
-  )
-  setPlace({
-    latitude: Number(position.coords.latitude.toFixed(2)),
-    longitude: Number(position.coords.longitude.toFixed(2)),
-    name: 'Current location',
-  })
+  try {
+    const pos = await new Promise<GeolocationPosition>((ok, no) =>
+      navigator.geolocation.getCurrentPosition(ok, no, { timeout: 10000 }),
+    )
+    setPlace({
+      latitude: +pos.coords.latitude.toFixed(2),
+      longitude: +pos.coords.longitude.toFixed(2),
+      name: 'Current location',
+    })
+  } catch {
+    const ip = await json('https://ipapi.co/json/')
+    if (ip.error || !Number.isFinite(ip.latitude) || !Number.isFinite(ip.longitude)) throw Error('Choose your city below.')
+    setPlace({ latitude: ip.latitude, longitude: ip.longitude, timezone: ip.timezone, name: ip.city })
+  }
 }

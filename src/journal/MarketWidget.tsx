@@ -1,28 +1,54 @@
-import {useState, type ReactNode} from 'react'
+import {createElement, useEffect, useRef, useState, type ReactNode} from 'react'
 
-function chartUrl(symbol: string) {
-  const settings = { symbol, interval: 'D', theme: 'dark', autosize: true, width: '100%', height: '100%' }
-  return 'https://www.tradingview-widget.com/embed-widget/advanced-chart/#' + encodeURIComponent(JSON.stringify(settings))
+type Kind = 'advanced-chart'
+const modules = new Map<Kind, Promise<void>>()
+
+function load(kind: Kind) {
+  let pending = modules.get(kind)
+  if (!pending) {
+    pending = new Promise<void>((resolve, reject) => {
+      const script = document.createElement('script')
+      script.type = 'module'
+      script.src = 'https://widgets.tradingview-widget.com/w/en/tv-' + kind + '.js'
+      script.onerror = reject
+      script.onload = () => customElements.whenDefined('tv-' + kind).then(() => resolve())
+      document.head.append(script)
+    })
+    modules.set(kind, pending)
+  }
+  return pending
 }
 
-export function MarketWidget({symbol = 'AMEX:SPY', children}: {symbol?: string, children: ReactNode}) {
-  const [loadedSymbol, setLoadedSymbol] = useState<string>()
-  const valid = /^[A-Z0-9._^/:-]{1,64}$/i.test(symbol)
-  const url = 'https://www.tradingview.com/chart/?symbol=' + encodeURIComponent(symbol)
-  return <div className="market-widget">
-    {valid && loadedSymbol === symbol ? <>
-      <iframe title={'TradingView chart for ' + symbol} sandbox="allow-scripts allow-same-origin allow-popups"
-        referrerPolicy="no-referrer" src={chartUrl(symbol)}
-        style={{display:'block', width:'100%', height:'clamp(360px, 52vh, 580px)', border:0}} />
-      <a href={url} target="_blank" rel="noreferrer">Chart by TradingView ↗</a>
-    </> : <>
-      {children}
-      <div className="market-controls">
-        {valid ? <>
-          <p>Loading the live chart contacts TradingView and shares the selected symbol.</p>
-          <button type="button" onClick={() => setLoadedSymbol(symbol)}>Load TradingView chart</button>
-        </> : <a href={url} target="_blank" rel="noreferrer">Open chart on TradingView ↗</a>}
-      </div>
-    </>}
+export function MarketWidget({kind, symbol, children}: {kind: Kind, symbol?: string, children: ReactNode}) {
+  const host = useRef<HTMLDivElement>(null)
+  const [ready, setReady] = useState(false)
+  const [online, setOnline] = useState(navigator.onLine)
+  useEffect(() => {
+    const sync = () => setOnline(navigator.onLine)
+    window.addEventListener('online', sync)
+    window.addEventListener('offline', sync)
+    return () => {
+      window.removeEventListener('online', sync)
+      window.removeEventListener('offline', sync)
+    }
+  }, [])
+  useEffect(() => {
+    if (!online) return
+    let active = true
+    setReady(false)
+    const observer = new IntersectionObserver(entries => {
+      if (!entries.some(entry => entry.isIntersecting)) return
+      observer.disconnect()
+      load(kind).then(() => { if (active) setReady(true) }, () => {})
+    })
+    observer.observe(host.current!)
+    return () => { active = false; observer.disconnect() }
+  }, [kind, online])
+  const available = online && ready
+  return <div ref={host} className="market-widget">
+    {kind === 'advanced-chart' && available && createElement('tv-advanced-chart', {
+      symbol, interval:'1D', theme:'dark', style:{display:'block', width:'100%', height:'clamp(360px, 52vh, 580px)'}
+    })}
+    {!available && children}
   </div>
 }

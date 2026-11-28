@@ -19,7 +19,7 @@ export default function Today() {
       </div>
     </div>
     <div className="section-line"><h2>Market session</h2><a href={journalHref('/markets')}>Explore markets ↗</a></div>
-    <MarketWidget symbol="AMEX:SPY"><Chart/></MarketWidget>
+    <MarketWidget kind="advanced-chart" symbol="AMEX:SPY"><Chart/></MarketWidget>
     <div className="section-line"><h2>Daily briefing</h2><a href={journalHref('/news')}>Read the recap ↗</a></div>
     <div className="briefing"><Briefing preview/><Weather/></div>
     <Products/>
