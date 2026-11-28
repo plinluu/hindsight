@@ -7,7 +7,7 @@ export default function LocationIntro() {
       <h2>Make the view local</h2>
       <p>
         Match the weather and seasonal scene to your location. Your choice stays on this device. Open-Meteo
-        receives your coordinates, and an IP lookup estimates your city if browser location is unavailable.
+        receives your rounded coordinates for forecasts. You can search for a city instead.
       </p>
       <div className="row">
         <button

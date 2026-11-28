@@ -144,6 +144,7 @@ export default function Weather({compact = false}: {compact?: boolean}) {
           <a href={journalHref("/settings")}>Location settings</a>
         </>
       )}
+      {!sample && <p>Weather data by <a href="https://open-meteo.com/">Open-Meteo</a> · <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Temperatures are rounded and displayed in your selected units.</p>}
       {place && error && <p role="status">{error} Retrying automatically.</p>}
     </section>
   )

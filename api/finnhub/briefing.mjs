@@ -4,6 +4,10 @@ import { fromFinnhub } from '../../server/feed.mjs'
 const symbols = ['SPY', 'QQQ', 'DIA']
 export default async function briefing(req, res, env = process.env) {
   res.setHeader('Content-Type', 'application/json')
+  if (env.ENABLE_LICENSED_MARKET_FEEDS !== 'true') {
+    res.statusCode = 404
+    return res.end()
+  }
   if (req.method !== 'GET') {
     res.setHeader('Allow', 'GET')
     res.statusCode = 405

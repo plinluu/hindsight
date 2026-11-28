@@ -69,7 +69,7 @@ export default function Markets() {
       </form>
       {error && <p role="alert">{error}</p>}
       <SecurityProfile key={symbol} symbol={symbol} name={name}/>
-      <MarketWidget kind="advanced-chart" symbol={symbol}>{symbol === 'AMEX:SPY' ? <Chart/> : <p>Loading the price chart for {name}…</p>}</MarketWidget>
+      <MarketWidget symbol={symbol}>{symbol === 'AMEX:SPY' ? <Chart/> : <p>Loading the price chart for {name}…</p>}</MarketWidget>
     </section>
   </>
 }
